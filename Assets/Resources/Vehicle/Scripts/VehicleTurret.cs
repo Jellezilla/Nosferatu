@@ -13,7 +13,6 @@ public class VehicleTurret : MonoBehaviour {
     private float m_OldRotation;
     [SerializeField]
     private float m_rotationSpeed = 1.0f;
-    private Quaternion m_originalRot;
     private Vector3 m_prevMPos;
     [SerializeField]
     private int m_RotRevCooldown;
@@ -22,7 +21,6 @@ public class VehicleTurret : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        m_originalRot = m_VehicleTurret.transform.rotation;
         m_prevMPos = Input.mousePosition;
         m_WaitStep = new WaitForSeconds(1);
         StartCoroutine(ReverseRotation());
@@ -52,7 +50,7 @@ public class VehicleTurret : MonoBehaviour {
                 if (rotCounter == m_RotRevCooldown)
                 {
                     m_Rotating = false;
-                    if (m_VehicleTurret.transform.rotation == m_originalRot)
+                    if (m_VehicleTurret.transform.rotation == transform.rotation)
                     {
                         rotCounter = 0;
                     }
@@ -79,7 +77,7 @@ public class VehicleTurret : MonoBehaviour {
         }
         else
         {
-            m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, m_originalRot, Time.fixedDeltaTime * m_rotationSpeed);
+            m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, transform.rotation, Time.fixedDeltaTime * m_rotationSpeed);
         }
 
 
