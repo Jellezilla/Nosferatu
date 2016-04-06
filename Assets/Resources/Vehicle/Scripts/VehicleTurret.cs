@@ -122,6 +122,7 @@ public class VehicleTurret : MonoBehaviour {
     public void Retract()
     {
         m_Hook.gameObject.SetActive(false);
+        m_Rope.DestroyRope();
     }
 
     void Update()
