@@ -193,7 +193,7 @@ public class VehicleController : MonoBehaviour {
                 }
             case TCS.FourWheel:
                 {
-                    thrustTorque = acceleration * (m_CurrentTorque / 4f);
+                    thrustTorque = acceleration * (m_CurrentTorque / m_WheelColliders.Length);
                     for (int i = 0; i < m_WheelColliders.Length; i++)
                     {
                         m_WheelColliders[i].motorTorque = thrustTorque;
@@ -208,6 +208,7 @@ public class VehicleController : MonoBehaviour {
         {
             case TCS.FrontWheel:
                 {
+
                     if (CurrentSpeed > m_SteerSpeedThreshold && Vector3.Angle(transform.forward, m_Rigidbody.velocity) > m_SteerAngleThreshold)
                     {
                         m_WheelColliders[0].brakeTorque = m_BrakeTorque * brake;
@@ -216,25 +217,26 @@ public class VehicleController : MonoBehaviour {
                     //add reverse & remove brake
                     else if (brake > 0)
                     {
-                        m_WheelColliders[0].brakeTorque = 0;
                         m_WheelColliders[0].motorTorque = -m_ReverseTorque * brake;
-
-                        m_WheelColliders[1].brakeTorque = 0;
                         m_WheelColliders[1].motorTorque = -m_ReverseTorque * brake;
+                        for (int i = 0; i < m_WheelColliders.Length; i++)
+                        {
+                            m_WheelColliders[i].brakeTorque = 0;
+                        }
+
                     }
                     //remove break to accelerate again
                     else if (acceleration > 0)
                     {
-                        m_WheelColliders[0].brakeTorque = 0;
-                        m_WheelColliders[1].brakeTorque = 0;
+                        for (int i = 0; i < m_WheelColliders.Length; i++)
+                        {
+                            m_WheelColliders[i].brakeTorque = 0;
+                        }
                     }
                     break;
                 }
             case TCS.RearWheel:
                 {
-                    thrustTorque = acceleration * (m_CurrentTorque / 2f);
-                    m_WheelColliders[m_WheelColliders.Length - 2].motorTorque = thrustTorque;
-                    m_WheelColliders[m_WheelColliders.Length - 1].motorTorque = thrustTorque;
 
                     if (CurrentSpeed > m_SteerSpeedThreshold && Vector3.Angle(transform.forward, m_Rigidbody.velocity) > m_SteerAngleThreshold)
                     {
@@ -244,17 +246,22 @@ public class VehicleController : MonoBehaviour {
                     //add reverse & remove brake
                     else if (brake > 0)
                     {
-                        m_WheelColliders[m_WheelColliders.Length - 2].brakeTorque = 0;
-                        m_WheelColliders[m_WheelColliders.Length - 2].motorTorque = -m_ReverseTorque * brake;
 
-                        m_WheelColliders[m_WheelColliders.Length - 1].brakeTorque = 0;
+                        m_WheelColliders[m_WheelColliders.Length - 2].motorTorque = -m_ReverseTorque * brake;
                         m_WheelColliders[m_WheelColliders.Length - 1].motorTorque = -m_ReverseTorque * brake;
+                        for (int i = 0; i < m_WheelColliders.Length; i++)
+                        {
+                            m_WheelColliders[i].brakeTorque = 0;
+                        }
+
                     }
                     //remove break to accelerate again
                     else if (acceleration > 0)
                     {
-                        m_WheelColliders[m_WheelColliders.Length - 2].brakeTorque = 0;
-                        m_WheelColliders[m_WheelColliders.Length - 1].brakeTorque = 0;
+                        for (int i = 0; i < m_WheelColliders.Length; i++)
+                        {
+                            m_WheelColliders[i].brakeTorque = 0;
+                        }
                     }
 
                     break;
@@ -281,7 +288,9 @@ public class VehicleController : MonoBehaviour {
                             m_WheelColliders[i].brakeTorque = 0;
                         }
                     }
-                    break;
+
+
+                        break;
                 }
         }
 
