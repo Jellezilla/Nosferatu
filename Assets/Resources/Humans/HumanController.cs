@@ -8,122 +8,131 @@ public class HumanController : MonoBehaviour {
     private bool _isDead = false; //used for creating bloodspatter only on first hit
     public GameObject bloodSpatterObject;
     [SerializeField]
+    private float speed = 0.2f;
+    [SerializeField]
+    private float panicSpeed = 0.6f;
+    [SerializeField]
     private float panicTime = 2.5f;
+    [SerializeField]
+    private float crippleSpeed = 0.15f;
+    [SerializeField]
+    private float panicRange = 5.0f;
 
-    private bool isCripple = false;
-
-    
-	// Use this for initialization
-	void Start () {
+   
+    // Use this for initialization
+    void Start () {
         Init();
+        
 	}
 	
+
+    /// <summary>
+    ///  Initialize references and variables
+    /// </summary>
 	void Init()
     {
         anim = GetComponent<Animator>();
-
-        
         player = GameObject.FindWithTag("Player");
-
+        
+   
     }
 
+
+
+
+    /// <summary>
+    ///  Controls the collision with the player (car) 
+    /// </summary>
+    /// <param name="col"></param>
     void OnTriggerEnter(Collider col) 
     {
-      /**  if (col.tag == "Player") 
+       
+        
+        if (col.tag == "Player" && !_isDead)
         {
-            GoRagdoll();
-        }*/
 
-        if (col.gameObject.name == "Jeep" && !_isDead)
-        {
             GoRagdoll();
             _isDead = true;
-            Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), col.gameObject.transform.rotation);
-            Debug.Log("HIT HIM");
+          
         }
     }
-    
-    /// <summary>
+       /// <summary>
     /// This method is run when hit by the car. It will make the blood splatter, make the human collapse (ragdoll effect) and call destroy on it.
     /// </summary>
     void GoRagdoll()
     {
-
         if (Random.Range(1, 15) == 1)
         {
-            CreateCripple();
-            return;
+            //CreateCripple();
+            //return;
         }
-
-
+        
         anim.enabled = false;
         Rigidbody[] rigids = GetComponentsInChildren<Rigidbody>();
-                
+        
+        // setting all rigidbodies in the human to isKinematic = false, creates the ragdoll effect and collapses him/her.         
         foreach(Rigidbody rb in rigids)
         {
             rb.isKinematic = false;
         }
 
-        
+
         // play blood splatter effect
+        (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
 
 
 
 
-       // Destroy object after 5 seconds. 
+        // Destroy object after 5 seconds. 
+        StopAllCoroutines();
         Destroy(gameObject, 5);
         
     }
 
-    void CreateCripple()
-    {
-        isCripple = true;
-        anim.SetBool("cripple", true);
-        anim.SetBool("panic", false);
-        anim.SetFloat("speed", 0.0f);
-
-        Destroy(gameObject, 15);
-    }
+    
 
     void FixedUpdate()
     {
-        if(Vector3.Distance(transform.position, player.transform.position) < 5.0f)
+
+
+        // When car comes close, the humans panic
+        if (Vector3.Distance(transform.position, player.transform.position) < panicRange)
         {
+
             Panic();
         }
-       
-
+        
     }
-    
-
-    void Wander()
-    {
-        anim.SetFloat("speed", 1.1f);
-    }
-
+   
     void Idle()
     {
+        
         anim.SetFloat("speed", 0.0f);
+        
     }
+    
+  
 
     void Panic()
     {
+        
+
         anim.SetBool("panic", true);
+        // move
+        
         StartCoroutine(calmDown(panicTime));
+      
     }
-
-
+ 
+    
 
     IEnumerator calmDown(float wait)
     {
-
+        
         yield return new WaitForSeconds(wait);
         anim.SetBool("panic", false);
+              
 
     }
-
     
-
-
-
 }
