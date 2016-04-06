@@ -5,7 +5,8 @@ public class HumanController : MonoBehaviour {
 
     private Animator anim;
     private GameObject player;
-
+    private bool _isDead = false; //used for creating bloodspatter only on first hit
+    public GameObject bloodSpatterObject;
     [SerializeField]
     private float speed = 0.2f;
     [SerializeField]
@@ -45,9 +46,17 @@ public class HumanController : MonoBehaviour {
     /// <param name="col"></param>
     void OnTriggerEnter(Collider col) 
     {
-        if (col.tag == "Player") 
+      /**  if (col.tag == "Player") 
         {
             GoRagdoll();
+        }*/
+
+        if (col.gameObject.name == "Jeep" && !_isDead)
+        {
+            GoRagdoll();
+            _isDead = true;
+            Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), col.gameObject.transform.rotation);
+            Debug.Log("HIT HIM");
         }
     }
        /// <summary>
