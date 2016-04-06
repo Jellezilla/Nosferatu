@@ -33,7 +33,7 @@ public class HumanController : MonoBehaviour {
     {
         anim = GetComponent<Animator>();
         player = GameObject.FindWithTag("Player");
-
+        
    
     }
 
@@ -46,17 +46,14 @@ public class HumanController : MonoBehaviour {
     /// <param name="col"></param>
     void OnTriggerEnter(Collider col) 
     {
-      /**  if (col.tag == "Player") 
+       
+        
+        if (col.tag == "Player" && !_isDead)
         {
-            GoRagdoll();
-        }*/
 
-        if (col.gameObject.name == "Jeep" && !_isDead)
-        {
             GoRagdoll();
             _isDead = true;
-            Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), col.gameObject.transform.rotation);
-            Debug.Log("HIT HIM");
+          
         }
     }
        /// <summary>
@@ -64,7 +61,6 @@ public class HumanController : MonoBehaviour {
     /// </summary>
     void GoRagdoll()
     {
-        Debug.Log("go ragdoll!");
         if (Random.Range(1, 15) == 1)
         {
             //CreateCripple();
@@ -82,6 +78,7 @@ public class HumanController : MonoBehaviour {
 
 
         // play blood splatter effect
+        (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
 
 
 
