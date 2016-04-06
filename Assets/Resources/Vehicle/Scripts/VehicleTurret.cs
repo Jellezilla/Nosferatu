@@ -8,21 +8,42 @@ public class VehicleTurret : MonoBehaviour {
     [SerializeField]
     private GameObject m_VehicleTurret;
     [SerializeField]
-    private float spawnPointOffset;
+    private float m_spawnPointOffset;
     private Vector3 m_spawnPoint;
     private float m_OldRotation;
     [SerializeField]
     private float m_rotationSpeed = 1.0f;
-    private Quaternion m_originalRot;
     private Vector3 m_prevMPos;
     [SerializeField]
     private int m_RotRevCooldown;
     private WaitForSeconds m_WaitStep;
     private bool m_Rotating;
+    [SerializeField]
+    private GameObject m_HookPrefab;
+    [SerializeField]
+    private int m_MaxChainLength;
+    [SerializeField]
+    private float m_RetractPointDist;
+    [SerializeField]
+    private float m_LaunchForce;
+    [SerializeField]
+    private float m_ReturnForce;
+    private TurretHook m_Hook;
+    private VehicleTurretRope m_Rope;
 	// Use this for initialization
+
+    public Vector3 SpawnPoint
+    {
+        get
+        {
+            return m_spawnPoint;
+        }
+    }
 	void Start () {
 
-        m_originalRot = m_VehicleTurret.transform.rotation;
+        m_Hook = ((GameObject)Instantiate(m_HookPrefab, m_spawnPoint, transform.rotation)).GetComponent<TurretHook>();
+        m_Hook.gameObject.SetActive(false);
+        m_Rope = GetComponent<VehicleTurretRope>();
         m_prevMPos = Input.mousePosition;
         m_WaitStep = new WaitForSeconds(1);
         StartCoroutine(ReverseRotation());
@@ -52,7 +73,7 @@ public class VehicleTurret : MonoBehaviour {
                 if (rotCounter == m_RotRevCooldown)
                 {
                     m_Rotating = false;
-                    if (m_VehicleTurret.transform.rotation == m_originalRot)
+                    if (m_VehicleTurret.transform.rotation == transform.rotation)
                     {
                         rotCounter = 0;
                     }
@@ -79,18 +100,36 @@ public class VehicleTurret : MonoBehaviour {
         }
         else
         {
-            m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, m_originalRot, Time.fixedDeltaTime * m_rotationSpeed);
+            m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, transform.rotation, Time.fixedDeltaTime * m_rotationSpeed);
         }
 
 
     }
 
     /// <summary>
-    /// Used to fire the grapple hook
+    /// Used to fire the hook
     /// </summary>
     public void Fire()
     {
-        throw new NotImplementedException();
+       
+        m_Hook.gameObject.SetActive(true);
+        m_Hook.transform.rotation = m_VehicleTurret.transform.rotation;
+        m_Hook.transform.position = m_spawnPoint;
+        m_Hook.Launch(m_VehicleTurret.transform.forward, m_MaxChainLength,m_RetractPointDist,m_LaunchForce,m_ReturnForce);
+        m_Rope.CreateRope(m_Hook.gameObject);
+    }
+
+    public void Retract()
+    {
+        m_Hook.gameObject.SetActive(false);
+        m_Rope.DestroyRope();
+    }
+
+    void Update()
+    {
+        m_spawnPoint = new Vector3(m_VehicleTurret.transform.position.x, m_VehicleTurret.transform.position.y, m_VehicleTurret.transform.position.z + m_spawnPointOffset);
+        m_Hook.spawnPosition = m_spawnPoint;
+        m_Rope.IsMaxDist = m_Hook.m_MaxLength;
     }
 	
 }

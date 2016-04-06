@@ -6,17 +6,19 @@ using System.Collections;
 /// </summary>
 public class GameController : Singleton<GameController> {
 
-   
+    private GameObject m_player; 
 	// Use this for initialization
 	void Awake ()
     {
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+        m_player = GameObject.FindGameObjectWithTag(Tags.player);
 	}
 
+    public GameObject Player
+    {
+        get
+        {
+            return m_player;
+        }
+    }
   
 }
