@@ -14,12 +14,10 @@ public class FollowCam : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-        Debug.Log("derp");
 
         if (_pObject != null)
         //if (_player != null)
         {
-            Debug.Log("derp");
             gameObject.transform.position = new Vector3(_pObject.transform.position.x, transform.position.y, _pObject.transform.position.z);
 
             //transform.position = new Vector3(_player.position.x, transform.position.y, _player.position.z);
