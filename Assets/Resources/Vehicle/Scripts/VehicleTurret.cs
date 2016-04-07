@@ -29,7 +29,10 @@ public class VehicleTurret : MonoBehaviour {
     [SerializeField]
     private float m_ReturnForce;
     private TurretHook m_Hook;
-    private VehicleTurretRope m_Rope;
+    private VehicleTurretRope m_Chain;
+    private Rigidbody m_rb;
+    [SerializeField]
+    private float m_PullBackForce;
 	// Use this for initialization
 
     public Vector3 SpawnPoint
@@ -39,13 +42,15 @@ public class VehicleTurret : MonoBehaviour {
             return m_spawnPoint;
         }
     }
+
 	void Start () {
 
         m_Hook = ((GameObject)Instantiate(m_HookPrefab, m_spawnPoint, transform.rotation)).GetComponent<TurretHook>();
         m_Hook.gameObject.SetActive(false);
-        m_Rope = GetComponent<VehicleTurretRope>();
+        m_Chain = GetComponent<VehicleTurretRope>();
         m_prevMPos = Input.mousePosition;
         m_WaitStep = new WaitForSeconds(1);
+        m_rb = GetComponent<Rigidbody>();
         StartCoroutine(ReverseRotation());
 
     }
@@ -116,20 +121,40 @@ public class VehicleTurret : MonoBehaviour {
         m_Hook.transform.rotation = m_VehicleTurret.transform.rotation;
         m_Hook.transform.position = m_spawnPoint;
         m_Hook.Launch(m_VehicleTurret.transform.forward, m_MaxChainLength,m_RetractPointDist,m_LaunchForce,m_ReturnForce);
-        m_Rope.CreateRope(m_Hook.gameObject);
+        m_Chain.CreateRope(m_Hook.gameObject);
     }
 
     public void Retract()
     {
         m_Hook.gameObject.SetActive(false);
-        m_Rope.DestroyRope();
+        m_Chain.DestroyRope();
+    }
+
+    void Grabbing()
+    {
+        float distance = Vector3.Distance(transform.position, m_Hook.transform.position);
+        if (distance > m_MaxChainLength+2 && m_Hook.gameObject.activeSelf)
+        {
+            Vector3 heading = m_Hook.transform.position - transform.position;
+            Vector3 axis = Vector3.Cross(m_rb.velocity, heading); // orbit axis
+            Vector3 direction = Vector3.Cross(heading, axis).normalized;
+            Quaternion newRot = Quaternion.LookRotation(direction, transform.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRot,Time.fixedDeltaTime * m_PullBackForce);
+
+            m_rb.velocity = direction * m_rb.velocity.magnitude;
+        }
     }
 
     void Update()
     {
         m_spawnPoint = new Vector3(m_VehicleTurret.transform.position.x, m_VehicleTurret.transform.position.y, m_VehicleTurret.transform.position.z + m_spawnPointOffset);
         m_Hook.spawnPosition = m_spawnPoint;
-        m_Rope.IsMaxDist = m_Hook.m_MaxLength;
+
+    }
+
+    void FixedUpdate()
+    {
+        Grabbing();
     }
 	
 }

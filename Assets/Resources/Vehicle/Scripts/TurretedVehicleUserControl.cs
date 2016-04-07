@@ -26,7 +26,6 @@ public class TurretedVehicleUserControl : MonoBehaviour {
         m_brakeAxis = Input.GetAxis("Jump");
         m_fireAxis = Input.GetAxis("Fire1");
         m_retractAxis = Input.GetAxis("Fire2");
-        Debug.Log(m_fireAxis);
 
         if (m_fireAxis == 1)
         {

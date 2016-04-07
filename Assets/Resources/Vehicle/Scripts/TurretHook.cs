@@ -15,7 +15,8 @@ public class TurretHook : MonoBehaviour
     private Vector3 m_returnVector;
     private float m_spawnDistance;
 
-    public bool m_MaxLength
+
+    public bool m_DragMode
     {
         get;
         private set;
@@ -71,7 +72,6 @@ public class TurretHook : MonoBehaviour
             m_rb.velocity = Vector3.zero;
             m_rb.angularVelocity = Vector3.zero;
             m_rb.isKinematic = true;
-            m_MaxLength = true;
         }
     }
    
