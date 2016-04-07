@@ -132,19 +132,31 @@ public class VehicleTurret : MonoBehaviour {
         m_Chain.DestroyRope();
     }
 
-    void Grabbing()
+    void HookLogic()
     {
-        float distance = Vector3.Distance(transform.position, m_Hook.transform.position);
-        if (distance > m_MaxChainLength+m_ChainSensitivity && m_Hook.gameObject.activeSelf)
+        if (!m_Hook.m_IsReset)
         {
-            Vector3 heading = m_Hook.transform.position - transform.position;
-            Vector3 axis = Vector3.Cross(m_rb.velocity, heading); // orbit axis
-            Vector3 direction = Vector3.Cross(heading, axis).normalized;
-            Quaternion newRot = Quaternion.LookRotation(direction, transform.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, newRot,Time.fixedDeltaTime * m_angularRotationFactor);
+            if (!m_Hook.m_DragMode)
+            {
+                float distance = Vector3.Distance(transform.position, m_Hook.transform.position);
+                if (distance > m_MaxChainLength + m_ChainSensitivity && m_Hook.gameObject.activeSelf)
+                {
+                    Vector3 heading = m_Hook.transform.position - transform.position;
+                    Vector3 axis = Vector3.Cross(m_rb.velocity, heading); // orbit axis
+                    Vector3 direction = Vector3.Cross(heading, axis).normalized;
+                    Quaternion newRot = Quaternion.LookRotation(direction, transform.up);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, newRot, Time.fixedDeltaTime * m_angularRotationFactor);
 
-            m_rb.velocity = direction * m_rb.velocity.magnitude;
+                    m_rb.velocity = direction * m_rb.velocity.magnitude;
+                }
+            }
+
         }
+        else
+        {
+            Retract();
+        }
+
     }
 
     private void HookSpawnPoint()
@@ -152,6 +164,7 @@ public class VehicleTurret : MonoBehaviour {
         m_spawnPoint = m_VehicleTurret.transform.position;
         m_spawnPoint.z += m_spawnPointOffset;
     }
+
     void Update()
     {
         HookSpawnPoint();
@@ -162,7 +175,7 @@ public class VehicleTurret : MonoBehaviour {
 
     void FixedUpdate()
     {
-        Grabbing();
+        HookLogic();
     }
 	
 }

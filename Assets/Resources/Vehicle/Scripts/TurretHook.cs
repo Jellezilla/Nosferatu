@@ -5,16 +5,15 @@ using System.Collections;
 public class TurretHook : MonoBehaviour
 {
     private float m_launchForce;
-    private float m_returnForce;
+    private float m_ReturnForce;
     private float m_returnDistance;
     private Rigidbody m_rb;
     private Vector3 m_spawnPosition;
     private float m_MaxChainLength;
     private bool m_hooked;
     private bool m_returnMode;
-    private Vector3 m_returnVector;
     private float m_spawnDistance;
-
+    private Vector3 m_returnHeading;
 
     public bool m_DragMode
     {
@@ -22,6 +21,11 @@ public class TurretHook : MonoBehaviour
         private set;
     }
 
+    public bool m_IsReset
+    {
+        get;
+        private set; 
+    }
     public Vector3 spawnPosition
     {
         set
@@ -56,26 +60,41 @@ public class TurretHook : MonoBehaviour
     public void Launch(Vector3 heading, float maxChainLength, float retractDistance, float launchForce, float returnForce)
     {
 
+        m_rb.velocity = Vector3.zero;
+        m_rb.angularVelocity = Vector3.zero;
         m_MaxChainLength = maxChainLength;
         m_returnDistance = retractDistance;
         m_launchForce = launchForce;
-        m_returnForce = returnForce;
+        m_ReturnForce = returnForce;
+        m_IsReset = false;
         m_rb.AddForce(heading * m_launchForce, ForceMode.Force);
     }
 
     public void ReelIn()
     {
-
+        if (m_DragMode && !m_IsReset)
+        {
+            m_returnHeading = m_spawnPosition - transform.position;
+            m_rb.transform.position = Vector3.MoveTowards(m_rb.transform.position, m_spawnPosition, Time.fixedDeltaTime * m_ReturnForce);
+            Debug.Log("call");
+            if (m_spawnDistance < m_returnDistance)
+            {
+                m_rb.velocity = Vector3.zero;
+                m_rb.angularVelocity = Vector3.zero;
+                m_DragMode = false;
+                m_IsReset = true;
+            }
+        }
     }
 
-    void MaxLength()
+    void HookAtMaxLength()
     {
         m_spawnDistance = Vector3.Distance(m_spawnPosition, transform.position);
-        if (m_spawnDistance >= m_MaxChainLength)
+        if (m_spawnDistance >= m_MaxChainLength && !m_DragMode && !m_hooked)
         {
             m_rb.velocity = Vector3.zero;
             m_rb.angularVelocity = Vector3.zero;
-
+            m_DragMode = true;
           //  Vector3 heading = m_spawnPosition - transform.position;
            // m_rb.AddForce(heading * m_returnForce, ForceMode.Force);
            
@@ -85,11 +104,11 @@ public class TurretHook : MonoBehaviour
    
     void Update()
     {
-
-        MaxLength();
+        
+        HookAtMaxLength();
     }
     void FixedUpdate()
     {
-        
+        ReelIn();
     }
 }
