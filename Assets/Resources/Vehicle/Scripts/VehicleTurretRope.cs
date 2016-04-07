@@ -11,7 +11,7 @@ public class VehicleTurretRope : MonoBehaviour {
     [SerializeField]
     private float m_ropeWidth = 0.5f;
     private Vector3[] m_RopeSegments;
-    [Range(1,2)][SerializeField][Tooltip("How many segments per metric unit. 1 -> 1")]
+    [Range(4,2)][SerializeField][Tooltip("How many segments per metric unit. 1 -> 1")]
     private int m_segmentRate = 1;
     private Vector3 m_segmentSeparator;
     private int m_segments;
