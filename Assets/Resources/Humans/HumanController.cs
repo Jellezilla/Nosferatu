@@ -32,7 +32,7 @@ public class HumanController : MonoBehaviour {
 	void Init()
     {
         anim = GetComponent<Animator>();
-        player = GameObject.FindWithTag("Player");
+      //  player = GameObject.FindWithTag("Player");
         
    
     }
@@ -46,8 +46,6 @@ public class HumanController : MonoBehaviour {
     /// <param name="col"></param>
     void OnTriggerEnter(Collider col) 
     {
-       
-        
         if (col.tag == "Player" && !_isDead)
         {
 
@@ -93,14 +91,12 @@ public class HumanController : MonoBehaviour {
 
     void FixedUpdate()
     {
-
-
         // When car comes close, the humans panic
-        if (Vector3.Distance(transform.position, player.transform.position) < panicRange)
+     /*   if (Vector3.Distance(transform.position, player.transform.position) < panicRange)
         {
 
             Panic();
-        }
+        }*/
         
     }
    
