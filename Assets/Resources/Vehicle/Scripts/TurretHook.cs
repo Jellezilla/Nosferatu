@@ -52,7 +52,12 @@ public class TurretHook : MonoBehaviour
             if (collision.gameObject.tag == Tags.human || collision.gameObject.tag == Tags.cow)
             {
 
-                //HIT SUCKABLE Object
+
+            }
+            else
+            {
+                m_rb.isKinematic = true;
+                m_hooked = true;
             }
         }
     }
@@ -70,19 +75,25 @@ public class TurretHook : MonoBehaviour
         m_rb.AddForce(heading * m_launchForce, ForceMode.Force);
     }
 
-    public void ReelIn()
+    public void Detach()
+    {
+        m_rb.isKinematic = false;
+        m_hooked = false;
+        m_DragMode = true;
+    }
+    void ReelIn()
     {
         if (m_DragMode && !m_IsReset)
         {
             m_returnHeading = m_spawnPosition - transform.position;
             m_rb.transform.position = Vector3.MoveTowards(m_rb.transform.position, m_spawnPosition, Time.fixedDeltaTime * m_ReturnForce);
-            Debug.Log("call");
             if (m_spawnDistance < m_returnDistance)
             {
                 m_rb.velocity = Vector3.zero;
                 m_rb.angularVelocity = Vector3.zero;
                 m_DragMode = false;
                 m_IsReset = true;
+                gameObject.SetActive(false);
             }
         }
     }

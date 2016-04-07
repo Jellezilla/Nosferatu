@@ -128,7 +128,7 @@ public class VehicleTurret : MonoBehaviour {
 
     public void Retract()
     {
-        m_Hook.gameObject.SetActive(false);
+        m_Hook.Detach();
         m_Chain.DestroyRope();
     }
 

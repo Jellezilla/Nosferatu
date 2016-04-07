@@ -44,17 +44,34 @@ public class HumanController : MonoBehaviour {
     ///  Controls the collision with the player (car) 
     /// </summary>
     /// <param name="col"></param>
+    /*
     void OnTriggerEnter(Collider col) 
     {
-        if (col.tag == "Player" && !_isDead)
+        if (col.tag == Tags.player && !_isDead)
         {
+            Debug.Log("hit");
 
             GoRagdoll();
             _isDead = true;
           
         }
     }
-       /// <summary>
+    */
+    public void OnCollisionEnter(Collision collision)
+    {
+       
+        if (collision.gameObject.tag == Tags.player && !_isDead)
+        {
+            Debug.Log("hit");
+            CapsuleCollider theCol = GetComponent<CapsuleCollider>();
+            theCol.enabled = false;
+            GoRagdoll();
+            _isDead = true;
+
+        }
+    }
+
+    /// <summary>
     /// This method is run when hit by the car. It will make the blood splatter, make the human collapse (ragdoll effect) and call destroy on it.
     /// </summary>
     void GoRagdoll()
