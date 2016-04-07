@@ -57,17 +57,17 @@ public class HumanController : MonoBehaviour {
         }
     }
     */
-    public void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider col)
     {
        
-        if (collision.gameObject.tag == Tags.player && !_isDead)
+        if (col.tag == Tags.player && !_isDead)
         {
             Debug.Log("hit");
-            CapsuleCollider theCol = GetComponent<CapsuleCollider>();
-            theCol.enabled = false;
-            GoRagdoll();
+          //  CapsuleCollider theCol = GetComponent<CapsuleCollider>();
+          //  theCol.enabled = false;
+           
             _isDead = true;
-
+            GoRagdoll();
         }
     }
 
