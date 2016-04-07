@@ -32,7 +32,7 @@ public class VehicleTurret : MonoBehaviour {
     private VehicleTurretRope m_Chain;
     private Rigidbody m_rb;
     [SerializeField]
-    private float m_PullBackForce;
+    private float m_angularRotationFactor;
 	// Use this for initialization
 
     public Vector3 SpawnPoint
@@ -139,7 +139,7 @@ public class VehicleTurret : MonoBehaviour {
             Vector3 axis = Vector3.Cross(m_rb.velocity, heading); // orbit axis
             Vector3 direction = Vector3.Cross(heading, axis).normalized;
             Quaternion newRot = Quaternion.LookRotation(direction, transform.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, newRot,Time.fixedDeltaTime * m_PullBackForce);
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRot,Time.fixedDeltaTime * m_angularRotationFactor);
 
             m_rb.velocity = direction * m_rb.velocity.magnitude;
         }
