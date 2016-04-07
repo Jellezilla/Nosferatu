@@ -60,24 +60,32 @@ public class TurretHook : MonoBehaviour
         m_returnDistance = retractDistance;
         m_launchForce = launchForce;
         m_returnForce = returnForce;
-        m_rb.isKinematic = false;
         m_rb.AddForce(heading * m_launchForce, ForceMode.Force);
     }
 
+    public void ReelIn()
+    {
+
+    }
 
     void MaxLength()
     {
+        m_spawnDistance = Vector3.Distance(m_spawnPosition, transform.position);
         if (m_spawnDistance >= m_MaxChainLength)
         {
             m_rb.velocity = Vector3.zero;
             m_rb.angularVelocity = Vector3.zero;
-            m_rb.isKinematic = true;
+
+          //  Vector3 heading = m_spawnPosition - transform.position;
+           // m_rb.AddForce(heading * m_returnForce, ForceMode.Force);
+           
+
         }
     }
    
     void Update()
     {
-        m_spawnDistance = Vector3.Distance(m_spawnPosition, transform.position);
+
         MaxLength();
     }
     void FixedUpdate()

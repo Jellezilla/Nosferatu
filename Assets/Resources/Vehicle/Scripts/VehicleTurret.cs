@@ -33,6 +33,8 @@ public class VehicleTurret : MonoBehaviour {
     private Rigidbody m_rb;
     [SerializeField]
     private float m_angularRotationFactor;
+    [SerializeField]
+    private float m_ChainSensitivity;
 	// Use this for initialization
 
     public Vector3 SpawnPoint
@@ -133,7 +135,7 @@ public class VehicleTurret : MonoBehaviour {
     void Grabbing()
     {
         float distance = Vector3.Distance(transform.position, m_Hook.transform.position);
-        if (distance > m_MaxChainLength+2 && m_Hook.gameObject.activeSelf)
+        if (distance > m_MaxChainLength+m_ChainSensitivity && m_Hook.gameObject.activeSelf)
         {
             Vector3 heading = m_Hook.transform.position - transform.position;
             Vector3 axis = Vector3.Cross(m_rb.velocity, heading); // orbit axis
@@ -145,9 +147,15 @@ public class VehicleTurret : MonoBehaviour {
         }
     }
 
+    private void HookSpawnPoint()
+    {
+        m_spawnPoint = m_VehicleTurret.transform.position;
+        m_spawnPoint.z += m_spawnPointOffset;
+    }
     void Update()
     {
-        m_spawnPoint = new Vector3(m_VehicleTurret.transform.position.x, m_VehicleTurret.transform.position.y, m_VehicleTurret.transform.position.z + m_spawnPointOffset);
+        HookSpawnPoint();
+
         m_Hook.spawnPosition = m_spawnPoint;
 
     }
