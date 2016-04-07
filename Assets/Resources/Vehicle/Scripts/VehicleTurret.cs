@@ -14,9 +14,10 @@ public class VehicleTurret : MonoBehaviour {
     [SerializeField]
     private float m_rotationSpeed = 1.0f;
     private Vector3 m_prevMPos;
+    private Vector3 m_curMPos;
     [SerializeField]
     private int m_RotRevCooldown;
-    private WaitForSeconds m_WaitStep;
+    private WaitForFixedUpdate m_WaitStep;
     private bool m_Rotating;
     [SerializeField]
     private GameObject m_HookPrefab;
@@ -26,8 +27,10 @@ public class VehicleTurret : MonoBehaviour {
     private float m_RetractPointDist;
     [SerializeField]
     private float m_LaunchForce;
+    [Tooltip("Hook return factor")]
+    [Range(1,50)]
     [SerializeField]
-    private float m_ReturnForce;
+    private float m_ReturnFactor;
     private TurretHook m_Hook;
     private VehicleTurretRope m_Chain;
     private Rigidbody m_rb;
@@ -51,7 +54,7 @@ public class VehicleTurret : MonoBehaviour {
         m_Hook.gameObject.SetActive(false);
         m_Chain = GetComponent<VehicleTurretRope>();
         m_prevMPos = Input.mousePosition;
-        m_WaitStep = new WaitForSeconds(1);
+        m_WaitStep = new WaitForFixedUpdate();
         m_rb = GetComponent<Rigidbody>();
         StartCoroutine(ReverseRotation());
 
@@ -71,13 +74,13 @@ public class VehicleTurret : MonoBehaviour {
     /// <returns></returns>
     private IEnumerator ReverseRotation()
     {
-        int rotCounter=0;
+        float rotCounter=0;
         while (true)
         {
             if (m_prevMPos == Input.mousePosition)
             {
-                rotCounter++;
-                if (rotCounter == m_RotRevCooldown)
+                rotCounter+=Time.fixedDeltaTime;
+                if (rotCounter >= m_RotRevCooldown)
                 {
                     m_Rotating = false;
                     if (m_VehicleTurret.transform.rotation == transform.rotation)
@@ -89,25 +92,31 @@ public class VehicleTurret : MonoBehaviour {
             else
             {
                 rotCounter = 0;
+                Debug.Log("TEST");
                 m_Rotating = true;
             }
             yield return m_WaitStep;
         }
     }
+
+    /// <summary>
+    /// Aim function
+    /// </summary>
     public void Aim()
     {
+        
         if (m_Rotating)
         {
             var pos = Camera.main.WorldToScreenPoint(m_VehicleTurret.transform.position);
             m_prevMPos = Input.mousePosition;
             var dir = m_prevMPos - pos;
             var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
-            m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, Quaternion.AngleAxis(angle, transform.up), Time.fixedDeltaTime * m_rotationSpeed);
+            m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, Quaternion.AngleAxis(angle, transform.up), Time.deltaTime * m_rotationSpeed);
 
         }
         else
         {
-            m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, transform.rotation, Time.fixedDeltaTime * m_rotationSpeed);
+            m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, transform.rotation, Time.deltaTime * m_rotationSpeed);
         }
 
 
@@ -122,16 +131,22 @@ public class VehicleTurret : MonoBehaviour {
         m_Hook.gameObject.SetActive(true);
         m_Hook.transform.rotation = m_VehicleTurret.transform.rotation;
         m_Hook.transform.position = m_spawnPoint;
-        m_Hook.Launch(m_VehicleTurret.transform.forward, m_MaxChainLength,m_RetractPointDist,m_LaunchForce,m_ReturnForce);
+        m_Hook.Launch(m_VehicleTurret.transform.forward, m_MaxChainLength,m_RetractPointDist,m_LaunchForce,m_ReturnFactor);
         m_Chain.CreateRope(m_Hook.gameObject);
     }
 
+    /// <summary>
+    /// Used to retract the hook
+    /// </summary>
     public void Retract()
     {
         m_Hook.Detach();
         m_Chain.DestroyRope();
     }
 
+    /// <summary>
+    /// Hook 
+    /// </summary>
     void HookLogic()
     {
         if (!m_Hook.m_IsReset)

@@ -17,15 +17,22 @@ public class TurretedVehicleUserControl : MonoBehaviour {
         m_controller = GetComponent<VehicleController>();
         m_turret = GetComponent<VehicleTurret>();
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+
+    private void GetInput()
     {
         m_hAxis = Input.GetAxis("Horizontal");
         m_vAxis = Input.GetAxis("Vertical");
         m_brakeAxis = Input.GetAxis("Jump");
         m_fireAxis = Input.GetAxis("Fire1");
         m_retractAxis = Input.GetAxis("Fire2");
+    }
+
+	void Update ()
+    {
+
+        GetInput();
 
         if (m_fireAxis == 1)
         {
@@ -37,11 +44,12 @@ public class TurretedVehicleUserControl : MonoBehaviour {
             m_turret.Retract();
         }
 
+        m_turret.Aim();
+
     }
 
     void FixedUpdate()
     {
         m_controller.Motion(m_vAxis, m_hAxis, m_vAxis, m_brakeAxis);
-        m_turret.Aim();
     }
 }
