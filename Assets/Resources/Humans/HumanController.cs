@@ -17,6 +17,9 @@ public class HumanController : MonoBehaviour {
     private float crippleSpeed = 0.15f;
     [SerializeField]
     private float panicRange = 5.0f;
+    private Rigidbody[] m_rbs;
+    private Collider[] m_cols;
+    private CharacterJoint[] m_joints;
 
    
     // Use this for initialization
@@ -32,6 +35,16 @@ public class HumanController : MonoBehaviour {
 	void Init()
     {
         anim = GetComponent<Animator>();
+        m_rbs = GetComponentsInChildren<Rigidbody>();
+        m_cols = GetComponentsInChildren<Collider>();
+
+
+        for (int i = 0; i < m_rbs.Length; i++)
+        {
+            m_cols[i].enabled = false;
+            m_rbs[i].useGravity = false;
+            m_rbs[i].Sleep();
+        }
       //  player = GameObject.FindWithTag("Player");
         
    

@@ -60,28 +60,31 @@ public class TurretHook : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag != Tags.player)
+        if (!m_DragMode)
         {
-            if (collision.gameObject.tag == Tags.human || collision.gameObject.tag == Tags.cow)
+            if (collision.gameObject.tag != Tags.player)
             {
+                if (collision.gameObject.tag == Tags.human || collision.gameObject.tag == Tags.cow)
+                {
 
 
-            }
-            else
-            {
+                }
+                else
+                {
 
-                m_rb.velocity = Vector3.zero;
-                m_rb.isKinematic = true;
-                m_col.enabled = false;
-                m_rb.transform.rotation = Quaternion.identity;
+                    m_rb.velocity = Vector3.zero;
+                    m_rb.isKinematic = true;
+                    m_col.enabled = false;
+                    m_rb.transform.rotation = Quaternion.identity;
 
-                m_hooked = true;
+                    m_hooked = true;
 
-                //add hinge to hook
-                m_hinge = gameObject.AddComponent<HingeJoint>();
-                m_hinge.axis = Vector3.up;
-                m_hinge.anchor = Vector3.zero;
-                m_hinge.connectedBody = m_launchPointRb;
+                    //add hinge to hook
+                    m_hinge = gameObject.AddComponent<HingeJoint>();
+                    m_hinge.axis = Vector3.up;
+                    m_hinge.anchor = Vector3.zero;
+                    m_hinge.connectedBody = m_launchPointRb;
+                }
             }
         }
     }
