@@ -28,7 +28,7 @@ public class VehicleTurret : MonoBehaviour {
     [SerializeField]
     private float m_LaunchForce;
     [Tooltip("Hook return factor")]
-    [Range(1,50)]
+    [Range(10,60)]
     [SerializeField]
     private float m_ReturnFactor;
     private TurretHook m_Hook;
@@ -36,8 +36,9 @@ public class VehicleTurret : MonoBehaviour {
     private Rigidbody m_rb;
     [SerializeField]
     private float m_angularRotationFactor;
-    [SerializeField]
-    private float m_ChainSensitivity;
+    private bool m_retracted;
+    private HingeJoint m_hinge;
+
 	// Use this for initialization
 
     public Vector3 SpawnPoint
@@ -51,6 +52,7 @@ public class VehicleTurret : MonoBehaviour {
 	void Start () {
 
         m_Hook = ((GameObject)Instantiate(m_HookPrefab, m_spawnPoint, transform.rotation)).GetComponent<TurretHook>();
+        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), m_Hook.gameObject.GetComponent<Collider>());
         m_Hook.gameObject.SetActive(false);
         m_Chain = GetComponent<VehicleTurretRope>();
         m_prevMPos = Input.mousePosition;
@@ -104,20 +106,23 @@ public class VehicleTurret : MonoBehaviour {
     /// </summary>
     public void Aim()
     {
-        
-        if (m_Rotating)
+        if (!m_Hook.hooked)
         {
-            var pos = Camera.main.WorldToScreenPoint(m_VehicleTurret.transform.position);
-            m_prevMPos = Input.mousePosition;
-            var dir = m_prevMPos - pos;
-            var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
-            m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, Quaternion.AngleAxis(angle, transform.up), Time.deltaTime * m_rotationSpeed);
+            if (m_Rotating)
+            {
+                var pos = Camera.main.WorldToScreenPoint(m_VehicleTurret.transform.position);
+                m_prevMPos = Input.mousePosition;
+                var dir = m_prevMPos - pos;
+                var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+                m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, Quaternion.AngleAxis(angle, transform.up), Time.deltaTime * m_rotationSpeed);
 
-        }
-        else
-        {
-            m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, transform.rotation, Time.deltaTime * m_rotationSpeed);
-        }
+            }
+            else
+            {
+                m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, transform.rotation, Time.deltaTime * m_rotationSpeed);
+            }
+        } 
+
 
 
     }
@@ -127,12 +132,15 @@ public class VehicleTurret : MonoBehaviour {
     /// </summary>
     public void Fire()
     {
-       
-        m_Hook.gameObject.SetActive(true);
-        m_Hook.transform.rotation = m_VehicleTurret.transform.rotation;
-        m_Hook.transform.position = m_spawnPoint;
-        m_Hook.Launch(m_VehicleTurret.transform.forward, m_MaxChainLength,m_RetractPointDist,m_LaunchForce,m_ReturnFactor);
-        m_Chain.CreateRope(m_Hook.gameObject);
+        if (!m_Hook.gameObject.activeSelf)
+        {
+            m_Hook.gameObject.SetActive(true);
+            m_Hook.transform.rotation = m_VehicleTurret.transform.rotation;
+            m_Hook.transform.position = m_spawnPoint;
+            m_Hook.Launch(m_VehicleTurret.transform.forward, m_MaxChainLength, m_RetractPointDist, m_LaunchForce, m_ReturnFactor, m_rb);
+            m_Chain.CreateRope(m_Hook.gameObject);
+        }
+
     }
 
     /// <summary>
@@ -141,56 +149,59 @@ public class VehicleTurret : MonoBehaviour {
     public void Retract()
     {
         m_Hook.Detach();
-        m_Chain.DestroyRope();
     }
 
     /// <summary>
     /// Hook 
     /// </summary>
-    void HookLogic()
+    void HookAndChainLogic()
     {
-        if (!m_Hook.m_IsReset)
+
+        if (!m_Hook.m_IsReset && m_Hook.gameObject.activeSelf)
         {
             if (!m_Hook.m_DragMode)
             {
-                float distance = Vector3.Distance(transform.position, m_Hook.transform.position);
-                if (distance > m_MaxChainLength + m_ChainSensitivity && m_Hook.gameObject.activeSelf)
-                {
-                    Vector3 heading = m_Hook.transform.position - transform.position;
-                    Vector3 axis = Vector3.Cross(m_rb.velocity, heading); // orbit axis
-                    Vector3 direction = Vector3.Cross(heading, axis).normalized;
-                    Quaternion newRot = Quaternion.LookRotation(direction, transform.up);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, newRot, Time.fixedDeltaTime * m_angularRotationFactor);
+                m_retracted = false;
+            }
 
-                    m_rb.velocity = direction * m_rb.velocity.magnitude;
-                }
+            if (m_Hook.hooked)
+            {
+
             }
 
         }
-        else
+        else if(!m_retracted)
         {
             Retract();
+            m_Chain.DestroyRope();
+            m_retracted = true;
+
         }
 
     }
 
     private void HookSpawnPoint()
     {
+
         m_spawnPoint = m_VehicleTurret.transform.position;
         m_spawnPoint.z += m_spawnPointOffset;
+
+        if (m_Hook.gameObject.activeSelf)
+        {
+            m_Hook.spawnPosition = m_spawnPoint;
+        }
     }
 
     void Update()
     {
         HookSpawnPoint();
-
-        m_Hook.spawnPosition = m_spawnPoint;
+        HookAndChainLogic();
 
     }
 
     void FixedUpdate()
     {
-        HookLogic();
+        
     }
 	
 }

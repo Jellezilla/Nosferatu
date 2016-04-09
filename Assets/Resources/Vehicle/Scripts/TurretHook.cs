@@ -14,6 +14,18 @@ public class TurretHook : MonoBehaviour
     private bool m_returnMode;
     private float m_spawnDistance;
     private Vector3 m_returnHeading;
+    private HingeJoint m_hinge;
+    private HingeJoint m_oHinge;
+    private Rigidbody m_launchPointRb;
+    private Collider m_col;
+
+    public bool hooked
+    {
+        get
+        {
+            return m_hooked;
+         }
+    }
 
     public bool m_DragMode
     {
@@ -38,6 +50,7 @@ public class TurretHook : MonoBehaviour
     void Awake()
     {
         m_rb = GetComponent<Rigidbody>();
+        m_col = GetComponent<Collider>();
        
        
         //grab original Position
@@ -45,7 +58,7 @@ public class TurretHook : MonoBehaviour
 
 
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag != Tags.player)
         {
@@ -56,15 +69,32 @@ public class TurretHook : MonoBehaviour
             }
             else
             {
+
+                m_rb.velocity = Vector3.zero;
                 m_rb.isKinematic = true;
+                m_col.enabled = false;
+                m_rb.transform.rotation = Quaternion.identity;
+
                 m_hooked = true;
+
+                //add hinge to hook
+                m_hinge = gameObject.AddComponent<HingeJoint>();
+                m_hinge.axis = Vector3.up;
+                m_hinge.anchor = Vector3.zero;
+                m_hinge.connectedBody = m_launchPointRb;
             }
         }
     }
 
-    public void Launch(Vector3 heading, float maxChainLength, float retractDistance, float launchForce, float returnForce)
+    void OnTriggerExit()
     {
+        m_hinge = null;
+    }
 
+    public void Launch(Vector3 heading, float maxChainLength, float retractDistance, float launchForce, float returnForce, Rigidbody origin)
+    {
+        m_col.enabled = true;
+        m_launchPointRb = origin;
         m_rb.velocity = Vector3.zero;
         m_rb.angularVelocity = Vector3.zero;
         m_MaxChainLength = maxChainLength;
@@ -72,12 +102,14 @@ public class TurretHook : MonoBehaviour
         m_launchForce = launchForce;
         m_ReturnForce = returnForce;
         m_IsReset = false;
-        m_rb.AddForce(heading * m_launchForce, ForceMode.Force);
+        m_rb.AddForce(heading * m_launchForce, ForceMode.Impulse);
     }
 
     public void Detach()
     {
+        Destroy(GetComponent<HingeJoint>(),0.0f);
         m_rb.isKinematic = false;
+
         m_hooked = false;
         m_DragMode = true;
     }
