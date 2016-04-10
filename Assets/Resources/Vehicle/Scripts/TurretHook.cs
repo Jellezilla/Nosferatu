@@ -141,10 +141,20 @@ public class TurretHook : MonoBehaviour
             m_rb.velocity = Vector3.zero;
             m_rb.angularVelocity = Vector3.zero;
             m_DragMode = true;
-          //  Vector3 heading = m_spawnPosition - transform.position;
-           // m_rb.AddForce(heading * m_returnForce, ForceMode.Force);
-           
+            //  Vector3 heading = m_spawnPosition - transform.position;
+            // m_rb.AddForce(heading * m_returnForce, ForceMode.Force);
 
+        }
+        else if (m_hooked)
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                m_hinge.connectedBody = null;
+            }
+            else if(Input.GetKeyDown(KeyCode.Z))
+            {
+                m_hinge.connectedBody = m_launchPointRb;
+            }
         }
     }
    

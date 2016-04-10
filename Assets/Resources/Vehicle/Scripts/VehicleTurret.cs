@@ -94,7 +94,6 @@ public class VehicleTurret : MonoBehaviour {
             else
             {
                 rotCounter = 0;
-                Debug.Log("TEST");
                 m_Rotating = true;
             }
             yield return m_WaitStep;
