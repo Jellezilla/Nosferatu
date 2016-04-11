@@ -14,10 +14,13 @@ public class TurretHook : MonoBehaviour
     private bool m_returnMode;
     private float m_spawnDistance;
     private Vector3 m_returnHeading;
-    private HingeJoint m_hinge;
+    private SpringJoint m_hinge;
     private HingeJoint m_oHinge;
     private Rigidbody m_launchPointRb;
     private Collider m_col;
+    private float m_currentHookedDist;
+    private float m_chainSpringForce;
+    private float m_chainSpringDampning;
 
     public bool hooked
     {
@@ -78,11 +81,13 @@ public class TurretHook : MonoBehaviour
                     m_rb.transform.rotation = Quaternion.identity;
 
                     m_hooked = true;
-
+                    m_currentHookedDist = Vector3.Distance(m_spawnPosition, transform.position);
                     //add hinge to hook
-                    m_hinge = gameObject.AddComponent<HingeJoint>();
+                    m_hinge = gameObject.AddComponent<SpringJoint>();
                     m_hinge.axis = Vector3.up;
                     m_hinge.anchor = Vector3.zero;
+                    m_hinge.spring = m_chainSpringForce;
+                    m_hinge.damper = m_chainSpringDampning;
                     m_hinge.connectedBody = m_launchPointRb;
                 }
             }
@@ -92,9 +97,10 @@ public class TurretHook : MonoBehaviour
     void OnTriggerExit()
     {
         m_hinge = null;
+        m_currentHookedDist = 0;
     }
 
-    public void Launch(Vector3 heading, float maxChainLength, float retractDistance, float launchForce, float returnForce, Rigidbody origin)
+    public void Launch(Vector3 heading, float maxChainLength, float retractDistance, float launchForce, float ropeSpringForce, float ropeDampningForce, float returnForce, Rigidbody origin)
     {
         m_col.enabled = true;
         m_launchPointRb = origin;
@@ -103,6 +109,8 @@ public class TurretHook : MonoBehaviour
         m_MaxChainLength = maxChainLength;
         m_returnDistance = retractDistance;
         m_launchForce = launchForce;
+        m_chainSpringForce = ropeSpringForce;
+        m_chainSpringDampning = ropeDampningForce;
         m_ReturnForce = returnForce;
         m_IsReset = false;
         m_rb.AddForce(heading * m_launchForce, ForceMode.Impulse);
@@ -110,7 +118,7 @@ public class TurretHook : MonoBehaviour
 
     public void Detach()
     {
-        Destroy(GetComponent<HingeJoint>(),0.0f);
+        Destroy(GetComponent<SpringJoint>(),0.0f);
         m_rb.isKinematic = false;
 
         m_hooked = false;
@@ -121,7 +129,7 @@ public class TurretHook : MonoBehaviour
         if (m_DragMode && !m_IsReset)
         {
             m_returnHeading = m_spawnPosition - transform.position;
-            m_rb.transform.position = Vector3.MoveTowards(m_rb.transform.position, m_spawnPosition, Time.fixedDeltaTime * m_ReturnForce);
+            transform.position = Vector3.MoveTowards(transform.position, m_spawnPosition, Time.fixedDeltaTime * m_ReturnForce);
             if (m_spawnDistance < m_returnDistance)
             {
                 m_rb.velocity = Vector3.zero;
@@ -147,14 +155,7 @@ public class TurretHook : MonoBehaviour
         }
         else if (m_hooked)
         {
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                m_hinge.connectedBody = null;
-            }
-            else if(Input.GetKeyDown(KeyCode.Z))
-            {
-                m_hinge.connectedBody = m_launchPointRb;
-            }
+           
         }
     }
    

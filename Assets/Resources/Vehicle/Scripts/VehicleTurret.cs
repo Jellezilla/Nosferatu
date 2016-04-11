@@ -24,6 +24,10 @@ public class VehicleTurret : MonoBehaviour {
     [SerializeField]
     private int m_MaxChainLength;
     [SerializeField]
+    private float m_RopeSpringDampning;
+    [SerializeField]
+    private float m_RopeSpringForce;
+    [SerializeField]
     private float m_RetractPointDist;
     [SerializeField]
     private float m_LaunchForce;
@@ -136,7 +140,7 @@ public class VehicleTurret : MonoBehaviour {
             m_Hook.gameObject.SetActive(true);
             m_Hook.transform.rotation = m_VehicleTurret.transform.rotation;
             m_Hook.transform.position = m_spawnPoint;
-            m_Hook.Launch(m_VehicleTurret.transform.forward, m_MaxChainLength, m_RetractPointDist, m_LaunchForce, m_ReturnFactor, m_rb);
+            m_Hook.Launch(m_VehicleTurret.transform.forward, m_MaxChainLength, m_RetractPointDist, m_LaunchForce, m_RopeSpringForce, m_RopeSpringDampning, m_ReturnFactor, m_rb);
             m_Chain.CreateRope(m_Hook.gameObject);
         }
 
