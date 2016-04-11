@@ -23,7 +23,7 @@ public class HumanController : MonoBehaviour {
 
    
     // Use this for initialization
-    void Start () {
+    void Awake () {
         Init();
         
 	}
@@ -41,13 +41,23 @@ public class HumanController : MonoBehaviour {
 
         for (int i = 0; i < m_rbs.Length; i++)
         {
-            m_cols[i].enabled = false;
-            m_rbs[i].useGravity = false;
-            m_rbs[i].Sleep();
-        }
+            if (i != 0)
+            {
+                if (i == 1)
+                {
+                    m_cols[i].enabled = true;
+                }
+                else
+                {
+                    m_cols[i].enabled = false;
+                }
 
-        m_cols[0].enabled = true;
-      //  player = GameObject.FindWithTag("Player");
+                m_rbs[i].useGravity = false;
+                m_rbs[i].isKinematic = true;
+                m_rbs[i].Sleep();
+            }
+
+        }
         
    
     }
@@ -82,22 +92,32 @@ public class HumanController : MonoBehaviour {
             //  theCol.enabled = false;
             for (int i = 0; i < m_rbs.Length; i++)
             {
-                if (i == 0)
+                if (i != 0)
+                {
+                    if (i == 1)
+                    {
+                        m_cols[i].enabled = false;
+                        //acount for root object collider
+                    }
+                    else
+                    {
+                        m_cols[i].enabled = true;
+                    }
+                    m_rbs[i].useGravity = true;
+                    m_rbs[i].isKinematic = false;
+                    m_rbs[i].WakeUp();
+                }
+                else //if its equal to 0
                 {
                     m_cols[i].enabled = false;
-                }
-                else
-                {
-                    m_cols[i].enabled = true;
+                    m_rbs[i].useGravity = false;
+                    m_rbs[i].Sleep();
                 }
 
-                m_rbs[i].useGravity = true;
-                m_rbs[i].Sleep();
+
             }
-
-            _isDead = true;
             GoRagdoll();
-            Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), col.gameObject.transform.rotation);
+            _isDead = true;
         }
     }
 
@@ -123,8 +143,9 @@ public class HumanController : MonoBehaviour {
 
 
         // play blood splatter effect
-        //Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation);
-        //Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), col.gameObject.transform.rotation);
+        (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
+
+
 
 
         // Destroy object after 5 seconds. 

@@ -6,7 +6,6 @@ TagManager:
   tags:
   - Human
   - Environment
-  - BloodCam
   layers:
   - Default
   - TransparentFX
@@ -16,9 +15,9 @@ TagManager:
   - UI
   - 
   - 
-  - Blood
-  - 2
-  - 3
+  - Human
+  - 
+  - 
   - 
   - 
   - 
