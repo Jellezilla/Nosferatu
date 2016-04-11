@@ -10,7 +10,7 @@ public class TurretedVehicleUserControl : MonoBehaviour {
     private float m_vAxis;
     private float m_brakeAxis;
     private float m_fireAxis;
-    private float m_retractAxis;
+
 	// Use this for initialization
 	void Awake ()
     {
@@ -26,7 +26,6 @@ public class TurretedVehicleUserControl : MonoBehaviour {
         m_vAxis = Input.GetAxis("Vertical");
         m_brakeAxis = Input.GetAxis("Jump");
         m_fireAxis = Input.GetAxis("Fire1");
-        m_retractAxis = Input.GetAxis("Fire2");
     }
 
 	void Update ()
@@ -39,7 +38,7 @@ public class TurretedVehicleUserControl : MonoBehaviour {
             m_turret.Fire();
         }
 
-        if(m_retractAxis == 1)
+        if(Input.GetKeyDown(KeyCode.Mouse1))
         {
             m_turret.Retract();
         }

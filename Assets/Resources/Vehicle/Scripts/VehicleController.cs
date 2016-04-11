@@ -92,6 +92,7 @@ public class VehicleController : MonoBehaviour {
     public float MaxSpeed { get { return m_Topspeed; } }
     public float Revs { get; private set; }
     public float AccelInput { get; private set; }
+    public bool Grounded { get; private set; }
 
     // Use this for initialization
     void Start() {
@@ -100,6 +101,11 @@ public class VehicleController : MonoBehaviour {
 
     }
 
+
+    void FixedUpdate()
+    {
+        IsGrounded();
+    }
     /// <summary>
     /// Init the controller
     /// </summary>
@@ -302,18 +308,35 @@ public class VehicleController : MonoBehaviour {
     }
 
     /// <summary>
+    /// Check if the car is grounded
+    /// </summary>
+    private void IsGrounded()
+    {
+
+        for (int i = 0; i < m_WheelColliders.Length; i++)
+        {
+            WheelHit hit;
+            if (!m_WheelColliders[i].GetGroundHit(out hit))
+            {
+                //if wheels off the ground then do not align velocity
+                Grounded = false;
+                return;
+            }
+            else
+            {
+                Grounded = true;
+            }
+        }
+    }
+
+    /// <summary>
     /// Controls steering behaviour for wheels 
     /// </summary>
     private void SteeringAsist()
     {
-        for (int i = 0; i < m_WheelColliders.Length; i++)
+        if (!Grounded)
         {
-           WheelHit hit;
-            if (!m_WheelColliders[i].GetGroundHit(out hit))
-            {
-                //if wheels off the ground then do not align velocity
-                return;
-            }
+            return;
         }
 
         //gimbal lock fix

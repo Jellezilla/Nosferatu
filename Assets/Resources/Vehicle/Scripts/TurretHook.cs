@@ -14,6 +14,21 @@ public class TurretHook : MonoBehaviour
     private bool m_returnMode;
     private float m_spawnDistance;
     private Vector3 m_returnHeading;
+    private SpringJoint m_hinge;
+    private HingeJoint m_oHinge;
+    private Rigidbody m_launchPointRb;
+    private Collider m_col;
+    private float m_currentHookedDist;
+    private float m_chainSpringForce;
+    private float m_chainSpringDampning;
+
+    public bool hooked
+    {
+        get
+        {
+            return m_hooked;
+         }
+    }
 
     public bool m_DragMode
     {
@@ -38,6 +53,7 @@ public class TurretHook : MonoBehaviour
     void Awake()
     {
         m_rb = GetComponent<Rigidbody>();
+        m_col = GetComponent<Collider>();
        
        
         //grab original Position
@@ -45,39 +61,66 @@ public class TurretHook : MonoBehaviour
 
 
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag != Tags.player)
+        if (!m_DragMode)
         {
-            if (collision.gameObject.tag == Tags.human || collision.gameObject.tag == Tags.cow)
+            if (collision.gameObject.tag != Tags.player)
             {
+                if (collision.gameObject.tag == Tags.human || collision.gameObject.tag == Tags.cow)
+                {
 
 
-            }
-            else
-            {
-                m_rb.isKinematic = true;
-                m_hooked = true;
+                }
+                else
+                {
+
+                    m_rb.velocity = Vector3.zero;
+                    m_rb.isKinematic = true;
+                    m_col.enabled = false;
+                    m_rb.transform.rotation = Quaternion.identity;
+
+                    m_hooked = true;
+                    m_currentHookedDist = Vector3.Distance(m_spawnPosition, transform.position);
+                    //add hinge to hook
+                    m_hinge = gameObject.AddComponent<SpringJoint>();
+                    m_hinge.axis = Vector3.up;
+                    m_hinge.anchor = Vector3.zero;
+                    m_hinge.spring = m_chainSpringForce;
+                    m_hinge.damper = m_chainSpringDampning;
+                    m_hinge.connectedBody = m_launchPointRb;
+                }
             }
         }
     }
 
-    public void Launch(Vector3 heading, float maxChainLength, float retractDistance, float launchForce, float returnForce)
+    void OnTriggerExit()
     {
+        m_hinge = null;
+        m_currentHookedDist = 0;
+    }
 
+    public void Launch(Vector3 heading, float maxChainLength, float retractDistance, float launchForce, float ropeSpringForce, float ropeDampningForce, float returnForce, Rigidbody origin)
+    {
+        m_col.enabled = true;
+        m_launchPointRb = origin;
         m_rb.velocity = Vector3.zero;
         m_rb.angularVelocity = Vector3.zero;
         m_MaxChainLength = maxChainLength;
         m_returnDistance = retractDistance;
         m_launchForce = launchForce;
+        m_chainSpringForce = ropeSpringForce;
+        m_chainSpringDampning = ropeDampningForce;
         m_ReturnForce = returnForce;
         m_IsReset = false;
-        m_rb.AddForce(heading * m_launchForce, ForceMode.Force);
+        m_rb.AddForce(heading * m_launchForce, ForceMode.Impulse);
     }
 
     public void Detach()
     {
+        Destroy(GetComponent<SpringJoint>(),0.0f);
         m_rb.isKinematic = false;
+
         m_hooked = false;
         m_DragMode = true;
     }
@@ -86,7 +129,7 @@ public class TurretHook : MonoBehaviour
         if (m_DragMode && !m_IsReset)
         {
             m_returnHeading = m_spawnPosition - transform.position;
-            m_rb.transform.position = Vector3.MoveTowards(m_rb.transform.position, m_spawnPosition, Time.fixedDeltaTime * m_ReturnForce);
+            transform.position = Vector3.MoveTowards(transform.position, m_spawnPosition, Time.fixedDeltaTime * m_ReturnForce);
             if (m_spawnDistance < m_returnDistance)
             {
                 m_rb.velocity = Vector3.zero;
@@ -106,10 +149,13 @@ public class TurretHook : MonoBehaviour
             m_rb.velocity = Vector3.zero;
             m_rb.angularVelocity = Vector3.zero;
             m_DragMode = true;
-          //  Vector3 heading = m_spawnPosition - transform.position;
-           // m_rb.AddForce(heading * m_returnForce, ForceMode.Force);
-           
+            //  Vector3 heading = m_spawnPosition - transform.position;
+            // m_rb.AddForce(heading * m_returnForce, ForceMode.Force);
 
+        }
+        else if (m_hooked)
+        {
+           
         }
     }
    
