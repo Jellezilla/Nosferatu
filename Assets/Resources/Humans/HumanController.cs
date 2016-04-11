@@ -97,6 +97,7 @@ public class HumanController : MonoBehaviour {
 
             _isDead = true;
             GoRagdoll();
+            Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), col.gameObject.transform.rotation);
         }
     }
 
@@ -122,9 +123,8 @@ public class HumanController : MonoBehaviour {
 
 
         // play blood splatter effect
-        (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
-
-
+        //Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation);
+        //Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), col.gameObject.transform.rotation);
 
 
         // Destroy object after 5 seconds. 
