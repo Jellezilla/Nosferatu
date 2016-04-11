@@ -1,8 +1,8 @@
 using UnityEngine;
-using UnityEditor;
+//using UnityEditor;
 using System.Collections.Generic;
 using System.Reflection;
-
+/*
 [CustomEditor(typeof(Decal))]
 public class DecalEditor : Editor {	
 
@@ -238,4 +238,4 @@ public class DecalEditor : Editor {
 
 
 	
-}
+}*/

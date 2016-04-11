@@ -35,7 +35,7 @@ public class FollowCam : MonoBehaviour {
 
 
         //Debug.Log(_offsetY);
-        Debug.Log(_pObject.transform.InverseTransformDirection(_pRb.velocity));
+       // Debug.Log(_pObject.transform.InverseTransformDirection(_pRb.velocity));
         //transform.InverseTransformDirection(rigidbody.velocity);
         if (_pObject != null)
         //if (_player != null)

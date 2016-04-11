@@ -8505,7 +8505,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409776, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11451128, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_LaunchForce
@@ -29993,6 +29993,45 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2007799206}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2009662948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2009662950}
+  - 114: {fileID: 2009662949}
+  m_Layer: 0
+  m_Name: TEST_RestartButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2009662949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2009662948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 926c7a848268e684b8830e5865524a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2009662950
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2009662948}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 53.890327, y: 25.463326, z: 487.6004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
 --- !u!1001 &2013004679
 Prefab:
   m_ObjectHideFlags: 0
@@ -31262,8 +31301,8 @@ Camera:
   m_GameObject: {fileID: 2071027161}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0.019607844}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -31311,6 +31350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff849ab691a7414ab4dbc8f7cffc9e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DistanceToPlayerUp: 15
+  DistanceToPlayerForward: 7.5
   _pObject: {fileID: 740890270}
 --- !u!4 &2086339090 stripped
 Transform:
