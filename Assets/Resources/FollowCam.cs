@@ -4,7 +4,7 @@ using System.Collections;
 public class FollowCam : MonoBehaviour {
 
     public float DistanceToPlayerUp = 15;
-    public float DistanceToPlayerForward = 5;
+    public float DistanceToPlayerForward = 10;
     public GameObject _pObject;
     private Rigidbody _pRb;
     private Transform _player;
@@ -35,7 +35,7 @@ public class FollowCam : MonoBehaviour {
 
 
         //Debug.Log(_offsetY);
-        Debug.Log(_pObject.transform.InverseTransformDirection(_pRb.velocity));
+       // Debug.Log(_pObject.transform.InverseTransformDirection(_pRb.velocity));
         //transform.InverseTransformDirection(rigidbody.velocity);
         if (_pObject != null)
         //if (_player != null)

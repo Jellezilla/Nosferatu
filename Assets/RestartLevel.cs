@@ -28,7 +28,7 @@ public class RestartLevel : MonoBehaviour {
     {
         Rect windowRect = new Rect(Screen.width / 2 - 150, Screen.height / 2 - 100, 300, 200);
 
-        if(GUI.Button(new Rect(10, 10, 100, 25), "Restart"))
+        if(GUI.Button(new Rect(10, 10, 100, 25), "(R)estart"))
         {
             confirmationPrompt = true;
         }

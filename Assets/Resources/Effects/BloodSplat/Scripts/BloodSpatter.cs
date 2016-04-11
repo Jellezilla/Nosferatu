@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEditor;
+//using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -118,7 +118,7 @@ public class BloodSpatter : MonoBehaviour {
             }
 
         }
-        SceneView.RepaintAll();
+       // SceneView.RepaintAll();
         //SceneView.RepaintAll();
     }
 }
