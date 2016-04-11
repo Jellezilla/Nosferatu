@@ -87,7 +87,7 @@ public class HumanController : MonoBehaviour {
        
         if (col.tag == Tags.player && !_isDead)
         {
-            Debug.Log("hit");
+//            Debug.Log("hit");
             //  CapsuleCollider theCol = GetComponent<CapsuleCollider>();
             //  theCol.enabled = false;
             for (int i = 0; i < m_rbs.Length; i++)
