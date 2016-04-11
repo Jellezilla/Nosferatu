@@ -45,6 +45,8 @@ public class HumanController : MonoBehaviour {
             m_rbs[i].useGravity = false;
             m_rbs[i].Sleep();
         }
+
+        m_cols[0].enabled = true;
       //  player = GameObject.FindWithTag("Player");
         
    
@@ -76,9 +78,23 @@ public class HumanController : MonoBehaviour {
         if (col.tag == Tags.player && !_isDead)
         {
             Debug.Log("hit");
-          //  CapsuleCollider theCol = GetComponent<CapsuleCollider>();
-          //  theCol.enabled = false;
-           
+            //  CapsuleCollider theCol = GetComponent<CapsuleCollider>();
+            //  theCol.enabled = false;
+            for (int i = 0; i < m_rbs.Length; i++)
+            {
+                if (i == 0)
+                {
+                    m_cols[i].enabled = false;
+                }
+                else
+                {
+                    m_cols[i].enabled = true;
+                }
+
+                m_rbs[i].useGravity = true;
+                m_rbs[i].Sleep();
+            }
+
             _isDead = true;
             GoRagdoll();
             Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), col.gameObject.transform.rotation);
