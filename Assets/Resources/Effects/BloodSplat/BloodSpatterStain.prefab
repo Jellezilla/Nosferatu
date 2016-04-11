@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 28fbfa3ed7a05fd4eaca4a267bd4de42, type: 2}
-  sprite: {fileID: 21300000, guid: 2a90bfc497ae1664d9578e7353177df5, type: 3}
+  sprite: {fileID: 0}
   maxAngle: 90
   pushDistance: 0.01
   affectedLayers:
