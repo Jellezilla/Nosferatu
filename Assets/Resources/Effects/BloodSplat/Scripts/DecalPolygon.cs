@@ -18,8 +18,8 @@ public class DecalPolygon {
 			if(positive[i]) positiveCount++;
 		}
 		
-		if(positiveCount == 0) return null; // полностью за плоскостью
-		if(positiveCount == polygon.vertices.Count) return polygon; // полностью перед плоскостью
+		if(positiveCount == 0) return null;
+		if(positiveCount == polygon.vertices.Count) return polygon;
 
 		DecalPolygon tempPolygon = new DecalPolygon();
 
