@@ -11,10 +11,14 @@ public class Decal : MonoBehaviour {
 	public float maxAngle = 90.0f;
 	public float pushDistance = 0.009f;
 	public LayerMask affectedLayers = -1;
-	
+
+    void Awake() {
+      //  GetComponent<MeshRenderer>().material = material;
+    }
+
 	void OnDrawGizmosSelected() {
-		//Gizmos.matrix = transform.localToWorldMatrix;
-		//Gizmos.DrawWireCube( Vector3.zero, Vector3.one );
+		Gizmos.matrix = transform.localToWorldMatrix;
+		Gizmos.DrawWireCube( Vector3.zero, Vector3.one );
 	}
 
 	public Bounds GetBounds() {
@@ -46,6 +50,4 @@ public class Decal : MonoBehaviour {
 
 		return new Bounds(transform.position, max-min);
 	}
-
-
 }

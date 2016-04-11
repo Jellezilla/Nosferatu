@@ -336,10 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf17fbe2754572541884c4b23130f3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaintPrefab: {fileID: 458430, guid: 70b3817f63266e74ead72041ec747bea, type: 2}
-  SpatterMaterials:
-  - {fileID: 2100000, guid: 28fbfa3ed7a05fd4eaca4a267bd4de42, type: 2}
-  - {fileID: 2100000, guid: cfa210adfe04dc74f9ca959433030c04, type: 2}
+  PaintPrefab: {fileID: 487730, guid: 340858fbc26afe4418139d7b1f7c52d8, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

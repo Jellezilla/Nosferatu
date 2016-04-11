@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,10 +7,9 @@ public class BloodSpatter : MonoBehaviour {
 
     private ParticleSystem ps;
     public Transform PaintPrefab;
-    public Material[] SpatterMaterials;
 
-    private int MinSplashs = 20;
-    private int MaxSplashs = 30;
+    private int MinSplashs = 5;
+    private int MaxSplashs = 10;
     private float SplashRange = 3f;
 
     private float MinScale = 0.8f;
@@ -118,5 +118,7 @@ public class BloodSpatter : MonoBehaviour {
             }
 
         }
+        SceneView.RepaintAll();
+        //SceneView.RepaintAll();
     }
 }
