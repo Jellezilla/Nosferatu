@@ -31311,6 +31311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff849ab691a7414ab4dbc8f7cffc9e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DistanceToPlayerUp: 15
+  DistanceToPlayerForward: 5
   _pObject: {fileID: 740890270}
 --- !u!4 &2086339090 stripped
 Transform:
