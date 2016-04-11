@@ -1,52 +1,51 @@
-﻿using UnityEngine;
+using UnityEngine;
+using System.Collections.Generic;
 
-[ExecuteInEditMode]
-public class Decal : MonoBehaviour
-{
-	public enum Kind
-	{
-		DiffuseOnly,
-		NormalsOnly,
-		Both
-	}
-	public Kind m_Kind;
-	public Material m_Material;
-    public Material[] SpatterMaterials;
+[RequireComponent( typeof(MeshFilter) )]
+[RequireComponent( typeof(MeshRenderer) )]
+public class Decal : MonoBehaviour {
 
-	public void OnEnable()
-	{
-		DeferredDecalSystem.instance.AddDecal (this);
-	}
+	public Material material;
+	public Sprite sprite;
 
-	public void Start()
-	{
-        m_Material = SpatterMaterials[Random.Range(0, SpatterMaterials.Length)];
-        DeferredDecalSystem.instance.AddDecal (this);
+	public float maxAngle = 90.0f;
+	public float pushDistance = 0.009f;
+	public LayerMask affectedLayers = -1;
+	
+	void OnDrawGizmosSelected() {
+		//Gizmos.matrix = transform.localToWorldMatrix;
+		//Gizmos.DrawWireCube( Vector3.zero, Vector3.one );
 	}
 
-	public void OnDisable()
-	{
-		DeferredDecalSystem.instance.RemoveDecal (this);
+	public Bounds GetBounds() {
+		Vector3 size = transform.lossyScale;
+		Vector3 min = -size/2f;
+		Vector3 max =  size/2f;
+
+		Vector3[] vts = new Vector3[] {
+			new Vector3(min.x, min.y, min.z),
+			new Vector3(max.x, min.y, min.z),
+			new Vector3(min.x, max.y, min.z),
+			new Vector3(max.x, max.y, min.z),
+
+			new Vector3(min.x, min.y, max.z),
+			new Vector3(max.x, min.y, max.z),
+			new Vector3(min.x, max.y, max.z),
+			new Vector3(max.x, max.y, max.z),
+		};
+
+		for(int i=0; i<8; i++) {
+			vts[i] = transform.TransformDirection( vts[i] );
+		}
+
+		min = max = vts[0];
+		foreach(Vector3 v in vts) {
+			min = Vector3.Min(min, v);
+			max = Vector3.Max(max, v);
+		}
+
+		return new Bounds(transform.position, max-min);
 	}
 
-	private void DrawGizmo(bool selected)
-	{
-		var col = new Color(0.0f,0.7f,1f,1.0f);
-		col.a = selected ? 0.3f : 0.1f;
-		Gizmos.color = col;
-		Gizmos.matrix = transform.localToWorldMatrix;
-		Gizmos.DrawCube (Vector3.zero, Vector3.one);
-		col.a = selected ? 0.5f : 0.2f;
-		Gizmos.color = col;
-		Gizmos.DrawWireCube (Vector3.zero, Vector3.one);		
-	}
 
-	public void OnDrawGizmos()
-	{
-		DrawGizmo(false);
-	}
-	public void OnDrawGizmosSelected()
-	{
-		DrawGizmo(true);
-	}
 }
