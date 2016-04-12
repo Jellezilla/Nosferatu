@@ -38,10 +38,7 @@ public class VehicleTurret : MonoBehaviour {
     private TurretHook m_Hook;
     private VehicleTurretRope m_Chain;
     private Rigidbody m_rb;
-    [SerializeField]
-    private float m_angularRotationFactor;
     private bool m_retracted;
-    private HingeJoint m_hinge;
 
 	// Use this for initialization
 

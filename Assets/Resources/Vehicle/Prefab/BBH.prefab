@@ -13,7 +13,7 @@ GameObject:
   - 54: {fileID: 5401624}
   - 114: {fileID: 11458482}
   - 65: {fileID: 6548474}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BBH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.731873, y: 0.566, z: -153.8863}
+  m_LocalPosition: {x: 51.48736, y: 1.18, z: 4.8406906}
   m_LocalScale: {x: 0.17418924, y: 0.08430702, z: 0.1574682}
   m_Children: []
   m_Father: {fileID: 0}
@@ -90,8 +90,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 2, z: 1.0000002}
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Size: {x: 1.5, y: 3.094335, z: 1.5}
+  m_Center: {x: 0, y: -0.07346951, z: 0}
 --- !u!114 &11458482
 MonoBehaviour:
   m_ObjectHideFlags: 1
