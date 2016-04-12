@@ -689,8 +689,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_VehicleTurret: {fileID: 143620}
   m_spawnPointOffset: 0
-  m_rotationSpeed: 30
-  m_RotRevCooldown: 60
+  m_rotationSpeed: 15
+  m_RotRevCooldown: 15
   m_HookPrefab: {fileID: 191332, guid: 8098c94d446a9b449a4f5d7de5fc8f70, type: 2}
   m_MaxChainLength: 18
   m_RopeSpringDampning: 1500
