@@ -35,12 +35,19 @@ public class TurretedVehicleUserControl : MonoBehaviour {
 
         if (m_fireAxis == 1)
         {
-            m_turret.Fire();
-        }
+            if (m_turret.isRetracted)
+            {
+                m_turret.Fire();
+            }
 
-        if(Input.GetKeyDown(KeyCode.Mouse1))
+        }
+        if (m_fireAxis == 0)
         {
-            m_turret.Retract();
+            if (!m_turret.isRetracted)
+            {
+                m_turret.Retract();
+            }
+
         }
 
         m_turret.Aim();

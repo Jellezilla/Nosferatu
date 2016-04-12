@@ -9045,7 +9045,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_WheelTorque
-      value: 10000
+      value: 6000
       objectReference: {fileID: 0}
     - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_MaxSteerAngle
@@ -9053,7 +9053,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_ReverseTorque
-      value: 7500
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_SteeringRate
