@@ -9035,6 +9035,54 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_TractionControlAsist
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_SteerAsist
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_WheelTorque
+      value: 6000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_MaxSteerAngle
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_ReverseTorque
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_SteeringRate
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 14648590, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_SidewaysFriction.m_Stiffness
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 14620894, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_SidewaysFriction.m_Stiffness
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 14691626, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_SidewaysFriction.m_Stiffness
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 14671038, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_SidewaysFriction.m_Stiffness
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_Topspeed
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_SpeedUnits
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
   m_IsPrefabParent: 0
