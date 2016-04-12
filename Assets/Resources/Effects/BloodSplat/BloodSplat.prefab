@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf17fbe2754572541884c4b23130f3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaintPrefab: {fileID: 487730, guid: 340858fbc26afe4418139d7b1f7c52d8, type: 2}
+  PaintPrefab: {fileID: 421560, guid: e4333f84dd244904b82e9000335d7802, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -3,16 +3,18 @@ using System.Collections;
 
 public class FollowCam : MonoBehaviour {
 
-    public float DistanceToPlayerUp = 15;
-    public float DistanceToPlayerForward = 10;
-    public GameObject _pObject;
+    [SerializeField]
+    private float DistanceToPlayerUp = 15;
+    [SerializeField]
+    private float DistanceToPlayerForward = 10;
+    private GameObject _pObject;
     private Rigidbody _pRb;
-    private Transform _player;
     private float _offsetY;
     
 	// Use this for initialization
-	void Awake () {
+	void Start () {
 
+        _pObject = GameController.Instance.Player;
         Vector3 eurot = gameObject.transform.rotation.eulerAngles;
         eurot.y = _pObject.transform.eulerAngles.y;
         transform.rotation = Quaternion.Euler(eurot);

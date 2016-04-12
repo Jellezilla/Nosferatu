@@ -38,11 +38,15 @@ public class VehicleTurret : MonoBehaviour {
     private TurretHook m_Hook;
     private VehicleTurretRope m_Chain;
     private Rigidbody m_rb;
-    [SerializeField]
-    private float m_angularRotationFactor;
     private bool m_retracted;
-    private HingeJoint m_hinge;
 
+    public bool isRetracted
+    {
+        get
+        {
+            return m_retracted;
+        }
+    }
 	// Use this for initialization
 
     public Vector3 SpawnPoint
@@ -55,6 +59,7 @@ public class VehicleTurret : MonoBehaviour {
 
 	void Start () {
 
+        m_retracted = true;
         m_Hook = ((GameObject)Instantiate(m_HookPrefab, m_spawnPoint, transform.rotation)).GetComponent<TurretHook>();
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), m_Hook.gameObject.GetComponent<Collider>());
         m_Hook.gameObject.SetActive(false);
@@ -135,6 +140,28 @@ public class VehicleTurret : MonoBehaviour {
     /// </summary>
     public void Fire()
     {
+        RaycastHit hit;
+
+        if (!m_Hook.gameObject.activeSelf)
+        {
+           
+            if (Physics.Raycast(m_VehicleTurret.transform.position, m_VehicleTurret.transform.forward, out hit, m_MaxChainLength, -1)) // 0 is default layer
+            {
+                if (hit.collider.gameObject.tag != Tags.human)
+                {
+                    m_Hook.gameObject.SetActive(true);
+                    m_Hook.gameObject.transform.rotation = m_VehicleTurret.transform.rotation;
+                    m_Hook.transform.position = hit.point;
+                    m_Hook.Launch(m_rb, m_RopeSpringForce, m_RopeSpringDampning);
+                    m_Chain.CreateRope(m_Hook.gameObject);
+                    m_retracted = false;
+                }
+
+
+            }
+        }
+
+        /*
         if (!m_Hook.gameObject.activeSelf)
         {
             m_Hook.gameObject.SetActive(true);
@@ -143,6 +170,7 @@ public class VehicleTurret : MonoBehaviour {
             m_Hook.Launch(m_VehicleTurret.transform.forward, m_MaxChainLength, m_RetractPointDist, m_LaunchForce, m_RopeSpringForce, m_RopeSpringDampning, m_ReturnFactor, m_rb);
             m_Chain.CreateRope(m_Hook.gameObject);
         }
+        */
 
     }
 
@@ -152,6 +180,8 @@ public class VehicleTurret : MonoBehaviour {
     public void Retract()
     {
         m_Hook.Detach();
+        m_Chain.DestroyRope();
+        m_retracted = true;
     }
 
     /// <summary>
@@ -165,11 +195,6 @@ public class VehicleTurret : MonoBehaviour {
             if (!m_Hook.m_DragMode)
             {
                 m_retracted = false;
-            }
-
-            if (m_Hook.hooked)
-            {
-
             }
 
         }
@@ -191,14 +216,14 @@ public class VehicleTurret : MonoBehaviour {
 
         if (m_Hook.gameObject.activeSelf)
         {
-            m_Hook.spawnPosition = m_spawnPoint;
+          //  m_Hook.spawnPosition = m_spawnPoint;
         }
     }
 
     void Update()
     {
         HookSpawnPoint();
-        HookAndChainLogic();
+       // HookAndChainLogic();
 
     }
 

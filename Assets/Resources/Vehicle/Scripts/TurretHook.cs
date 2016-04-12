@@ -55,12 +55,11 @@ public class TurretHook : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
         m_col = GetComponent<Collider>();
        
-       
         //grab original Position
     }
 
 
-
+    /*
     void OnTriggerEnter(Collider collision)
     {
         if (!m_DragMode)
@@ -80,15 +79,7 @@ public class TurretHook : MonoBehaviour
                     m_col.enabled = false;
                     m_rb.transform.rotation = Quaternion.identity;
 
-                    m_hooked = true;
-                    m_currentHookedDist = Vector3.Distance(m_spawnPosition, transform.position);
-                    //add hinge to hook
-                    m_hinge = gameObject.AddComponent<SpringJoint>();
-                    m_hinge.axis = Vector3.up;
-                    m_hinge.anchor = Vector3.zero;
-                    m_hinge.spring = m_chainSpringForce;
-                    m_hinge.damper = m_chainSpringDampning;
-                    m_hinge.connectedBody = m_launchPointRb;
+                   
                 }
             }
         }
@@ -96,34 +87,32 @@ public class TurretHook : MonoBehaviour
 
     void OnTriggerExit()
     {
-        m_hinge = null;
+       
         m_currentHookedDist = 0;
     }
+    */
 
-    public void Launch(Vector3 heading, float maxChainLength, float retractDistance, float launchForce, float ropeSpringForce, float ropeDampningForce, float returnForce, Rigidbody origin)
+    public void Launch(Rigidbody shooterRB,float springForce,float springDamper)
     {
-        m_col.enabled = true;
-        m_launchPointRb = origin;
-        m_rb.velocity = Vector3.zero;
-        m_rb.angularVelocity = Vector3.zero;
-        m_MaxChainLength = maxChainLength;
-        m_returnDistance = retractDistance;
-        m_launchForce = launchForce;
-        m_chainSpringForce = ropeSpringForce;
-        m_chainSpringDampning = ropeDampningForce;
-        m_ReturnForce = returnForce;
-        m_IsReset = false;
-        m_rb.AddForce(heading * m_launchForce, ForceMode.Impulse);
+        m_hooked = true;
+        //m_currentHookedDist = Vector3.Distance(m_spawnPosition, transform.position);
+        //add hinge to hook
+        m_hinge = gameObject.AddComponent<SpringJoint>();
+        m_hinge.axis = Vector3.up;
+        m_hinge.anchor = Vector3.zero;
+        m_hinge.spring = springForce;
+        m_hinge.damper = springDamper;
+        m_hinge.connectedBody = shooterRB;
     }
 
     public void Detach()
     {
         Destroy(GetComponent<SpringJoint>(),0.0f);
-        m_rb.isKinematic = false;
-
         m_hooked = false;
-        m_DragMode = true;
+        m_hinge = null;
+        gameObject.SetActive(false);
     }
+    /*
     void ReelIn()
     {
         if (m_DragMode && !m_IsReset)
@@ -140,7 +129,9 @@ public class TurretHook : MonoBehaviour
             }
         }
     }
+    */
 
+    /*
     void HookAtMaxLength()
     {
         m_spawnDistance = Vector3.Distance(m_spawnPosition, transform.position);
@@ -158,14 +149,14 @@ public class TurretHook : MonoBehaviour
            
         }
     }
-   
+   */
     void Update()
     {
         
-        HookAtMaxLength();
+       // HookAtMaxLength();
     }
     void FixedUpdate()
     {
-        ReelIn();
+      //  ReelIn();
     }
 }

@@ -46,6 +46,8 @@ public class VehicleController : MonoBehaviour {
     [SerializeField]
     private Vector3 m_CenterOfMass;
     [SerializeField]
+    private float m_SteeringRate;
+    [SerializeField]
     private float m_MaxSteerAngle;
     [SerializeField]
     private float m_SteerSpeedThreshold;
@@ -445,7 +447,7 @@ public class VehicleController : MonoBehaviour {
         BrakeInput = brake;
 
         //set the steering
-        m_SteerAngle = steering * m_MaxSteerAngle;
+        m_SteerAngle = steering * m_SteeringRate * m_MaxSteerAngle;
         switch (m_SteeringControl)
         {
             case Steering.FrontWheel:
