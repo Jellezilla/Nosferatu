@@ -8,12 +8,12 @@ public class BloodSpatter : MonoBehaviour {
     private ParticleSystem ps;
     public Transform PaintPrefab;
 
-    private int MinSplashs = 5;
-    private int MaxSplashs = 10;
-    private float SplashRange = 3f;
+    private int MinSplashs = 30;
+    private int MaxSplashs = 40;
+    private float SplashRange = 1.5f;
 
-    private float MinScale = 0.8f;
-    private float MaxScale = 3.5f;
+    private float MinScale = 1f;
+    private float MaxScale = 2.5f;
 
     private GameObject _spatterDecal;
     // DEBUG
@@ -63,14 +63,15 @@ public class BloodSpatter : MonoBehaviour {
         //mDrawDebug = true;
 
         int n = -1;
-
+        int b = 0;
+        int spatterAmount = 10;
         int drops = Random.Range(MinSplashs, MaxSplashs);
         RaycastHit hit;
 
         // Generate multiple decals in once
-        while (n <= drops) {
-            n++;
+        while (n <= drops || b == spatterAmount) {
 
+            n++;
             // Get a random direction (beween -n and n for each vector component)
             var fwd = transform.TransformDirection(Random.onUnitSphere * SplashRange);
 
@@ -79,15 +80,16 @@ public class BloodSpatter : MonoBehaviour {
             // Raycast around the position to splash everwhere we can
             if (Physics.Raycast(location, fwd, out hit, SplashRange)) {
                 if (hit.collider.gameObject.tag == Tags.environment) {
+                    b++;
                     // Create a splash if we found a surface
                     Debug.Log("name"+hit.collider.gameObject.name);
                     var paintSpatter = GameObject.Instantiate(PaintPrefab,
-                                                               hit.point,
+                                                               new Vector3 (hit.point.x, 0.01f, hit.point.z),
 
                                                                // Rotation from the original sprite to the normal
                                                                // Prefab are currently oriented to z+ so we use the opposite
                                                                //Quaternion.FromToRotation(Vector3.back, hit.normal)
-                                                               Quaternion.LookRotation(fwd)
+                                                               Quaternion.identity
                                                                ) as Transform;
 
 
