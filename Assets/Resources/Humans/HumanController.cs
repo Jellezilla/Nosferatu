@@ -7,6 +7,7 @@ public class HumanController : MonoBehaviour {
     private GameObject player;
     private bool _isDead = false; //used for creating bloodspatter only on first hit
     public GameObject bloodSpatterObject;
+    public GameObject TESTuimanager;
     [SerializeField]
     private float speed = 0.2f;
     [SerializeField]
@@ -145,8 +146,8 @@ public class HumanController : MonoBehaviour {
         // play blood splatter effect
         (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
 
-
-
+        GameController.Instance.AddFuel();
+        GameController.Instance.AddSoul();
 
         // Destroy object after 5 seconds. 
         StopAllCoroutines();
