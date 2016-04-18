@@ -5,6 +5,7 @@ public class UIManager : MonoBehaviour {
 
     public GameObject Healthbar;
     public GameObject Soulsbar;
+    public GameObject SpecialEffectObject;
     private RectTransform _hpmask;
     private RectTransform _spmask;
     private float _spMaxWidth, _hpMaxWidth, _spHeight,_hpHeight;
@@ -27,6 +28,9 @@ public class UIManager : MonoBehaviour {
         Debug.Log(soulsCurrent);
         _hpmask.sizeDelta = new Vector2(_hpMaxWidth/100 * fuelCurrent, _hpHeight);// _hpHeight);
         _spmask.sizeDelta = new Vector2(_spMaxWidth/100 * (1+soulsCurrent), _spHeight);// _hpHeight);
-    }
 
+        if (soulsCurrent >= 100 && !SpecialEffectObject.activeSelf) {//hardcoded max
+            SpecialEffectObject.SetActive(true);
+        }
+    }
 }
