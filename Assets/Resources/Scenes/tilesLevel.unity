@@ -15098,7 +15098,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_Strength: 1
     m_Bias: 0.05
@@ -30099,8 +30099,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1817034683}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1.7877}
-  m_LocalScale: {x: 1.4993471, y: 1.4993469, z: 1.4993469}
+  m_LocalPosition: {x: 0, y: 0, z: 8.2674}
+  m_LocalScale: {x: 3.3093226, y: 3.3093216, z: 3.3093216}
   m_Children:
   - {fileID: 1332290850}
   - {fileID: 183272209}
@@ -30110,7 +30110,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 228.2, y: 145}
+  m_AnchoredPosition: {x: 454, y: 219}
   m_SizeDelta: {x: 261, y: 71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1817034685
@@ -31104,8 +31104,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1909975809}
-  m_LocalRotation: {x: 0.11906214, y: -0.03252681, z: -0.0039025813, w: 0.9923462}
-  m_LocalPosition: {x: -0.46, y: -0.16, z: 0.57}
+  m_LocalRotation: {x: 0.04199696, y: -0.032731183, z: -0.0013765628, w: 0.9985805}
+  m_LocalPosition: {x: -0.45999908, y: -0.17096901, z: 0.5685253}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 109920368}
@@ -31121,8 +31121,8 @@ Light:
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 18.12
-  m_SpotAngle: 31.28
+  m_Range: 8.45
+  m_SpotAngle: 49.2
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -33414,8 +33414,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2032126675}
-  m_LocalRotation: {x: 0.119120516, y: 0.00959002, z: 0.0011506149, w: 0.99283284}
-  m_LocalPosition: {x: 0.56, y: -0.19, z: 0.71}
+  m_LocalRotation: {x: 0.042017587, y: 0.009650278, z: 0.00040585734, w: 0.9990702}
+  m_LocalPosition: {x: 0.5600014, y: -0.17903072, z: 0.71147466}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 109920368}
@@ -33431,8 +33431,8 @@ Light:
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
-  m_Range: 18.12
-  m_SpotAngle: 31.28
+  m_Range: 8.45
+  m_SpotAngle: 49.2
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0

@@ -10,6 +10,7 @@ public class FollowCam : MonoBehaviour {
     private GameObject _pObject;
     private Rigidbody _pRb;
     private float _offsetY;
+    private float _cOffsetY;
     
 	// Use this for initialization
 	void Start () {
@@ -25,13 +26,12 @@ public class FollowCam : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void FixedUpdate () {
+    void Update () {
         float carSpeed = _pObject.transform.InverseTransformDirection(_pRb.velocity).z / 2;
-        float camMinSpeed = 0;
 
-        if (carSpeed > camMinSpeed) {
-            _offsetY = _pRb.velocity.magnitude / 2 - camMinSpeed;
-        }
+        _offsetY = _pRb.velocity.magnitude / 2;
+        _cOffsetY = Mathf.Lerp(_cOffsetY, _offsetY, Time.deltaTime);
+
 
         if (_offsetY > 5f) _offsetY = 5f;
 
@@ -43,7 +43,7 @@ public class FollowCam : MonoBehaviour {
         //if (_player != null)
         {
             gameObject.transform.position = new Vector3(_pObject.transform.position.x, 
-                _pObject.transform.position.y+DistanceToPlayerUp+_offsetY, 
+                _pObject.transform.position.y+DistanceToPlayerUp+_cOffsetY, 
                 _pObject.transform.position.z+ DistanceToPlayerForward);
 
             //transform.position = new Vector3(_player.position.x, transform.position.y, _player.position.z);
