@@ -18,7 +18,7 @@ public class RestartLevel : MonoBehaviour {
         {
             confirmationPrompt = !confirmationPrompt;
         }
-        if(player.transform.position.z > 490)
+        if(player.transform.position.z > 890.0f)
         {
             confirmationPrompt = true;
         } 

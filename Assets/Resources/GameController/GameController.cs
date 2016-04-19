@@ -23,7 +23,7 @@ public class GameController : Singleton<GameController>
     void Update() {
         _fuelCurrent -= 0.2f;
         if (_fuelCurrent < 0.1) _fuelCurrent = 0.1f;
-            Debug.Log("running");
+         //   Debug.Log("running");
     }
 
     public GameObject Player
