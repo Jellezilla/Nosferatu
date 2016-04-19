@@ -39,7 +39,6 @@ public class VehicleTurret : MonoBehaviour {
     private VehicleTurretRope m_Chain;
     private Rigidbody m_rb;
     private bool m_retracted;
-
     public bool isRetracted
     {
         get
@@ -179,6 +178,7 @@ public class VehicleTurret : MonoBehaviour {
     /// </summary>
     public void Retract()
     {
+        Destroy(GetComponent<SpringJoint>(), 0.0f);
         m_Hook.Detach();
         m_Chain.DestroyRope();
         m_retracted = true;
