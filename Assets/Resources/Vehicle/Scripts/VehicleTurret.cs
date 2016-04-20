@@ -152,6 +152,10 @@ public class VehicleTurret : MonoBehaviour {
                     m_Hook.gameObject.transform.rotation = m_VehicleTurret.transform.rotation;
                     m_Hook.transform.position = hit.point;
                     m_Hook.Launch(m_rb, m_RopeSpringForce, m_RopeSpringDampning);
+                    HingeJoint joint = gameObject.AddComponent<HingeJoint>();
+                    joint.anchor = Vector3.zero;
+                    joint.axis = Vector3.down;
+                    joint.connectedBody = m_Hook.GetComponent<Rigidbody>();
                     m_Chain.CreateRope(m_Hook.gameObject);
                     m_retracted = false;
                 }
@@ -178,7 +182,7 @@ public class VehicleTurret : MonoBehaviour {
     /// </summary>
     public void Retract()
     {
-        Destroy(GetComponent<SpringJoint>(), 0.0f);
+        Destroy(GetComponent<HingeJoint>(), 0.0f);
         m_Hook.Detach();
         m_Chain.DestroyRope();
         m_retracted = true;

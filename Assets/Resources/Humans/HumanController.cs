@@ -146,9 +146,6 @@ public class HumanController : MonoBehaviour {
         // play blood splatter effect
         (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
 
-        GameController.Instance.AddFuel();
-        GameController.Instance.AddSoul();
-
         // Destroy object after 5 seconds. 
         StopAllCoroutines();
         Destroy(gameObject, 5);
