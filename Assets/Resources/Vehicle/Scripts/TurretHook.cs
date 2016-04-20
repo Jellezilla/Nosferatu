@@ -8,7 +8,7 @@ public class TurretHook : MonoBehaviour
     private Rigidbody m_rb;
     private Vector3 m_spawnPosition;
     private bool m_hooked;
-    private SpringJoint m_hinge;
+    private HingeJoint m_hinge;
     private Collider m_col;
 
     public bool hooked
@@ -85,17 +85,17 @@ public class TurretHook : MonoBehaviour
     {
         m_hooked = true;
         //add hinge to hook
-        m_hinge = gameObject.AddComponent<SpringJoint>();
-        m_hinge.axis = Vector3.up;
+        m_hinge = gameObject.AddComponent<HingeJoint>();
+        m_hinge.axis = Vector3.down;
         m_hinge.anchor = Vector3.zero;
-        m_hinge.spring = springForce;
-        m_hinge.damper = springDamper;
-        m_hinge.connectedBody = shooterRB;
+       // m_hinge.spring = springForce;
+      //  m_hinge.damper = springDamper;
+       // m_hinge.connectedBody = shooterRB;
     }
 
     public void Detach()
     {
-        Destroy(GetComponent<SpringJoint>(),0.0f);
+        Destroy(GetComponent<HingeJoint>(),0.0f);
         m_hooked = false;
         m_hinge = null;
         gameObject.SetActive(false);

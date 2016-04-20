@@ -62,10 +62,27 @@ GameObject:
   - 114: {fileID: 11460920}
   - 114: {fileID: 11451128}
   - 114: {fileID: 11405432}
+  - 114: {fileID: 11432038}
   - 65: {fileID: 6564882}
   m_Layer: 0
   m_Name: Car
   m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &127098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 465390}
+  - 108: {fileID: 10812080}
+  m_Layer: 0
+  m_Name: Spotlight (1)
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,6 +148,22 @@ GameObject:
   - 23: {fileID: 2316124}
   m_Layer: 0
   m_Name: forwardRight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &140280
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 440796}
+  - 108: {fileID: 10883984}
+  m_Layer: 0
+  m_Name: Spotlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,7 +304,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 126868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.00055, y: 0.82, z: -156.02}
+  m_LocalPosition: {x: 49.7, y: 1, z: 274}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 450742}
@@ -281,6 +314,8 @@ Transform:
   - {fileID: 419732}
   - {fileID: 464404}
   - {fileID: 448062}
+  - {fileID: 440796}
+  - {fileID: 465390}
   - {fileID: 478768}
   - {fileID: 444000}
   m_Father: {fileID: 0}
@@ -309,6 +344,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 409776}
   m_RootOrder: 3
+--- !u!4 &440796
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140280}
+  m_LocalRotation: {x: 0.119120516, y: 0.00959002, z: 0.0011506149, w: 0.99283284}
+  m_LocalPosition: {x: 0.56, y: -0.19, z: 0.71}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 409776}
+  m_RootOrder: 7
 --- !u!4 &443846
 Transform:
   m_ObjectHideFlags: 1
@@ -332,7 +379,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 409776}
-  m_RootOrder: 8
+  m_RootOrder: 10
 --- !u!4 &445202
 Transform:
   m_ObjectHideFlags: 1
@@ -398,6 +445,18 @@ Transform:
   - {fileID: 466280}
   m_Father: {fileID: 409776}
   m_RootOrder: 5
+--- !u!4 &465390
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127098}
+  m_LocalRotation: {x: 0.11906214, y: -0.03252681, z: -0.0039025813, w: 0.9923462}
+  m_LocalPosition: {x: -0.46, y: -0.16, z: 0.57}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 409776}
+  m_RootOrder: 8
 --- !u!4 &466280
 Transform:
   m_ObjectHideFlags: 1
@@ -433,7 +492,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 409776}
-  m_RootOrder: 7
+  m_RootOrder: 9
 --- !u!4 &497324
 Transform:
   m_ObjectHideFlags: 1
@@ -719,6 +778,39 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6174393, y: 0.7566228, z: 4.0910654}
   m_Center: {x: 0.00793457, y: 0.0033574104, z: 0.28398895}
+--- !u!108 &10812080
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127098}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_Type: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 18.12
+  m_SpotAngle: 31.28
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_AreaSize: {x: 1, y: 1}
 --- !u!108 &10847900
 Light:
   m_ObjectHideFlags: 1
@@ -785,6 +877,39 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!108 &10883984
+Light:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140280}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_Type: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 18.12
+  m_SpotAngle: 31.28
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_Lightmapping: 4
+  m_BounceIntensity: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+  m_AreaSize: {x: 1, y: 1}
 --- !u!114 &11405432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -800,6 +925,22 @@ MonoBehaviour:
   m_RopeMaterial: {fileID: 2100000, guid: c2caad9e29195ed40997696f42d29f67, type: 2}
   m_ropeWidth: 0.15
   m_segmentRate: 2
+--- !u!114 &11432038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 126868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655fac3913e72e741bf203e6e5e640bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxCarSouls: 100
+  m_MaxCarBlood: 100
+  m_BloodConsumption: 3
+  m_BloodPerHuman: 8
+  m_SoulsPerHuman: 3
 --- !u!114 &11451128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -864,7 +1005,7 @@ MonoBehaviour:
   m_SteerSpeedThreshold: 5
   m_SteerAngleThreshold: 50
   m_SteerAsist: 0.5
-  m_TractionControlAsist: 0.2
+  m_TractionControlAsist: 0.25
   m_WheelTorque: 6000
   m_ReverseTorque: 3000
   m_Downforce: 60
