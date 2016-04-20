@@ -27,8 +27,6 @@ public class FollowCam : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        float carSpeed = _pObject.transform.InverseTransformDirection(_pRb.velocity).z / 2;
-
         _offsetY = _pRb.velocity.magnitude / 2;
         _cOffsetY = Mathf.Lerp(_cOffsetY, _offsetY, Time.deltaTime);
 

@@ -129,10 +129,9 @@ public class VehicleTurret : MonoBehaviour {
                 m_VehicleTurret.transform.rotation = Quaternion.Lerp(m_VehicleTurret.transform.rotation, transform.rotation, Time.deltaTime * m_rotationSpeed);
             }
         } 
-
-
-
     }
+
+
 
     /// <summary>
     /// Used to fire the hook
@@ -140,24 +139,29 @@ public class VehicleTurret : MonoBehaviour {
     public void Fire()
     {
         RaycastHit hit;
-
+        Ray ray;
         if (!m_Hook.gameObject.activeSelf)
         {
-           
-            if (Physics.Raycast(m_VehicleTurret.transform.position, m_VehicleTurret.transform.forward, out hit, m_MaxChainLength, -1)) // 0 is default layer
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit, 1000,-1))
             {
-                if (hit.collider.gameObject.tag != Tags.human)
+                if (Vector3.Distance(transform.position, hit.collider.transform.position) <= m_MaxChainLength)
                 {
-                    m_Hook.gameObject.SetActive(true);
-                    m_Hook.gameObject.transform.rotation = m_VehicleTurret.transform.rotation;
-                    m_Hook.transform.position = hit.point;
-                    m_Hook.Launch(m_rb, m_RopeSpringForce, m_RopeSpringDampning);
-                    HingeJoint joint = gameObject.AddComponent<HingeJoint>();
-                    joint.anchor = Vector3.zero;
-                    joint.axis = Vector3.down;
-                    joint.connectedBody = m_Hook.GetComponent<Rigidbody>();
-                    m_Chain.CreateRope(m_Hook.gameObject);
-                    m_retracted = false;
+                    Debug.Log("IS HIT");
+                    if (hit.collider.gameObject.tag != Tags.human)
+                    {
+                        m_Hook.gameObject.SetActive(true);
+                        m_Hook.gameObject.transform.rotation = m_VehicleTurret.transform.rotation;
+                        m_Hook.transform.position = hit.point;
+                        m_Hook.Launch(m_rb, m_RopeSpringForce, m_RopeSpringDampning);
+                        HingeJoint joint = gameObject.AddComponent<HingeJoint>();
+                        joint.anchor = Vector3.zero;
+                        joint.axis = Vector3.up;
+                        joint.connectedBody = m_Hook.rigidBody;
+                        m_Chain.CreateRope(m_Hook.gameObject);
+                        m_retracted = false;
+                    }
                 }
 
 

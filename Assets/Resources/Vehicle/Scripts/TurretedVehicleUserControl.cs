@@ -24,8 +24,15 @@ public class TurretedVehicleUserControl : MonoBehaviour {
 
     private void GetInput()
     {
+        if (m_resources.OutOfFuel)
+        {
+            m_vAxis = 0;
+        }
+        else
+        {
+            m_vAxis = Input.GetAxis("Vertical");
+        }
         m_hAxis = Input.GetAxis("Horizontal");
-        m_vAxis = Input.GetAxis("Vertical");
         m_brakeAxis = Input.GetAxis("Jump");
         m_fireAxis = Input.GetAxis("Fire1");
     }
@@ -34,23 +41,19 @@ public class TurretedVehicleUserControl : MonoBehaviour {
     {
 
         GetInput();
+        TurretLogic();
 
-        ///TESTING PAUSE STUFF
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            if (Time.timeScale == 1)
-            {
-                Time.timeScale = 0;
-            }
-            else
-            {
-                Time.timeScale = 1;
-            }
-
+            m_controller.LightsToggle();
         }
-        ///
 
 
+
+    }
+
+    private void TurretLogic()
+    {
         if (m_fireAxis == 1)
         {
             if (m_turret.isRetracted)
@@ -69,7 +72,6 @@ public class TurretedVehicleUserControl : MonoBehaviour {
         }
 
         m_turret.Aim();
-
     }
 
     void FixedUpdate()

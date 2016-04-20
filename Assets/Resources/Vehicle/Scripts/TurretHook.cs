@@ -6,10 +6,8 @@ public class TurretHook : MonoBehaviour
 {
 
     private Rigidbody m_rb;
-    private Vector3 m_spawnPosition;
     private bool m_hooked;
     private HingeJoint m_hinge;
-    private Collider m_col;
 
     public bool hooked
     {
@@ -30,19 +28,18 @@ public class TurretHook : MonoBehaviour
         get;
         private set; 
     }
-    public Vector3 spawnPosition
+
+    public Rigidbody rigidBody
     {
-        set
+        get
         {
-            m_spawnPosition = value;
+            return m_rb;
         }
     }
-
     // Use this for initialization
     void Awake()
     {
         m_rb = GetComponent<Rigidbody>();
-        m_col = GetComponent<Collider>();
        
         //grab original Position
     }
@@ -86,11 +83,8 @@ public class TurretHook : MonoBehaviour
         m_hooked = true;
         //add hinge to hook
         m_hinge = gameObject.AddComponent<HingeJoint>();
-        m_hinge.axis = Vector3.down;
+        m_hinge.axis = Vector3.up;
         m_hinge.anchor = Vector3.zero;
-       // m_hinge.spring = springForce;
-      //  m_hinge.damper = springDamper;
-       // m_hinge.connectedBody = shooterRB;
     }
 
     public void Detach()
