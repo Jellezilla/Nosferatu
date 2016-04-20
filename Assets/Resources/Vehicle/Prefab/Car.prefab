@@ -1002,12 +1002,12 @@ MonoBehaviour:
   m_CenterOfMass: {x: 0, y: -0.75, z: 0}
   m_SteeringRate: 1
   m_MaxSteerAngle: 25
-  m_SteerSpeedThreshold: 5
+  m_SteerSpeedThreshold: 20
   m_SteerAngleThreshold: 50
   m_SteerAsist: 0.5
   m_TractionControlAsist: 0.25
   m_WheelTorque: 6000
-  m_ReverseTorque: 3000
+  m_ReverseTorque: 4000
   m_Downforce: 60
   m_Topspeed: 80
   m_nrOfGears: 5
@@ -1040,7 +1040,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 3
+    m_Stiffness: 2.5
   m_Enabled: 1
 --- !u!146 &14648590
 WheelCollider:
@@ -1069,7 +1069,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 3
+    m_Stiffness: 2.5
   m_Enabled: 1
 --- !u!146 &14671038
 WheelCollider:
@@ -1098,7 +1098,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1.75
+    m_Stiffness: 1.5
   m_Enabled: 1
 --- !u!146 &14691626
 WheelCollider:
@@ -1127,7 +1127,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1.75
+    m_Stiffness: 1.5
   m_Enabled: 1
 --- !u!1001 &100100000
 Prefab:
