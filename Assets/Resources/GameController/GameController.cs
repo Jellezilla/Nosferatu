@@ -7,23 +7,23 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameController : Singleton<GameController>
 {
-    private float _fuelCurrent=100,_fuelMax=100, _soulsCurrent=0,_soulsMax=100;
+    private VehicleResources m_playerRes;
     private GameObject m_player;
     // Use this for initialization
     void Awake()
     {
-        m_player = GameObject.FindGameObjectWithTag(Tags.player);
+        LoadPlayer();
     }
 
     void OnLevelWasLoaded(int level)
     {
-        m_player = GameObject.FindGameObjectWithTag(Tags.player);
+        LoadPlayer();
     }
 
-    void Update() {
-        _fuelCurrent -= 0.2f;
-        if (_fuelCurrent < 0.1) _fuelCurrent = 0.1f;
-         //   Debug.Log("running");
+    private void LoadPlayer()
+    {
+        m_player = GameObject.FindGameObjectWithTag(Tags.player);
+        m_playerRes = m_player.GetComponent<VehicleResources>();
     }
 
     public GameObject Player
@@ -36,28 +36,16 @@ public class GameController : Singleton<GameController>
 
     public float GetFuel {
         get {
-            return _fuelCurrent;
+            return m_playerRes.CarBlood;
         }
     }
 
     public float GetSouls {
         get {
-            return _soulsCurrent;
+            return m_playerRes.CarSouls;
         }
     }
 
-    public void AddFuel() {
-        _fuelCurrent += 2;
-        if (_fuelCurrent > _fuelMax) {
-            _fuelCurrent = _fuelMax;
-        }
-    }
 
-    public void AddSoul() {
-        _soulsCurrent += 10;
-        if (_soulsCurrent > _soulsMax) {
-            _soulsCurrent = _soulsMax;
-        }
-    }
 
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Human
   - Environment
+  - UI Camera
   layers:
   - Default
   - TransparentFX

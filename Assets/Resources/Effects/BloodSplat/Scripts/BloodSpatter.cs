@@ -34,7 +34,6 @@ public class BloodSpatter : MonoBehaviour {
         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
             // Paint!
             // Step back a little for a better effect (that's what "normal * x" is for)
-            Debug.Log(hit.transform.position);
             //Paint(transform.position + hit.normal * (SplashRange / 4f));
             Vector3 dist = transform.position+transform.forward*1.05f;
             
