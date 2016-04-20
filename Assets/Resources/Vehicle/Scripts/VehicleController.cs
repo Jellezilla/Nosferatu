@@ -40,6 +40,8 @@ public class VehicleController : MonoBehaviour {
     [SerializeField]
     private SpeedUnits m_SpeedUnits;
     [SerializeField]
+    private Light[] m_lights;
+    [SerializeField]
     private WheelCollider[] m_WheelColliders;
     [SerializeField]
     private GameObject[] m_WheelMeshes;
@@ -86,6 +88,7 @@ public class VehicleController : MonoBehaviour {
     private const float k_ReversingThreshold = 0.01f;
     private float m_mphFactor = 2.23693629f;
     private float m_kphFactor = 3.6f;
+    private bool m_lightsOn;
 
     public bool Skidding { get; private set; }
     public float BrakeInput { get; private set; }
@@ -126,6 +129,33 @@ public class VehicleController : MonoBehaviour {
 
     }
 
+
+    /// <summary>
+    /// Toggles CarLigts if they exist
+    /// </summary>
+    public void LightsToggle()
+    {
+        if(m_lights != null)
+        {
+            if (m_lightsOn)
+            {
+                for (int i = 0; i < m_lights.Length; i++)
+                {
+                    m_lights[i].enabled = false;
+                }
+                m_lightsOn = false;
+            }
+            else
+            {
+                for (int i = 0; i < m_lights.Length; i++)
+                {
+                    m_lights[i].enabled = true;
+                }
+                m_lightsOn = true;
+            }
+        }
+
+    }
     /// <summary>
     /// Gear changing, based on max speed & number of gears
     /// </summary>

@@ -19,7 +19,6 @@ public class VehicleResources : MonoBehaviour
 
     private float m_CarBlood;
     private float m_CarSouls;
-    private Rigidbody m_Rb;
 
     public bool OutOfFuel
     {
@@ -30,7 +29,6 @@ public class VehicleResources : MonoBehaviour
     void Awake()
     {
         m_CarBlood = m_MaxCarBlood;
-        m_Rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
