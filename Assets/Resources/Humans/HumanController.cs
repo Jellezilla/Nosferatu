@@ -40,27 +40,8 @@ public class HumanController : MonoBehaviour {
 
         transform.position = orgPos;
         transform.rotation = Quaternion.identity;
-        //anim.SetFloat("speed", 0.0f);
-        anim = GetComponent<Animator>();
-        m_rbs = GetComponentsInChildren<Rigidbody>();
-        m_cols = GetComponentsInChildren<Collider>();
-        for (int i = 0; i < m_rbs.Length; i++)
-        {
-            if (i != 0)
-            {
-                if (i == 1)
-                {
-                    m_cols[i].enabled = true;
-                }
-                else
-                {
-                    m_cols[i].enabled = false;
-                }
-                m_rbs[i].useGravity = false;
-                m_rbs[i].isKinematic = true;
-                m_rbs[i].Sleep();
-            }
-        }
+
+        Init();
 
     }
     
@@ -74,6 +55,7 @@ public class HumanController : MonoBehaviour {
         m_rbs = GetComponentsInChildren<Rigidbody>();
         m_cols = GetComponentsInChildren<Collider>();
 
+        _isDead = false;
 
         for (int i = 0; i < m_rbs.Length; i++)
         {
