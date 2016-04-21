@@ -153,7 +153,9 @@ public class VehicleTurret : MonoBehaviour {
                     {
                         m_Hook.gameObject.SetActive(true);
                         m_Hook.gameObject.transform.rotation = m_VehicleTurret.transform.rotation;
-                        m_Hook.transform.position = hit.point;
+                        Vector3 hitpos = hit.point;
+                        hitpos.y = m_VehicleTurret.transform.position.y;
+                        m_Hook.transform.position = hitpos;
                         m_Hook.Launch(m_rb, m_RopeSpringForce, m_RopeSpringDampning);
                         HingeJoint joint = gameObject.AddComponent<HingeJoint>();
                         joint.anchor = Vector3.zero;
