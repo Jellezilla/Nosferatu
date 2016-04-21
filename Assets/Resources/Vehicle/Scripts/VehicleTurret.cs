@@ -148,7 +148,7 @@ public class VehicleTurret : MonoBehaviour {
             {
                 if (Vector3.Distance(transform.position, hit.collider.transform.position) <= m_MaxChainLength)
                 {
-                    Debug.Log("IS HIT");
+                    //Debug.Log("IS HIT");
                     if (hit.collider.gameObject.tag != Tags.human)
                     {
                         m_Hook.gameObject.SetActive(true);

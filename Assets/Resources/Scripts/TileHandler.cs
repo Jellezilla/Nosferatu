@@ -45,7 +45,14 @@ public class TileHandler : MonoBehaviour {
 
     private void SwitchTiles()
     {
-        
+
+       foreach (GameObject go in
+       currentTile.GetComponentInChildren<HumanSpawner>().humansInTile)
+        {
+            Debug.Log("human pooled!" + go.name);
+            HumanObjectPool.instance.PoolObject(go);
+
+        }
         // remove old tile (throw it back to the pool) 
         ObjectPool.instance.PoolObject(currentTile);
 
@@ -64,7 +71,7 @@ public class TileHandler : MonoBehaviour {
 
         // Get Random tile (string) according to type
         string tileStr = GetRandomTileString();
-        Debug.Log("Tile: " + tileStr);
+       
         GameObject tilePrefab = ObjectPool.instance.GetObjectForType(tileStr, true);
         tilePrefab.transform.position = new Vector3(0, 0, 100) + pos;
         return tilePrefab;
@@ -87,7 +94,7 @@ public class TileHandler : MonoBehaviour {
             str = "Rampage" + rand;
             
         }
-        Debug.Log("tile string: " + str);
+
         return str;
     }
 

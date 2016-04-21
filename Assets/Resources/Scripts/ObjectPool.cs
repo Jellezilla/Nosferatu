@@ -89,7 +89,7 @@ public class ObjectPool : MonoBehaviour
             {
                 if (pooledObjects[i].Count > 0)
                 {
-                    Debug.Log("pooledObjects[].Count is greater than zero");
+
                     GameObject pooledObject = pooledObjects[i][0];
                     pooledObjects[i].RemoveAt(0);
                     pooledObject.transform.parent = null;
@@ -129,7 +129,7 @@ public class ObjectPool : MonoBehaviour
                 obj.SetActiveRecursively(false);
                 obj.transform.parent = containerObject.transform;
                 pooledObjects[i].Add(obj);
-                Debug.Log("poolObjects count = "+pooledObjects[i].Count );
+               
                 return;
             }
         }

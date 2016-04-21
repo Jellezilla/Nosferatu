@@ -8596,6 +8596,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 491440}
+  - 114: {fileID: 11406912}
   m_Layer: 0
   m_Name: Humans
   m_TagString: Untagged
@@ -40230,6 +40231,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.010373243, y: 0.09883805, z: 0.0704843}
   m_Center: {x: 0.002185019, y: 0.04939727, z: 0.0003957285}
+--- !u!114 &11406912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 193064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b010f7fab87584429d3e45421f02969, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  humansInTile: []
 --- !u!154 &15431894
 TerrainCollider:
   m_ObjectHideFlags: 1

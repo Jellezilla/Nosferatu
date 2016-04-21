@@ -81,7 +81,7 @@ public class BloodSpatter : MonoBehaviour {
                 if (hit.collider.gameObject.tag == Tags.environment) {
                     b++;
                     // Create a splash if we found a surface
-                    Debug.Log("name"+hit.collider.gameObject.name);
+                    //Debug.Log("name"+hit.collider.gameObject.name);
                     var paintSpatter = GameObject.Instantiate(PaintPrefab,
                                                                new Vector3 (hit.point.x, 0.01f, hit.point.z),
 

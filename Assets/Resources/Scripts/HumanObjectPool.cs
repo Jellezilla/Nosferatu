@@ -89,7 +89,7 @@ public class HumanObjectPool : MonoBehaviour
             {
                 if (pooledObjects[i].Count > 0)
                 {
-                    Debug.Log("pooledObjects[].Count is greater than zero");
+                    
                     GameObject pooledObject = pooledObjects[i][0];
                     pooledObjects[i].RemoveAt(0);
                     pooledObject.transform.parent = null;
@@ -111,6 +111,7 @@ public class HumanObjectPool : MonoBehaviour
         }
 
         //If we have gotten here either there was no object of the specified type or non were left in the pool with onlyPooled set to true
+        Debug.Log("null humans returned!");
         return null;
     }
 
@@ -129,7 +130,7 @@ public class HumanObjectPool : MonoBehaviour
                 obj.SetActiveRecursively(false);
                 obj.transform.parent = containerObject.transform;
                 pooledObjects[i].Add(obj);
-                Debug.Log("poolObjects count = " + pooledObjects[i].Count);
+               
                 return;
             }
         }
