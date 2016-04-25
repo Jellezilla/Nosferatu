@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class ObjectPool : MonoBehaviour
+public class HumanObjectPool : MonoBehaviour
 {
 
-    public static ObjectPool instance;
+    public static HumanObjectPool instance;
 
     /// <summary>
     /// The object prefabs which the pool can handle.
@@ -38,7 +38,7 @@ public class ObjectPool : MonoBehaviour
     // Use this for initialization
     void Init()
     {
-        containerObject = new GameObject("ObjectPool");
+        containerObject = new GameObject("HumanObjectPool");
 
         //Loop through the object prefabs and make a new list for each one.
         //We do this because the pool can only support prefabs set to it in the editor,
@@ -89,13 +89,13 @@ public class ObjectPool : MonoBehaviour
             {
                 if (pooledObjects[i].Count > 0)
                 {
-
+                    
                     GameObject pooledObject = pooledObjects[i][0];
                     pooledObjects[i].RemoveAt(0);
                     pooledObject.transform.parent = null;
                     pooledObject.SetActiveRecursively(true);
-                  
-                    
+
+
 
                     return pooledObject;
 
@@ -111,6 +111,7 @@ public class ObjectPool : MonoBehaviour
         }
 
         //If we have gotten here either there was no object of the specified type or non were left in the pool with onlyPooled set to true
+        Debug.Log("null humans returned!");
         return null;
     }
 

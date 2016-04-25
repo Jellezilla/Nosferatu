@@ -35,7 +35,6 @@ public class UIManager : MonoBehaviour {
         float fuelCurrent = GameController.Instance.GetFuel;
         float soulsCurrent = GameController.Instance.GetSouls;
 
-        Debug.Log(soulsCurrent);
         _hpmask.sizeDelta = new Vector2(_hpMaxWidth/100 * fuelCurrent, _hpHeight);// _hpHeight);
         _spmask.sizeDelta = new Vector2(_spMaxWidth/100 * (1+soulsCurrent), _spHeight);// _hpHeight);
 

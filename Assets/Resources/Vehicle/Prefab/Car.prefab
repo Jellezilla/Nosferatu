@@ -18,7 +18,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &106112
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -26,7 +26,7 @@ GameObject:
   - 4: {fileID: 444000}
   - 108: {fileID: 10864636}
   m_Layer: 0
-  m_Name: Spotlight (1)
+  m_Name: Spotlight1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,6 +62,7 @@ GameObject:
   - 114: {fileID: 11460920}
   - 114: {fileID: 11451128}
   - 114: {fileID: 11405432}
+  - 114: {fileID: 11432038}
   - 65: {fileID: 6564882}
   m_Layer: 0
   m_Name: Car
@@ -105,7 +106,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &133208
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -236,6 +237,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &195156
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 438808}
+  m_Layer: 0
+  m_Name: Lights
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &195830
 GameObject:
   m_ObjectHideFlags: 1
@@ -271,7 +287,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 126868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 45.00055, y: 0.82, z: -156.02}
+  m_LocalPosition: {x: 53.7, y: 1, z: 13.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 450742}
@@ -281,8 +297,7 @@ Transform:
   - {fileID: 419732}
   - {fileID: 464404}
   - {fileID: 448062}
-  - {fileID: 478768}
-  - {fileID: 444000}
+  - {fileID: 438808}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &419732
@@ -309,6 +324,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 409776}
   m_RootOrder: 3
+--- !u!4 &438808
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 195156}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 478768}
+  - {fileID: 444000}
+  m_Father: {fileID: 409776}
+  m_RootOrder: 7
 --- !u!4 &443846
 Transform:
   m_ObjectHideFlags: 1
@@ -327,12 +356,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106112}
-  m_LocalRotation: {x: 0.05390229, y: -0.032202028, z: -0.0060216845, w: 0.99800867}
+  m_LocalRotation: {x: 0.00540782, y: -0.031871878, z: -0.0075772787, w: 0.99944866}
   m_LocalPosition: {x: -0.45999908, y: -0.16000003, z: 0.5700073}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 409776}
-  m_RootOrder: 8
+  m_Father: {fileID: 438808}
+  m_RootOrder: 1
 --- !u!4 &445202
 Transform:
   m_ObjectHideFlags: 1
@@ -428,12 +457,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133208}
-  m_LocalRotation: {x: 0.053928714, y: 0.009494228, z: 0.0017753916, w: 0.99849814}
-  m_LocalPosition: {x: 0.5600014, y: -0.19, z: 0.7100067}
+  m_LocalRotation: {x: 0.0054104505, y: 0.009396909, z: 0.002234033, w: 0.9999387}
+  m_LocalPosition: {x: 0.5600014, y: -0.19, z: 0.710022}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 409776}
-  m_RootOrder: 7
+  m_Father: {fileID: 438808}
+  m_RootOrder: 0
 --- !u!4 &497324
 Transform:
   m_ObjectHideFlags: 1
@@ -725,13 +754,13 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133208}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 6
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 7.6
-  m_SpotAngle: 37.8
+  m_Color: {r: 1, g: 0.99574035, b: 0.9117647, a: 1}
+  m_Intensity: 1.93
+  m_Range: 8.3
+  m_SpotAngle: 45
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -758,13 +787,13 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106112}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 6
   m_Type: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 7.6
-  m_SpotAngle: 37.8
+  m_Color: {r: 1, g: 0.99574035, b: 0.9117647, a: 1}
+  m_Intensity: 1.93
+  m_Range: 8.3
+  m_SpotAngle: 45
   m_CookieSize: 10
   m_Shadows:
     m_Type: 0
@@ -800,6 +829,22 @@ MonoBehaviour:
   m_RopeMaterial: {fileID: 2100000, guid: c2caad9e29195ed40997696f42d29f67, type: 2}
   m_ropeWidth: 0.15
   m_segmentRate: 2
+--- !u!114 &11432038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 126868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 655fac3913e72e741bf203e6e5e640bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxCarSouls: 100
+  m_MaxCarBlood: 100
+  m_BloodConsumption: 6
+  m_BloodPerHuman: 5
+  m_SoulsPerHuman: 1
 --- !u!114 &11451128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -848,6 +893,9 @@ MonoBehaviour:
   m_SteeringControl: 0
   m_BrakingControl: 1
   m_SpeedUnits: 0
+  m_lights:
+  - {fileID: 10847900}
+  - {fileID: 10864636}
   m_WheelColliders:
   - {fileID: 14671038}
   - {fileID: 14691626}
@@ -861,12 +909,12 @@ MonoBehaviour:
   m_CenterOfMass: {x: 0, y: -0.75, z: 0}
   m_SteeringRate: 1
   m_MaxSteerAngle: 25
-  m_SteerSpeedThreshold: 5
+  m_SteerSpeedThreshold: 10
   m_SteerAngleThreshold: 50
   m_SteerAsist: 0.5
-  m_TractionControlAsist: 0.2
-  m_WheelTorque: 6000
-  m_ReverseTorque: 3000
+  m_TractionControlAsist: 0.25
+  m_WheelTorque: 8000
+  m_ReverseTorque: 4000
   m_Downforce: 60
   m_Topspeed: 80
   m_nrOfGears: 5
@@ -899,7 +947,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 3
+    m_Stiffness: 2.5
   m_Enabled: 1
 --- !u!146 &14648590
 WheelCollider:
@@ -928,7 +976,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 3
+    m_Stiffness: 2.5
   m_Enabled: 1
 --- !u!146 &14671038
 WheelCollider:
@@ -957,7 +1005,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1.75
+    m_Stiffness: 1.5
   m_Enabled: 1
 --- !u!146 &14691626
 WheelCollider:
@@ -986,7 +1034,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1.75
+    m_Stiffness: 1.5
   m_Enabled: 1
 --- !u!1001 &100100000
 Prefab:

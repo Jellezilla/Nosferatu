@@ -21,14 +21,30 @@ public class HumanController : MonoBehaviour {
     private Rigidbody[] m_rbs;
     private Collider[] m_cols;
     private CharacterJoint[] m_joints;
-
+    private Vector3 orgPos;
    
     // Use this for initialization
     void Awake () {
         Init();
         
 	}
-	
+    void OnEnable()
+    {
+        anim.enabled = true;
+        orgPos = transform.position;
+    }
+
+    void Reset()
+    {
+
+
+        transform.position = orgPos;
+        transform.rotation = Quaternion.identity;
+
+        Init();
+
+    }
+    
 
     /// <summary>
     ///  Initialize references and variables
@@ -39,6 +55,7 @@ public class HumanController : MonoBehaviour {
         m_rbs = GetComponentsInChildren<Rigidbody>();
         m_cols = GetComponentsInChildren<Collider>();
 
+        _isDead = false;
 
         for (int i = 0; i < m_rbs.Length; i++)
         {
@@ -146,13 +163,12 @@ public class HumanController : MonoBehaviour {
         // play blood splatter effect
         (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
 
-        GameController.Instance.AddFuel();
-        GameController.Instance.AddSoul();
-
         // Destroy object after 5 seconds. 
         StopAllCoroutines();
-        Destroy(gameObject, 5);
-        
+
+        //Destroy(gameObject, 5);
+        StartCoroutine(poolObject(4.0f));
+
     }
 
     
@@ -198,5 +214,15 @@ public class HumanController : MonoBehaviour {
               
 
     }
-    
+
+    IEnumerator poolObject(float wait)
+    {
+        yield return new WaitForSeconds(wait);
+        Reset();
+        Debug.Log("human pooled!");
+
+        //  HumanObjectPool.instance.PoolObject(gameObject);
+
+    }
+
 }

@@ -34,7 +34,6 @@ public class BloodSpatter : MonoBehaviour {
         if (Physics.Raycast(ray, out hit, Mathf.Infinity)) {
             // Paint!
             // Step back a little for a better effect (that's what "normal * x" is for)
-            Debug.Log(hit.transform.position);
             //Paint(transform.position + hit.normal * (SplashRange / 4f));
             Vector3 dist = transform.position+transform.forward*1.05f;
             
@@ -82,7 +81,7 @@ public class BloodSpatter : MonoBehaviour {
                 if (hit.collider.gameObject.tag == Tags.environment) {
                     b++;
                     // Create a splash if we found a surface
-                    Debug.Log("name"+hit.collider.gameObject.name);
+                    //Debug.Log("name"+hit.collider.gameObject.name);
                     var paintSpatter = GameObject.Instantiate(PaintPrefab,
                                                                new Vector3 (hit.point.x, 0.01f, hit.point.z),
 
