@@ -287,7 +287,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 126868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 49.7, y: 1, z: 274}
+  m_LocalPosition: {x: 53.7, y: 1, z: 13.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 450742}
@@ -842,9 +842,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaxCarSouls: 100
   m_MaxCarBlood: 100
-  m_BloodConsumption: 3
-  m_BloodPerHuman: 8
-  m_SoulsPerHuman: 3
+  m_BloodConsumption: 6
+  m_BloodPerHuman: 5
+  m_SoulsPerHuman: 1
 --- !u!114 &11451128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -913,7 +913,7 @@ MonoBehaviour:
   m_SteerAngleThreshold: 50
   m_SteerAsist: 0.5
   m_TractionControlAsist: 0.25
-  m_WheelTorque: 6000
+  m_WheelTorque: 8000
   m_ReverseTorque: 4000
   m_Downforce: 60
   m_Topspeed: 80
