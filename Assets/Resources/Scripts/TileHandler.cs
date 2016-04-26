@@ -54,7 +54,7 @@ public class TileHandler : MonoBehaviour {
 
         }
         // remove old tile (throw it back to the pool) 
-        ObjectPool.instance.PoolObject(currentTile);
+     //   ObjectPool.instance.PoolObject(currentTile);
 
         // Set new current tile
         currentTile = nextTile;
@@ -71,10 +71,10 @@ public class TileHandler : MonoBehaviour {
 
         // Get Random tile (string) according to type
         string tileStr = GetRandomTileString();
-       
-        GameObject tilePrefab = ObjectPool.instance.GetObjectForType(tileStr, true);
-        tilePrefab.transform.position = new Vector3(0, 0, 100) + pos;
-        return tilePrefab;
+
+        // GameObject tilePrefab = ObjectPool.instance.GetObjectForType(tileStr, true);
+        //tilePrefab.transform.position = new Vector3(0, 0, 100) + pos;
+        return null;// tilePrefab;
     }   
         
     private string GetRandomTileString()

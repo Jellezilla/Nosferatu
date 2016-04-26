@@ -2,136 +2,86 @@
 using System.Collections;
 using System.Collections.Generic;
 
+/// <summary>
+/// Object Pooling Class
+/// </summary>
 public class ObjectPool : MonoBehaviour
 {
-
-    public static ObjectPool instance;
-
-    /// <summary>
-    /// The object prefabs which the pool can handle.
-    /// </summary>
-    public GameObject[] objectPrefabs;
-
-    /// <summary>
-    /// The pooled objects currently available.
-    /// </summary>
-    public List<GameObject>[] pooledObjects;
-
-    /// <summary>
-    /// The amount of objects of each type to buffer.
-    /// </summary>
-    public int[] amountToBuffer;
-
-    public int defaultBufferAmount = 3;
-
-    /// <summary>
-    /// The container object that we will keep unused pooled objects so we dont clog up the editor with objects.
-    /// </summary>
-    protected GameObject containerObject;
-
+    [SerializeField]
+    private GameObject[] m_Prefabs;
+    [SerializeField]
+    private int m_NrOfInstances;
+    private Dictionary<int,ListStack<GameObject>> m_UnUsedObjects;
+    private Dictionary<int,ListStack<GameObject>> m_UsedObjects;
+    private GameObject testObj;
     void Awake()
     {
-        instance = this;
-        Init();
+        InitPool();
     }
 
-    // Use this for initialization
-    void Init()
+    /// <summary>
+    /// Init pool and populate with prefab instances
+    /// </summary>
+    void InitPool()
     {
-        containerObject = new GameObject("ObjectPool");
+        m_UnUsedObjects = new Dictionary<int, ListStack<GameObject>>();
+        m_UsedObjects = new Dictionary<int, ListStack<GameObject>>();
 
-        //Loop through the object prefabs and make a new list for each one.
-        //We do this because the pool can only support prefabs set to it in the editor,
-        //so we can assume the lists of pooled objects are in the same order as object prefabs in the array
-        pooledObjects = new List<GameObject>[objectPrefabs.Length];
-
-        int i = 0;
-        foreach (GameObject objectPrefab in objectPrefabs)
+        for (int i = 0; i < m_Prefabs.Length; i++)
         {
-            pooledObjects[i] = new List<GameObject>();
+            m_UnUsedObjects.Add(i, new ListStack<GameObject>());
+            m_UsedObjects.Add(i, new ListStack<GameObject>());
+            
 
-            int bufferAmount;
-
-            if (i < amountToBuffer.Length) bufferAmount = amountToBuffer[i];
-            else
-                bufferAmount = defaultBufferAmount;
-
-            for (int n = 0; n < bufferAmount; n++)
+            for (int j = 0; j < m_NrOfInstances; j++)
             {
-                GameObject newObj = Instantiate(objectPrefab) as GameObject;
-                newObj.name = objectPrefab.name;
-                PoolObject(newObj);
+                GameObject prefab = Instantiate(m_Prefabs[i]);
+                prefab.SetActive(false);
+                m_UnUsedObjects[i].Push(prefab);
             }
-
-            i++;
         }
     }
 
     /// <summary>
-    /// Gets a new object for the name type provided.  If no object type exists or if onlypooled is true and there is no objects of that type in the pool
-    /// then null will be returned.
+    /// Returns a pooled object corresponding to the given index.
     /// </summary>
-    /// <returns>
-    /// The object for type.
-    /// </returns>
-    /// <param name='objectType'>
-    /// Object type.
-    /// </param>
-    /// <param name='onlyPooled'>
-    /// If true, it will only return an object if there is one currently pooled.
-    /// </param>
-    public GameObject GetObjectForType(string objectType, bool onlyPooled)
+    /// <param name="objectIndex"> position within the list of objects</param>
+    /// <param name="position"> object position </param>
+    /// <param name="rotation"> object rotation </param>
+    /// <returns></returns>
+    public GameObject GrabObject(int objectIndex, Vector3 position, Quaternion rotation)
     {
-        for (int i = 0; i < objectPrefabs.Length; i++)
+        GameObject gameOb;
+        if (m_UnUsedObjects[objectIndex].Count > 0)
         {
-            GameObject prefab = objectPrefabs[i];
-            if (prefab.name == objectType)
-            {
-                if (pooledObjects[i].Count > 0)
-                {
-
-                    GameObject pooledObject = pooledObjects[i][0];
-                    pooledObjects[i].RemoveAt(0);
-                    pooledObject.transform.parent = null;
-                    pooledObject.SetActiveRecursively(true);
-                  
-                    
-
-                    return pooledObject;
-
-                }
-                else if (!onlyPooled)
-                {
-                    return Instantiate(objectPrefabs[i]) as GameObject;
-                }
-
-                break;
-
-            }
+            gameOb = m_UnUsedObjects[objectIndex].Pop();
+            gameOb.transform.position = position;
+            gameOb.transform.rotation = rotation;
+            gameOb.SetActive(true);
+            m_UsedObjects[objectIndex].Push(gameOb);
+            return gameOb;
         }
+        else
+        {
+            gameOb = (GameObject)Instantiate(m_Prefabs[objectIndex],position,rotation);
+            m_UsedObjects[objectIndex].Push(gameOb);
+            return gameOb;
 
-        //If we have gotten here either there was no object of the specified type or non were left in the pool with onlyPooled set to true
-        return null;
+        }
     }
 
     /// <summary>
-    /// Pools the object specified.  Will not be pooled if there is no prefab of that type.
+    /// Returns an object to the pool based on its index position
     /// </summary>
-    /// <param name='obj'>
-    /// Object to be pooled.
-    /// </param>
-    public void PoolObject(GameObject obj)
+    /// <param name="objectIndex"></param>
+    /// <param name="obj"></param>
+    public void ReturnObject(int objectIndex,GameObject obj)
     {
-        for (int i = 0; i < objectPrefabs.Length; i++)
+        if (m_UsedObjects[objectIndex].Contains(obj))
         {
-            if (objectPrefabs[i].name == obj.name)
-            {
-                obj.SetActiveRecursively(false);
-                obj.transform.parent = containerObject.transform;
-                pooledObjects[i].Add(obj);
-               
-                return;
-            }
+            obj.SetActive(false);
+            m_UsedObjects[objectIndex].Remove(obj);
+            m_UnUsedObjects[objectIndex].Push(obj);
         }
     }
 
