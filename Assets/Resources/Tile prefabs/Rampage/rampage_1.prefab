@@ -626,6 +626,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 491030}
+  - 65: {fileID: 6560592}
   m_Layer: 0
   m_Name: rampage_1
   m_TagString: Untagged
@@ -4333,6 +4334,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6560592
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 138126}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100, y: 0.36253357, z: 100}
+  m_Center: {x: 50, y: -0.17, z: 50}
 --- !u!65 &6564790
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -4520,7 +4533,7 @@ TerrainCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189188}
   m_Material: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_TerrainData: {fileID: 15600000, guid: 096f4e3afd030c9428ae42a5d5279b1f, type: 2}
   m_EnableTreeColliders: 1
 --- !u!218 &21809342

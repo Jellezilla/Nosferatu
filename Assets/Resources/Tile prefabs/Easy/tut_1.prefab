@@ -1734,6 +1734,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 488682}
+  - 114: {fileID: 11496184}
+  - 65: {fileID: 6565788}
+  - 114: {fileID: 11474014}
   m_Layer: 0
   m_Name: tut_1
   m_TagString: Untagged
@@ -11170,7 +11173,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127342}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 435206}
@@ -28876,6 +28879,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0301239, y: 0.070000984, z: 0.030516949}
   m_Center: {x: 0.000035705976, y: 0.034996007, z: 0.00009955838}
+--- !u!65 &6565788
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127342}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100, y: 0.36253357, z: 100}
+  m_Center: {x: 50, y: -0.17, z: 50}
 --- !u!65 &6566588
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -30352,6 +30367,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0036072987, y: 0.07611927, z: 0.02556884}
   m_Center: {x: 0.000011730144, y: 0.037923228, z: 0.0004177729}
+--- !u!114 &11474014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e6b439b714ca14ba9eda9ccbcd81d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Humans: {fileID: 158048}
+  m_tombstones: {fileID: 0}
+--- !u!114 &11496184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e6b439b714ca14ba9eda9ccbcd81d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Humans: {fileID: 0}
+  m_tombstones: {fileID: 0}
 --- !u!154 &15420642
 TerrainCollider:
   m_ObjectHideFlags: 1
@@ -30359,7 +30400,7 @@ TerrainCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144998}
   m_Material: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_TerrainData: {fileID: 15600000, guid: 2cc6e5296e8033e418d366b5b2ed8e26, type: 2}
   m_EnableTreeColliders: 1
 --- !u!218 &21899248
