@@ -9,14 +9,17 @@ public class GameController : Singleton<GameController>
 {
     private VehicleResources m_playerRes;
     private GameObject m_player;
+    private ObjectPool m_objPool;
     // Use this for initialization
     void Awake()
     {
+        LoadObjectPool();
         LoadPlayer();
     }
 
     void OnLevelWasLoaded(int level)
     {
+        LoadObjectPool();
         LoadPlayer();
     }
 
@@ -26,11 +29,24 @@ public class GameController : Singleton<GameController>
         m_playerRes = m_player.GetComponent<VehicleResources>();
     }
 
+    private void LoadObjectPool()
+    {
+        m_objPool = GameObject.FindGameObjectWithTag(Tags.objectpool).GetComponent<ObjectPool>();
+    }
+
     public GameObject Player
     {
         get
         {
             return m_player;
+        }
+    }
+
+    public ObjectPool ObjectPool
+    {
+        get
+        {
+            return m_objPool;
         }
     }
 
