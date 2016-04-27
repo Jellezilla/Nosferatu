@@ -20,7 +20,7 @@ public class Tile : MonoBehaviour {
 
     void OnDisable()
     {
-
+        UnloadTile();
     }
 
     void Awake ()
@@ -48,12 +48,22 @@ public class Tile : MonoBehaviour {
     {
         for (int i = 0; i < m_SpawnPoints.Length; i++)
         {
-
+            m_Humans[i] = GameController.Instance.ObjectPool.GrabObject(0, m_SpawnPoints[i], Quaternion.identity);
         }
+        /// add tombstone logic
     }
 
-	// Update is called once per frame
-	void Update () {
+    void UnloadTile()
+    {
+        for (int i = 0; i < m_Humans.Length; i++)
+        {
+            GameController.Instance.ObjectPool.ReturnObject(0, m_Humans[i]);
+        }
+        /// add tombstone logic
+    }
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
 }
