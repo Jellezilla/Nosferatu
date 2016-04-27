@@ -55,12 +55,17 @@ public class Tile : MonoBehaviour {
 
     void UnloadTile()
     {
-        for (int i = 0; i < m_Humans.Length; i++)
+        if (GameController.Instance != null)
         {
-            GameController.Instance.ObjectPool.ReturnObject(0, m_Humans[i]);
+            for (int i = 0; i < m_Humans.Length; i++)
+            {
+                GameController.Instance.ObjectPool.ReturnObject(0, m_Humans[i]);
+            }
         }
+       
         /// add tombstone logic
     }
+
 
     // Update is called once per frame
     void Update () {
