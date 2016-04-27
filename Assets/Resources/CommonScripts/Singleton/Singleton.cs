@@ -7,6 +7,13 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     private static T instance;
     private static bool appQuiting = false;
     private static object container = new object();
+    public static bool isQuitting
+    {
+        get
+        {
+            return appQuiting;
+        }
+    }
 
     public static T Instance
     {

@@ -46,6 +46,11 @@ public class Tile : MonoBehaviour {
 
     void ResetTile()
     {
+        for (int i = 0; i < m_HumanContainer.transform.childCount; i++)
+        {
+            m_SpawnPoints[i] = m_HumanContainer.transform.GetChild(i).gameObject.transform.position;
+        }
+
         for (int i = 0; i < m_SpawnPoints.Length; i++)
         {
             m_Humans[i] = GameController.Instance.ObjectPool.GrabObject(0, m_SpawnPoints[i], Quaternion.identity);
@@ -55,10 +60,11 @@ public class Tile : MonoBehaviour {
 
     void UnloadTile()
     {
-        if (GameController.Instance != null)
+        if (!GameController.isQuitting)
         {
             for (int i = 0; i < m_Humans.Length; i++)
             {
+                
                 GameController.Instance.ObjectPool.ReturnObject(0, m_Humans[i]);
             }
         }

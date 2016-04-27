@@ -61,8 +61,8 @@ public class ObjectPool : MonoBehaviour
             gameOb = m_UnUsedObjects[objectIndex].Pop();
             gameOb.transform.position = position;
             gameOb.transform.rotation = rotation;
-            gameOb.SetActive(true);
             m_UsedObjects[objectIndex].Push(gameOb);
+            gameOb.SetActive(true);
             return gameOb;
         }
         else
@@ -81,7 +81,7 @@ public class ObjectPool : MonoBehaviour
     /// <param name="obj"></param>
     public void ReturnObject(int objectIndex,GameObject obj)
     {
-        if (m_UsedObjects[objectIndex].Contains(obj))
+        if (m_UsedObjects[objectIndex].Contains(obj) && obj!=null)
         {
             obj.SetActive(false);
             m_UsedObjects[objectIndex].Remove(obj);
