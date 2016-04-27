@@ -10,7 +10,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField]
     private GameObject[] m_Prefabs;
     [SerializeField]
-    private int m_NrOfInstances;
+    private int[] m_NrOfInstances;
     private Dictionary<int,ListStack<GameObject>> m_UnUsedObjects;
     private Dictionary<int,ListStack<GameObject>> m_UsedObjects;
     private GameObject testObj;
@@ -33,7 +33,7 @@ public class ObjectPool : MonoBehaviour
             m_UsedObjects.Add(i, new ListStack<GameObject>());
             
 
-            for (int j = 0; j < m_NrOfInstances; j++)
+            for (int j = 0; j < m_NrOfInstances[i]; j++)
             {
                 GameObject prefab = Instantiate(m_Prefabs[i]);
                 prefab.SetActive(false);
