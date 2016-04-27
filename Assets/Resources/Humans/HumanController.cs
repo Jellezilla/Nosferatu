@@ -1,228 +1,114 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HumanController : MonoBehaviour {
+public class HumanController : MonoBehaviour
+{
 
     private Animator anim;
-    private GameObject player;
-    private bool _isDead = false; //used for creating bloodspatter only on first hit
+    [SerializeField]
+    private GameObject m_rig;
+    private bool m_isDead;
     public GameObject bloodSpatterObject;
-    public GameObject TESTuimanager;
-    [SerializeField]
-    private float speed = 0.2f;
-    [SerializeField]
-    private float panicSpeed = 0.6f;
-    [SerializeField]
-    private float panicTime = 2.5f;
-    [SerializeField]
-    private float crippleSpeed = 0.15f;
-    [SerializeField]
-    private float panicRange = 5.0f;
-    private Rigidbody[] m_rbs;
-    private Collider[] m_cols;
-    private CharacterJoint[] m_joints;
-    private Vector3 orgPos;
-   
+    private Rigidbody m_Hrb;
+    private Collider[] m_HColls;
+    private Rigidbody[] m_rigRbs;
+    private Collider[] m_rigCols;
+    private bool m_init;
+
     // Use this for initialization
-    void Awake () {
+    void Awake()
+    {
         Init();
-        
-	}
+
+    }
+
     void OnEnable()
     {
-        anim.enabled = true;
-        orgPos = transform.position;
-    }
-
-    void Reset()
-    {
-
-
-        transform.position = orgPos;
-        transform.rotation = Quaternion.identity;
-
-        Init();
+        //check if human initialized, if not then initialize
+        if (!m_init)
+        {
+            Init();
+        }
+        else
+        {
+            Reset();
+        }
 
     }
-    
 
     /// <summary>
     ///  Initialize references and variables
     /// </summary>
 	void Init()
     {
+
         anim = GetComponent<Animator>();
-        m_rbs = GetComponentsInChildren<Rigidbody>();
-        m_cols = GetComponentsInChildren<Collider>();
-
-        _isDead = false;
-
-        for (int i = 0; i < m_rbs.Length; i++)
-        {
-            if (i != 0)
-            {
-                if (i == 1)
-                {
-                    m_cols[i].enabled = true;
-                }
-                else
-                {
-                    m_cols[i].enabled = false;
-                }
-
-                m_rbs[i].useGravity = false;
-                m_rbs[i].isKinematic = true;
-                m_rbs[i].Sleep();
-            }
-
-        }
-        
-   
+        m_Hrb = GetComponent<Rigidbody>();
+        m_HColls = GetComponents<Collider>();
+        m_rigRbs = m_rig.GetComponentsInChildren<Rigidbody>();
+        m_rigCols = m_rig.GetComponentsInChildren<Collider>();
+        m_init = true;
+        Reset();
     }
-
-
-
 
     /// <summary>
-    ///  Controls the collision with the player (car) 
+    /// Human reset method
     /// </summary>
-    /// <param name="col"></param>
-    /*
-    void OnTriggerEnter(Collider col) 
+    void Reset()
     {
-        if (col.tag == Tags.player && !_isDead)
+        if (m_isDead)
         {
-            Debug.Log("hit");
+            m_isDead = false;
+            anim.enabled = true;
+            m_Hrb.isKinematic = false;
+            for (int i = 0; i < m_HColls.Length; i++)
+            {
+                m_HColls[i].enabled = true;
+            }
 
-            GoRagdoll();
-            _isDead = true;
-          
+            for (int i = 0; i < m_rigRbs.Length; i++)
+            {
+                m_rigCols[i].enabled = false;
+                m_rigRbs[i].useGravity = false;
+                m_rigRbs[i].Sleep();
+            }
         }
+
     }
-    */
+
+    void Death()
+    {
+        if (!m_isDead)
+        {
+            m_isDead = true;
+            anim.enabled = false;
+            m_Hrb.isKinematic = true;
+
+            for (int i = 0; i < m_HColls.Length; i++)
+            {
+                m_HColls[i].enabled = false;
+            }
+
+            for (int i = 0; i < m_rigRbs.Length; i++)
+            {
+                m_rigCols[i].enabled = true;
+                m_rigRbs[i].useGravity = true;
+            }
+
+            (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
+
+        }
+
+    }
+
     void OnTriggerEnter(Collider col)
     {
-       
-        if (col.tag == Tags.player && !_isDead)
+
+        if (col.tag == Tags.player)
         {
-//            Debug.Log("hit");
-            //  CapsuleCollider theCol = GetComponent<CapsuleCollider>();
-            //  theCol.enabled = false;
-            for (int i = 0; i < m_rbs.Length; i++)
-            {
-                if (i != 0)
-                {
-                    if (i == 1)
-                    {
-                        m_cols[i].enabled = false;
-                        //acount for root object collider
-                    }
-                    else
-                    {
-                        m_cols[i].enabled = true;
-                    }
-                    m_rbs[i].useGravity = true;
-                    m_rbs[i].isKinematic = false;
-                    m_rbs[i].WakeUp();
-                }
-                else //if its equal to 0
-                {
-                    m_cols[i].enabled = false;
-                    m_rbs[i].useGravity = false;
-                    m_rbs[i].Sleep();
-                }
-
-
-            }
-            GoRagdoll();
-            _isDead = true;
+            Death();
         }
     }
 
-    /// <summary>
-    /// This method is run when hit by the car. It will make the blood splatter, make the human collapse (ragdoll effect) and call destroy on it.
-    /// </summary>
-    void GoRagdoll()
-    {
-        if (Random.Range(1, 15) == 1)
-        {
-            //CreateCripple();
-            //return;
-        }
-        
-        anim.enabled = false;
-        Rigidbody[] rigids = GetComponentsInChildren<Rigidbody>();
-        
-        // setting all rigidbodies in the human to isKinematic = false, creates the ragdoll effect and collapses him/her.         
-        foreach(Rigidbody rb in rigids)
-        {
-            rb.isKinematic = false;
-        }
-
-
-        // play blood splatter effect
-        (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
-
-        // Destroy object after 5 seconds. 
-        StopAllCoroutines();
-
-        //Destroy(gameObject, 5);
-        StartCoroutine(poolObject(4.0f));
-
-    }
-
-    
-
-    void FixedUpdate()
-    {
-        // When car comes close, the humans panic
-     /*   if (Vector3.Distance(transform.position, player.transform.position) < panicRange)
-        {
-
-            Panic();
-        }*/
-        
-    }
-   
-    void Idle()
-    {
-        
-        anim.SetFloat("speed", 0.0f);
-        
-    }
-    
-  
-
-    void Panic()
-    {
-        
-
-        anim.SetBool("panic", true);
-        // move
-        
-        StartCoroutine(calmDown(panicTime));
-      
-    }
- 
-    
-
-    IEnumerator calmDown(float wait)
-    {
-        
-        yield return new WaitForSeconds(wait);
-        anim.SetBool("panic", false);
-              
-
-    }
-
-    IEnumerator poolObject(float wait)
-    {
-        yield return new WaitForSeconds(wait);
-        Reset();
-        Debug.Log("human pooled!");
-
-        //  HumanObjectPool.instance.PoolObject(gameObject);
-
-    }
 
 }
