@@ -8,6 +8,7 @@ TagManager:
   - Environment
   - UI Camera
   - ObjectPool
+  - TileManager
   layers:
   - Default
   - TransparentFX

@@ -2289,7 +2289,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 6c1cd3f3b8a25df45b84f6fe8b632af7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2305,13 +2305,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1761a1e6558a04198f957688d4c7ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_rig: {fileID: 0}
   bloodSpatterObject: {fileID: 100000, guid: 80cd87e5e66b84b35b29f75198eeda8b, type: 2}
-  TESTuimanager: {fileID: 0}
-  speed: 0.2
-  panicSpeed: 0.6
-  panicTime: 2.5
-  crippleSpeed: 0.15
-  panicRange: 5
 --- !u!135 &13563434
 SphereCollider:
   m_ObjectHideFlags: 1
