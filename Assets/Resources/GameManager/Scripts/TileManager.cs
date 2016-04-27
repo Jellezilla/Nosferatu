@@ -23,7 +23,7 @@ public class TileManager : MonoBehaviour {
     private int m_curTileIndex;
     private int m_prevTileIndex;
     private Collider m_curTileCol;
-
+    private float m_carHeight;
     void Start()
     {
         Init();
@@ -51,15 +51,18 @@ public class TileManager : MonoBehaviour {
         m_curTile = GameController.Instance.ObjectPool.GrabObject(m_curTileIndex, m_LevelOrigin, Quaternion.identity);
         m_curTileCol = m_curTile.GetComponent<Collider>();
         Vector3 tileCenter = m_curTileCol.bounds.center;
-        float carHeight = m_Player.GetComponent<Collider>().bounds.extents.y * 2;
-        tileCenter.y = carHeight;
+        m_carHeight = m_Player.GetComponent<Collider>().bounds.extents.y * 2;
+        tileCenter.y = m_carHeight;
         m_Player.transform.position = tileCenter; 
     }
 
     private void TileChanger()
     {
-        if (Vector3.Distance(m_Player.transform.position, m_curTileCol.bounds.center) < m_tileChangeDistance)
+        Vector3 playerOnTile = m_Player.transform.position;
+        playerOnTile.y -= m_carHeight;
+        if (m_curTileCol.bounds.Contains(playerOnTile) && playerOnTile.z > m_curTileCol.bounds.center.z)
         {
+
             if (m_prevTile != null)
             {
                 GameController.Instance.ObjectPool.ReturnObject(m_prevTileIndex, m_prevTile);

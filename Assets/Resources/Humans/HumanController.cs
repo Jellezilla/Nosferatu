@@ -29,11 +29,11 @@ public class HumanController : MonoBehaviour
         {
             Init();
         }
-        else
-        {
-            Reset();
-        }
+    }
 
+    void OnDisable()
+    {
+        Reset();
     }
 
     /// <summary>
