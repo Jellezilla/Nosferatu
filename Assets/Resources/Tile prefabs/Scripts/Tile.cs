@@ -5,6 +5,10 @@ public class Tile : MonoBehaviour {
 
     private bool m_initTile;
     [SerializeField]
+    private int m_HumanIndex;
+    [SerializeField]
+    private int m_TombstoneIndex;
+    [SerializeField]
     private GameObject m_HumanContainer;
     [SerializeField]
     private GameObject m_tombstones;
@@ -53,7 +57,7 @@ public class Tile : MonoBehaviour {
 
         for (int i = 0; i < m_SpawnPoints.Length; i++)
         {
-            m_Humans[i] = GameController.Instance.ObjectPool.GrabObject(0, m_SpawnPoints[i], Quaternion.identity);
+            m_Humans[i] = GameController.Instance.ObjectPool.GrabObject(m_HumanIndex, m_SpawnPoints[i], Quaternion.identity);
         }
         /// add tombstone logic
     }
@@ -65,7 +69,7 @@ public class Tile : MonoBehaviour {
             for (int i = 0; i < m_Humans.Length; i++)
             {
                 
-                GameController.Instance.ObjectPool.ReturnObject(0, m_Humans[i]);
+                GameController.Instance.ObjectPool.ReturnObject(m_HumanIndex, m_Humans[i]);
             }
         }
        
