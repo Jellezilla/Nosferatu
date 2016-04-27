@@ -14,13 +14,13 @@ public class Tombstone : MonoBehaviour {
         Init();
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
-    void Init()
+    void OnDisable()
+    {
+        Reset();
+    }
+
+    private void Init()
     {
         m_childrenRbs = new Rigidbody[transform.childCount];
         m_childPositions = new Vector3[transform.childCount];
@@ -40,20 +40,23 @@ public class Tombstone : MonoBehaviour {
         }
     }
 
-    void Reset()
+    private void Reset()
     {
-
-
-        for (int i = 0; i < m_childrenRbs.Length; i++)
-        {
-            m_childrenRbs[i].isKinematic = true;
-
-        }
-
         for (int i = 0; i < m_childrenCols.Count; i++)
         {
             m_childrenCols[i].enabled = false;
         }
+
+        for (int i = 0; i < m_childrenRbs.Length; i++)
+        {
+            m_childrenRbs[i].isKinematic = true;
+            m_childrenRbs[i].transform.rotation = m_childRotations[i];
+            m_childrenRbs[i].transform.position = m_childPositions[i];
+
+
+        }
+
+
 
         m_col.enabled = true;
     }

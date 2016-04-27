@@ -676,7 +676,6 @@ MonoBehaviour:
   Healthbar: {fileID: 111662}
   Soulsbar: {fileID: 133570}
   ScoreBoard: {fileID: 192214}
-  PlayerObject: {fileID: 0}
   SpecialEffectObject: {fileID: 187366}
   RampageEffect: {fileID: 171596}
 --- !u!114 &11475136

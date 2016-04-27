@@ -13,7 +13,7 @@ GameObject:
   - 54: {fileID: 5407222}
   - 65: {fileID: 6518928}
   - 136: {fileID: 13682152}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Man03
   m_TagString: Human
   m_Icon: {fileID: 0}
