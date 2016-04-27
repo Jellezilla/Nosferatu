@@ -23,7 +23,7 @@ public class Tile : MonoBehaviour {
         UnloadTile();
     }
 
-    void Awake ()
+    void Start ()
     {
         InitTile();
 	}

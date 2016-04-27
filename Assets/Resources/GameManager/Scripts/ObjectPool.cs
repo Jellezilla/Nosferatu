@@ -14,6 +14,9 @@ public class ObjectPool : MonoBehaviour
     private Dictionary<int,ListStack<GameObject>> m_UnUsedObjects;
     private Dictionary<int,ListStack<GameObject>> m_UsedObjects;
     private GameObject testObj;
+
+
+
     void Awake()
     {
         InitPool();
@@ -26,7 +29,6 @@ public class ObjectPool : MonoBehaviour
     {
         m_UnUsedObjects = new Dictionary<int, ListStack<GameObject>>();
         m_UsedObjects = new Dictionary<int, ListStack<GameObject>>();
-
         for (int i = 0; i < m_Prefabs.Length; i++)
         {
             m_UnUsedObjects.Add(i, new ListStack<GameObject>());
@@ -40,6 +42,8 @@ public class ObjectPool : MonoBehaviour
                 m_UnUsedObjects[i].Push(prefab);
             }
         }
+
+        
     }
 
     /// <summary>
