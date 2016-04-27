@@ -3,6 +3,8 @@ using System.Collections;
 
 public class TileManager : MonoBehaviour {
 
+    [SerializeField]
     private Vector3 m_playerSpawnPosition;
+
 
 }

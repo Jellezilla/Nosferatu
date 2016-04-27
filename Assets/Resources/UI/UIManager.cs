@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour {
     public GameObject Healthbar;
     public GameObject Soulsbar;
     public GameObject ScoreBoard;
-    public GameObject PlayerObject;
+    private GameObject PlayerObject;
     public GameObject SpecialEffectObject;
     public GameObject RampageEffect;
 
@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour {
     private int oldPlayerDistance=0;
 
     void Start () {
+        PlayerObject = GameController.Instance.Player;
         _hpmask = Healthbar.transform.GetChild(0).gameObject.GetComponent<RectTransform>();
         _spmask = Soulsbar.transform.GetChild(0).gameObject.GetComponent<RectTransform>();
 
