@@ -2838,6 +2838,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 408228}
   - 65: {fileID: 6582860}
+  - 114: {fileID: 11437618}
   m_Layer: 0
   m_Name: normal_4
   m_TagString: Untagged
@@ -35500,6 +35501,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.012971603, y: 0.11901396, z: 0.047350597}
   m_Center: {x: -0.0015568731, y: 0.05947696, z: -0.0009945394}
+--- !u!114 &11437618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e6b439b714ca14ba9eda9ccbcd81d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HumanIndex: 0
+  m_TombstoneIndex: 0
+  m_HumanContainer: {fileID: 120808}
+  m_tombstones: {fileID: 0}
 --- !u!154 &15444116
 TerrainCollider:
   m_ObjectHideFlags: 1

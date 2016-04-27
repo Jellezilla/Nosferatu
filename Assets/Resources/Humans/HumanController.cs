@@ -70,7 +70,6 @@ public class HumanController : MonoBehaviour
             {
                 m_rigCols[i].enabled = false;
                 m_rigRbs[i].useGravity = false;
-                m_rigRbs[i].Sleep();
             }
         }
 

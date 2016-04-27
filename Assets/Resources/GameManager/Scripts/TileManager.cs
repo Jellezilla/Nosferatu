@@ -10,11 +10,11 @@ public class TileManager : MonoBehaviour {
     [SerializeField]
     private int m_startTileIndex;
     [SerializeField]
-    private int m_easyTileIndex;
+    private int[] m_easyTileIndexs;
     [SerializeField]
-    private int m_mediumTileIndex;
+    private int[] m_mediumTileIndexs;
     [SerializeField]
-    private int m_hardTileIndex;
+    private int[] m_hardTileIndexs;
     [SerializeField]
     private int m_rampageTileIndex;
     private GameObject m_Player;
@@ -70,7 +70,28 @@ public class TileManager : MonoBehaviour {
             Vector3 nTilePos = m_curTile.transform.position + new Vector3(0, 0, m_curTileCol.bounds.extents.z * 2);
             m_prevTileIndex = m_curTileIndex;
             m_prevTile = m_curTile;
-            m_curTileIndex = Random.Range(m_easyTileIndex,m_hardTileIndex+1); // testing line
+            int tileDifficulty = Random.Range(0,3); // testing line
+            switch (tileDifficulty)
+            {
+                case 0:
+                    {
+                        m_curTileIndex = m_easyTileIndexs[Random.Range(0, m_easyTileIndexs.Length)];
+                        break;
+                    }
+                case 1:
+                    {
+                        m_curTileIndex = m_mediumTileIndexs[Random.Range(0, m_mediumTileIndexs.Length)];
+                        break;
+                    }
+
+                case 2:
+                    {
+                        m_curTileIndex = m_hardTileIndexs[Random.Range(0, m_hardTileIndexs.Length)];
+                        break;
+                    }
+            }
+
+
             m_curTile = GameController.Instance.ObjectPool.GrabObject(m_curTileIndex, nTilePos, Quaternion.identity);
             m_curTileCol = m_curTile.GetComponent<Collider>();
 

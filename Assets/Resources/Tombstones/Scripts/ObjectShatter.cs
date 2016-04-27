@@ -5,7 +5,6 @@ public class ObjectShatter : MonoBehaviour {
     public GameObject Remains;
 	// Use this for initialization
 	void Start () {
-        Debug.Log("its created");
 	}
 	
 	// Update is called once per frame
@@ -15,7 +14,8 @@ public class ObjectShatter : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision) {
        Debug.Log("hitting tombstone");
-       if (collision.gameObject.tag == Tags.player || collision.gameObject.tag == Tags.human) {
+       if (collision.gameObject.tag == Tags.player || collision.gameObject.tag == Tags.human)
+        {
             Debug.Log("hitting tombstone");
             Instantiate(Remains, transform.position, collision.gameObject.transform.rotation);
            Destroy(gameObject);

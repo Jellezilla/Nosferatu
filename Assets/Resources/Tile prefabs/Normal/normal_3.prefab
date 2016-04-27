@@ -3486,6 +3486,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 403728}
   - 65: {fileID: 6531836}
+  - 114: {fileID: 11432560}
   m_Layer: 0
   m_Name: normal_3
   m_TagString: Untagged
@@ -6775,7 +6776,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 500}
+  m_LocalPosition: {x: 58.10339, y: 3.6622443, z: 235.59644}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 495612}
@@ -29206,6 +29207,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.055407103, y: 0.0069544897, z: 0.025757369}
   m_Center: {x: 0.00090179406, y: 0.0033990017, z: 0.000005670823}
+--- !u!114 &11432560
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e6b439b714ca14ba9eda9ccbcd81d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HumanIndex: 0
+  m_TombstoneIndex: 0
+  m_HumanContainer: {fileID: 192466}
+  m_tombstones: {fileID: 0}
 --- !u!154 &15412696
 TerrainCollider:
   m_ObjectHideFlags: 1
