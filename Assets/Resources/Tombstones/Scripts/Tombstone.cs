@@ -9,13 +9,12 @@ public class Tombstone : MonoBehaviour {
     private List<BoxCollider> m_childrenCols;
     private BoxCollider m_col;
 	// Use this for initialization
-	void Awake () {
 
+    void OnEnable()
+    {
         Init();
         Reset();
-	
-	}
-
+    }
 
     private void Init()
     {

@@ -30,10 +30,6 @@ public class Tile : MonoBehaviour {
         UnloadTile();
     }
 
-    void Start ()
-    {
-      //  InitTile();
-	}
 
     void InitTile()
     {
@@ -90,6 +86,8 @@ public class Tile : MonoBehaviour {
             int randomIndex = m_TombstoneIndexs[dictIndex];
             m_Tombstones[dictIndex].Add(GameController.Instance.ObjectPool.GrabObject(randomIndex, m_TombSpawnPoints[i], Quaternion.identity));
         }
+
+        Debug.Log(m_TombSpawnPoints.Length);
 
     }
 
