@@ -30377,6 +30377,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e6b439b714ca14ba9eda9ccbcd81d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_HumanIndex: 0
+  m_TombstoneIndex: 0
   m_HumanContainer: {fileID: 158048}
   m_tombstones: {fileID: 0}
 --- !u!154 &15420642
@@ -30386,7 +30388,7 @@ TerrainCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144998}
   m_Material: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: 2cc6e5296e8033e418d366b5b2ed8e26, type: 2}
   m_EnableTreeColliders: 1
 --- !u!218 &21899248
