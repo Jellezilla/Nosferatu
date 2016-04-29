@@ -59,16 +59,17 @@ public class ObjectPool : MonoBehaviour
         {
             if (!m_pools[objectIndex][i].activeSelf)
             {
+
                 m_pools[objectIndex][i].transform.position = position;
                 m_pools[objectIndex][i].transform.rotation = rotation;
                 m_pools[objectIndex][i].SetActive(true);
-
                 return m_pools[objectIndex][i];
 
             }
         }
 
         /// no objects are available
+        
         m_pools[objectIndex].Add(Instantiate(m_Prefabs[objectIndex]));
         m_pools[objectIndex][m_pools[objectIndex].Count - 1].transform.position = position;
         m_pools[objectIndex][m_pools[objectIndex].Count - 1].transform.rotation = rotation;
@@ -80,11 +81,11 @@ public class ObjectPool : MonoBehaviour
     /// </summary>
     /// <param name="objectIndex"></param>
     /// <param name="obj"></param>
-    public void ReturnObject(int objectIndex,GameObject obj)
+    public void ReturnObject(int objectIndex, GameObject obj)
     {
         if (m_pools[objectIndex].Contains(obj) && obj!=null)
         {
-            obj.SetActive(false);
+            m_pools[objectIndex][(m_pools[objectIndex].IndexOf(obj))].SetActive(false);
         }
     }
 
