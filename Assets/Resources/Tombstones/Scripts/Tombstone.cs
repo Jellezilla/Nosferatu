@@ -12,13 +12,10 @@ public class Tombstone : MonoBehaviour {
 	void Awake () {
 
         Init();
+        Reset();
 	
 	}
 
-    void OnDisable()
-    {
-        Reset();
-    }
 
     private void Init()
     {
@@ -42,6 +39,12 @@ public class Tombstone : MonoBehaviour {
 
     private void Reset()
     {
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            m_childPositions[i] = m_childrenRbs[i].transform.position;
+        }
+
         for (int i = 0; i < m_childrenCols.Count; i++)
         {
             m_childrenCols[i].enabled = false;

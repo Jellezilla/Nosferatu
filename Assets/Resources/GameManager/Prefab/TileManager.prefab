@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &410380
 Transform:
   m_ObjectHideFlags: 1
@@ -41,11 +41,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LevelOrigin: {x: 0, y: 0, z: 0}
   m_tileChangeDistance: 3
-  m_startTileIndex: 1
-  m_easyTileIndexs: 010000000200000003000000
-  m_mediumTileIndexs: 040000000500000006000000
-  m_hardTileIndexs: 070000000800000009000000
-  m_rampageTileIndex: 10
+  m_startTileIndex: 3
+  m_easyTileIndexs: 030000000400000005000000
+  m_mediumTileIndexs: 060000000700000008000000
+  m_hardTileIndexs: 090000000a0000000b000000
+  m_rampageTileIndex: 12
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
