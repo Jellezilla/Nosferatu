@@ -98,6 +98,7 @@ GameObject:
   - 124: {fileID: 40392831}
   - 81: {fileID: 40392830}
   - 114: {fileID: 40392835}
+  - 114: {fileID: 40392836}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -186,6 +187,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DistanceToPlayerUp: 15
   DistanceToPlayerForward: 2.5
+--- !u!114 &40392836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 40392829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad3209bcf5730d439fafdda81699766, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &201637881
 Prefab:
   m_ObjectHideFlags: 0
@@ -223,7 +235,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 410380, guid: 3064779c69c9b5d42a51ce8bbeb30d9f, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 139022, guid: 3064779c69c9b5d42a51ce8bbeb30d9f, type: 2}
       propertyPath: m_IsActive
@@ -292,7 +304,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &300279346
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,7 +379,7 @@ Transform:
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!1001 &441570564
 Prefab:
   m_ObjectHideFlags: 0
@@ -405,11 +417,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409776, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 148180, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_Layer
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
@@ -493,7 +501,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 493612, guid: 45ac87845d4992242a233091ba382903, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45ac87845d4992242a233091ba382903, type: 2}
