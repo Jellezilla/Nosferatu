@@ -1,44 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
-[RequireComponent(typeof(TurretedVehicleUserControl))]
 public class VehicleTurret : MonoBehaviour {
 
     [SerializeField]
     private GameObject m_VehicleTurret;
-    [SerializeField]
-    private float m_spawnPointOffset;
-    private Vector3 m_spawnPoint;
     private float m_OldRotation;
+    private Vector3 m_prevMPos;
     [SerializeField]
     private float m_rotationSpeed = 1.0f;
-    private Vector3 m_prevMPos;
-    private Vector3 m_curMPos;
     [SerializeField]
     private int m_RotRevCooldown;
-    private WaitForFixedUpdate m_WaitStep;
+    private WaitForFixedUpdate m_turretWaitStep;
     private bool m_Rotating;
     [SerializeField]
     private GameObject m_HookPrefab;
     [SerializeField]
-    private int m_MaxChainLength;
-    [SerializeField]
-    private float m_RopeSpringDampning;
-    [SerializeField]
-    private float m_RopeSpringForce;
-    [SerializeField]
-    private float m_RetractPointDist;
-    [SerializeField]
-    private float m_LaunchForce;
-    [Tooltip("Hook return factor")]
-    [Range(10,60)]
-    [SerializeField]
-    private float m_ReturnFactor;
-    private TurretHook m_Hook;
-    private VehicleTurretRope m_Chain;
+    private int m_MaxRopeLength;
+    private float m_CurentRopeLength;
+    private GameObject m_Hook;
+    private Rigidbody m_HookRB;
+    private VehicleTurretRope m_Rope;
     private Rigidbody m_rb;
     private bool m_retracted;
+    private HingeJoint m_turretChainJoint;
+    private HingeJoint m_turretHookJoint;
+    private JointSpring m_spring;
     public bool isRetracted
     {
         get
@@ -46,37 +33,42 @@ public class VehicleTurret : MonoBehaviour {
             return m_retracted;
         }
     }
-	// Use this for initialization
-
-    public Vector3 SpawnPoint
-    {
-        get
-        {
-            return m_spawnPoint;
-        }
-    }
 
 	void Start () {
 
-        m_retracted = true;
-        m_Hook = ((GameObject)Instantiate(m_HookPrefab, m_spawnPoint, transform.rotation)).GetComponent<TurretHook>();
-        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), m_Hook.gameObject.GetComponent<Collider>());
-        m_Hook.gameObject.SetActive(false);
-        m_Chain = GetComponent<VehicleTurretRope>();
-        m_prevMPos = Input.mousePosition;
-        m_WaitStep = new WaitForFixedUpdate();
-        m_rb = GetComponent<Rigidbody>();
-        StartCoroutine(ReverseRotation());
+        InitTurret();
+        InitHook();
 
     }
 
     /// <summary>
-    /// Used to Calculate Spawn Point
+    /// Init turret
     /// </summary>
-    private void CalculateSpawnPoint()
+    void InitTurret()
     {
-        throw new NotImplementedException();
+        m_Rope = GetComponent<VehicleTurretRope>();
+        m_turretWaitStep = new WaitForFixedUpdate();
+        m_retracted = true;
+        m_prevMPos = Input.mousePosition;
+        m_rb = GetComponent<Rigidbody>();
+        StartCoroutine(ReverseRotation());
     }
+
+    /// <summary>
+    /// Init hook
+    /// </summary>
+    void InitHook()
+    {
+        m_Hook = Instantiate(m_HookPrefab);
+        m_HookRB = m_Hook.GetComponent<Rigidbody>();
+        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), m_Hook.gameObject.GetComponent<Collider>());
+        m_Hook.gameObject.SetActive(false);
+        m_spring = new JointSpring();
+        m_spring.targetPosition = 0;
+        m_spring.spring = 2500;
+        m_spring.damper = 750;
+    }
+
 
     /// <summary>
     /// Used to set the turret back to its original rotation if the player doesnt move the mouse
@@ -104,7 +96,7 @@ public class VehicleTurret : MonoBehaviour {
                 rotCounter = 0;
                 m_Rotating = true;
             }
-            yield return m_WaitStep;
+            yield return m_turretWaitStep;
         }
     }
 
@@ -113,11 +105,11 @@ public class VehicleTurret : MonoBehaviour {
     /// </summary>
     public void Aim()
     {
-        if (!m_Hook.hooked)
+        if (m_retracted)
         {
             if (m_Rotating)
             {
-                var pos = Camera.main.WorldToScreenPoint(m_VehicleTurret.transform.position);
+                Vector3 pos = Camera.main.WorldToScreenPoint(m_VehicleTurret.transform.position);
                 m_prevMPos = Input.mousePosition;
                 var dir = m_prevMPos - pos;
                 var angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
@@ -130,8 +122,6 @@ public class VehicleTurret : MonoBehaviour {
             }
         } 
     }
-
-
 
     /// <summary>
     /// Used to fire the hook
@@ -146,9 +136,8 @@ public class VehicleTurret : MonoBehaviour {
 
             if (Physics.Raycast(ray, out hit, 1000,-1))
             {
-                if (Vector3.Distance(transform.position, hit.collider.transform.position) <= m_MaxChainLength)
+                if (Vector3.Distance(transform.position, hit.collider.transform.position) <= m_MaxRopeLength)
                 {
-                    //Debug.Log("IS HIT");
                     if (hit.collider.gameObject.tag != Tags.human)
                     {
                         m_Hook.gameObject.SetActive(true);
@@ -156,12 +145,23 @@ public class VehicleTurret : MonoBehaviour {
                         Vector3 hitpos = hit.point;
                         hitpos.y = m_VehicleTurret.transform.position.y;
                         m_Hook.transform.position = hitpos;
-                        m_Hook.Launch(m_rb, m_RopeSpringForce, m_RopeSpringDampning);
-                        HingeJoint joint = gameObject.AddComponent<HingeJoint>();
-                        joint.anchor = Vector3.zero;
-                        joint.axis = Vector3.up;
-                        joint.connectedBody = m_Hook.rigidBody;
-                        m_Chain.CreateRope(m_Hook.gameObject);
+
+                        //add hook hinge
+                        m_turretHookJoint = m_Hook.gameObject.AddComponent<HingeJoint>();
+                       // m_turretHookJoint.spring = m_spring;
+                       // m_turretHookJoint.useSpring = true;
+                        m_turretHookJoint.axis = Vector3.up;
+                        m_turretHookJoint.anchor = Vector3.zero;
+
+                        //add car hinge
+                        m_turretChainJoint = gameObject.AddComponent<HingeJoint>();
+                        m_turretChainJoint.spring = m_spring;
+                        m_turretChainJoint.useSpring = true;
+                        m_turretChainJoint.anchor = Vector3.zero;
+                        m_turretChainJoint.axis = Vector3.up;
+                        m_turretChainJoint.connectedBody = m_HookRB;
+                        m_Rope.CreateRope(m_Hook.gameObject);
+                        m_CurentRopeLength = Vector3.Distance(m_Hook.transform.position, gameObject.transform.position);
                         m_retracted = false;
                     }
                 }
@@ -170,17 +170,6 @@ public class VehicleTurret : MonoBehaviour {
             }
         }
 
-        /*
-        if (!m_Hook.gameObject.activeSelf)
-        {
-            m_Hook.gameObject.SetActive(true);
-            m_Hook.transform.rotation = m_VehicleTurret.transform.rotation;
-            m_Hook.transform.position = m_spawnPoint;
-            m_Hook.Launch(m_VehicleTurret.transform.forward, m_MaxChainLength, m_RetractPointDist, m_LaunchForce, m_RopeSpringForce, m_RopeSpringDampning, m_ReturnFactor, m_rb);
-            m_Chain.CreateRope(m_Hook.gameObject);
-        }
-        */
-
     }
 
     /// <summary>
@@ -188,58 +177,35 @@ public class VehicleTurret : MonoBehaviour {
     /// </summary>
     public void Retract()
     {
-        Destroy(GetComponent<HingeJoint>(), 0.0f);
-        m_Hook.Detach();
-        m_Chain.DestroyRope();
+        Destroy(m_turretChainJoint, 0.0f);
+        Destroy(m_turretHookJoint, 0.0f);
+        m_Hook.gameObject.SetActive(false);
+        m_Rope.DestroyRope();
         m_retracted = true;
     }
 
     /// <summary>
-    /// Hook 
+    /// Hook and chain distance clamping
     /// </summary>
     void HookAndChainLogic()
     {
-
-        if (!m_Hook.m_IsReset && m_Hook.gameObject.activeSelf)
+        if (!m_retracted)
         {
-            if (!m_Hook.m_DragMode)
+            if (Vector3.Distance(transform.position, m_Hook.transform.position) > m_CurentRopeLength)
             {
-                m_retracted = false;
+                // Vector3 counterForceHeading = m_Hook.transform.position - transform.position;
+                //  m_rb.AddForce(counterForceHeading * 1000);
             }
-
         }
-        else if(!m_retracted)
-        {
-            Retract();
-            m_Chain.DestroyRope();
-            m_retracted = true;
 
-        }
 
     }
 
-    private void HookSpawnPoint()
-    {
-
-        m_spawnPoint = m_VehicleTurret.transform.position;
-        m_spawnPoint.z += m_spawnPointOffset;
-
-        if (m_Hook.gameObject.activeSelf)
-        {
-          //  m_Hook.spawnPosition = m_spawnPoint;
-        }
-    }
 
     void Update()
     {
-        HookSpawnPoint();
-       // HookAndChainLogic();
+        HookAndChainLogic();
 
-    }
-
-    void FixedUpdate()
-    {
-        
     }
 	
 }
