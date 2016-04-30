@@ -94,7 +94,7 @@ public class HumanController : MonoBehaviour
                 m_rigRbs[i].useGravity = true;
             }
 
-            (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
+            (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y , transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
 
         }
 
