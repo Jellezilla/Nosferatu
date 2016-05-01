@@ -11,8 +11,8 @@ public class ObjectPool : MonoBehaviour
     private GameObject[] m_Prefabs;
     [SerializeField]
     private int[] m_NrOfInstances;
-    private Dictionary<int,ListStack<GameObject>> m_UnUsedObjects;
-    private Dictionary<int,ListStack<GameObject>> m_UsedObjects;
+  //  private Dictionary<int,ListStack<GameObject>> m_UnUsedObjects;
+    private Dictionary<int,List<GameObject>> m_pools;
     private GameObject testObj;
 
 
@@ -27,19 +27,19 @@ public class ObjectPool : MonoBehaviour
     /// </summary>
     void InitPool()
     {
-        m_UnUsedObjects = new Dictionary<int, ListStack<GameObject>>();
-        m_UsedObjects = new Dictionary<int, ListStack<GameObject>>();
+     //   m_UnUsedObjects = new Dictionary<int, ListStack<GameObject>>();
+        m_pools = new Dictionary<int, List<GameObject>>();
         for (int i = 0; i < m_Prefabs.Length; i++)
         {
-            m_UnUsedObjects.Add(i, new ListStack<GameObject>());
-            m_UsedObjects.Add(i, new ListStack<GameObject>());
+          //  m_UnUsedObjects.Add(i, new ListStack<GameObject>());
+            m_pools.Add(i, new List<GameObject>());
             
 
             for (int j = 0; j < m_NrOfInstances[i]; j++)
             {
                 GameObject prefab = Instantiate(m_Prefabs[i]);
                 prefab.SetActive(false);
-                m_UnUsedObjects[i].Push(prefab);
+               m_pools[i].Add(prefab);
             }
         }
 
@@ -55,23 +55,25 @@ public class ObjectPool : MonoBehaviour
     /// <returns></returns>
     public GameObject GrabObject(int objectIndex, Vector3 position, Quaternion rotation)
     {
-        GameObject gameOb;
-        if (m_UnUsedObjects[objectIndex].Count > 0)
+        for (int i = 0; i < m_pools[objectIndex].Count; i++)
         {
-            gameOb = m_UnUsedObjects[objectIndex].Pop();
-            gameOb.transform.position = position;
-            gameOb.transform.rotation = rotation;
-            m_UsedObjects[objectIndex].Push(gameOb);
-            gameOb.SetActive(true);
-            return gameOb;
-        }
-        else
-        {
-            gameOb = (GameObject)Instantiate(m_Prefabs[objectIndex],position,rotation);
-            m_UsedObjects[objectIndex].Push(gameOb);
-            return gameOb;
+            if (!m_pools[objectIndex][i].activeSelf)
+            {
 
+                m_pools[objectIndex][i].transform.position = position;
+                m_pools[objectIndex][i].transform.rotation = rotation;
+                m_pools[objectIndex][i].SetActive(true);
+                return m_pools[objectIndex][i];
+
+            }
         }
+
+        /// no objects are available
+        
+        m_pools[objectIndex].Add(Instantiate(m_Prefabs[objectIndex]));
+        m_pools[objectIndex][m_pools[objectIndex].Count - 1].transform.position = position;
+        m_pools[objectIndex][m_pools[objectIndex].Count - 1].transform.rotation = rotation;
+        return m_pools[objectIndex][m_pools[objectIndex].Count - 1];
     }
 
     /// <summary>
@@ -79,13 +81,11 @@ public class ObjectPool : MonoBehaviour
     /// </summary>
     /// <param name="objectIndex"></param>
     /// <param name="obj"></param>
-    public void ReturnObject(int objectIndex,GameObject obj)
+    public void ReturnObject(int objectIndex, GameObject obj)
     {
-        if (m_UsedObjects[objectIndex].Contains(obj) && obj!=null)
+        if (m_pools[objectIndex].Contains(obj) && obj!=null)
         {
-            obj.SetActive(false);
-            m_UsedObjects[objectIndex].Remove(obj);
-            m_UnUsedObjects[objectIndex].Push(obj);
+            m_pools[objectIndex][(m_pools[objectIndex].IndexOf(obj))].SetActive(false);
         }
     }
 
