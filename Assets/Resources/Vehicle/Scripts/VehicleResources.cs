@@ -16,8 +16,8 @@ public class VehicleResources : MonoBehaviour
     private float m_BloodPerHuman;
     [SerializeField]
     private float m_SoulsPerHuman;
-    [SerializeField]
-    private float m_ConsumptionFactor;
+   // [SerializeField]
+ //   private float m_ConsumptionFactor;
 
     private float m_CarBlood;
     private float m_CarSouls;
@@ -74,11 +74,11 @@ public class VehicleResources : MonoBehaviour
     {
         if (m_CarBlood > 0)
         {
-            if ((int)gameObject.transform.position.z > m_playerMaxDistance)
-            {
-                m_playerMaxDistance = (int)gameObject.transform.position.z;
-            }
-            m_CarBlood -= m_BloodConsumption * Time.deltaTime * m_playerMaxDistance * m_ConsumptionFactor/100;
+          //  if ((int)gameObject.transform.position.z > m_playerMaxDistance)
+            //{
+              //  m_playerMaxDistance = (int)gameObject.transform.position.z;
+           // }
+            m_CarBlood -= m_BloodConsumption * Time.deltaTime; //* m_playerMaxDistance * m_ConsumptionFactor; //Please stop.
             OutOfFuel = false;
 
             if (m_CarBlood < 0)

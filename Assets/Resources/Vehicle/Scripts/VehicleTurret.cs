@@ -18,6 +18,10 @@ public class VehicleTurret : MonoBehaviour {
     [SerializeField]
     private int m_MaxRopeLength;
     private float m_CurentRopeLength;
+    [SerializeField]
+    private float m_RopeSpringForce;
+    [SerializeField]
+    private float m_RopeSpringDamper;
     private GameObject m_Hook;
     private Rigidbody m_HookRB;
     private VehicleTurretRope m_Rope;
@@ -65,8 +69,8 @@ public class VehicleTurret : MonoBehaviour {
         m_Hook.gameObject.SetActive(false);
         m_spring = new JointSpring();
         m_spring.targetPosition = 0;
-        m_spring.spring = 2500;
-        m_spring.damper = 750;
+        m_spring.spring = m_RopeSpringForce;
+        m_spring.damper = m_RopeSpringDamper;
     }
 
 

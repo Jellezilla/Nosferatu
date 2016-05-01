@@ -842,8 +842,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaxCarSouls: 100
   m_MaxCarBlood: 100
-  m_BloodConsumption: 0
-  m_BloodPerHuman: 5
+  m_BloodConsumption: 0.5
+  m_BloodPerHuman: 2
   m_SoulsPerHuman: 1
 --- !u!114 &11451128
 MonoBehaviour:
@@ -861,6 +861,8 @@ MonoBehaviour:
   m_RotRevCooldown: 15
   m_HookPrefab: {fileID: 191332, guid: 8098c94d446a9b449a4f5d7de5fc8f70, type: 2}
   m_MaxRopeLength: 15
+  m_RopeSpringForce: 15000
+  m_RopeSpringDamper: 1500
 --- !u!114 &11460920
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -886,7 +888,7 @@ MonoBehaviour:
   m_TractionControl: 2
   m_SteeringControl: 0
   m_BrakingControl: 1
-  m_SpeedUnits: 1
+  m_SpeedUnits: 0
   m_lights:
   - {fileID: 10847900}
   - {fileID: 10864636}
@@ -904,13 +906,13 @@ MonoBehaviour:
   m_SteeringRate: 1
   m_MaxSteerAngle: 15
   m_SteerSpeedThreshold: 5
-  m_SteerAngleThreshold: 50
-  m_SteerAsist: 0.5
-  m_TractionControlAsist: 0.25
-  m_WheelTorque: 10000
-  m_ReverseTorque: 5000
+  m_SteerAngleThreshold: 35
+  m_SteerAsist: 0.25
+  m_TractionControlAsist: 0.35
+  m_WheelTorque: 7000
+  m_ReverseTorque: 4000
   m_Downforce: 100
-  m_Topspeed: 120
+  m_Topspeed: 80
   m_nrOfGears: 5
   m_SlipLimit: 0.2
   m_BrakeTorque: 7500
@@ -935,13 +937,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 1.75
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 1.75
   m_Enabled: 1
 --- !u!146 &14648590
 WheelCollider:
@@ -964,13 +966,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 1.75
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 1.75
   m_Enabled: 1
 --- !u!146 &14671038
 WheelCollider:
@@ -993,13 +995,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 1.25
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 1.25
   m_Enabled: 1
 --- !u!146 &14691626
 WheelCollider:
@@ -1022,13 +1024,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1
+    m_Stiffness: 1.25
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1
+    m_Stiffness: 1.25
   m_Enabled: 1
 --- !u!1001 &100100000
 Prefab:
