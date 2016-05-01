@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Tile : MonoBehaviour {
 
@@ -17,6 +18,7 @@ public class Tile : MonoBehaviour {
     private GameObject[] m_Humans;
     private Vector3[] m_TombSpawnPoints;
     private Dictionary<int,Stack<GameObject>> m_Tombstones;
+    private WaitForEndOfFrame m_tileStep = new WaitForEndOfFrame();
     // Use this for initialization
 
     void OnEnable()
@@ -91,6 +93,11 @@ public class Tile : MonoBehaviour {
 
 
 
+    }
+
+    IEnumerator TileRoutine()
+    {
+        yield return m_tileStep;
     }
 
     void UnloadTile()
