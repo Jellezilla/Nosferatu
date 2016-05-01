@@ -62,6 +62,9 @@ public class GameController : Singleton<GameController>
         }
     }
 
-
-
+    public bool OutOfFuel {
+        get {
+            return m_playerRes.OutOfFuel;
+        }
+    }
 }
