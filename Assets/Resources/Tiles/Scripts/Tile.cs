@@ -87,7 +87,6 @@ public class Tile : MonoBehaviour {
             int randomIndex = m_TombstoneIndexs[dictIndex];
             m_Tombstones[dictIndex].Push(GameController.Instance.ObjectPool.GrabObject(randomIndex, m_TombSpawnPoints[i], Quaternion.identity));
             m_Tombstones[dictIndex].Peek().transform.SetParent(m_TombstonesContainer.transform);
-          //  Debug.Log(gameObject.name + " has called this");
         }
 
 
@@ -110,7 +109,6 @@ public class Tile : MonoBehaviour {
                 {
                     m_Tombstones[i].Peek().transform.SetParent(null);
                     GameController.Instance.ObjectPool.ReturnObject(m_TombstoneIndexs[i], m_Tombstones[i].Pop());
-
                 }
             }
         }

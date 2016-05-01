@@ -9,6 +9,7 @@ public class Tombstone : MonoBehaviour {
     private List<BoxCollider> m_childrenCols;
     private BoxCollider m_col;
     private bool m_init;
+    private bool m_broken;
 	// Use this for initialization
 
     void OnEnable()
@@ -26,6 +27,7 @@ public class Tombstone : MonoBehaviour {
         if (!m_init)
         {
             m_init = true;
+            m_broken = false;
             m_childrenRbs = new Rigidbody[transform.childCount];
             m_childPositions = new Vector3[transform.childCount];
             m_childRotations = new Quaternion[transform.childCount];
@@ -48,24 +50,25 @@ public class Tombstone : MonoBehaviour {
 
     private void Reset()
     {
-
-        for (int i = 0; i < m_childrenCols.Count; i++)
+        if (m_broken)
         {
-            m_childrenCols[i].enabled = false;
+            m_broken = false;
+            for (int i = 0; i < m_childrenCols.Count; i++)
+            {
+                m_childrenCols[i].enabled = false;
+            }
+
+            for (int i = 0; i < m_childrenRbs.Length; i++)
+            {
+                m_childrenRbs[i].isKinematic = true;
+                m_childrenRbs[i].transform.localRotation = m_childRotations[i];
+                m_childrenRbs[i].transform.localPosition = m_childPositions[i];
+
+
+            }
+            m_col.enabled = true;
         }
 
-        for (int i = 0; i < m_childrenRbs.Length; i++)
-        {
-            m_childrenRbs[i].isKinematic = true;
-            m_childrenRbs[i].transform.localRotation = m_childRotations[i];
-            m_childrenRbs[i].transform.localPosition = m_childPositions[i];
-
-
-        }
-
-
-
-        m_col.enabled = true;
     }
 
 
@@ -85,7 +88,7 @@ public class Tombstone : MonoBehaviour {
                 m_childrenRbs[i].isKinematic = false;
 
             }
-
+            m_broken = true;
 
         }
     }

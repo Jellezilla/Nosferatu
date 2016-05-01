@@ -77,11 +77,10 @@ public class HumanController : MonoBehaviour
 
             for (int i = 0; i < m_rigRbs.Length; i++)
             {
+                m_rigCols[i].enabled = false;
                 m_rigRbs[i].transform.localPosition = m_rigRbsPos[i];
                 m_rigRbs[i].transform.localRotation = m_rigRbsRot[i];
-                m_rigRbs[i].velocity = Vector3.zero;
-                m_rigRbs[i].angularVelocity = Vector3.zero;
-                m_rigCols[i].enabled = false;
+                m_rigRbs[i].isKinematic = true;
                 m_rigRbs[i].useGravity = false;
 
             }
@@ -105,6 +104,7 @@ public class HumanController : MonoBehaviour
             for (int i = 0; i < m_rigRbs.Length; i++)
             {
                 m_rigCols[i].enabled = true;
+                m_rigRbs[i].isKinematic = false;
                 m_rigRbs[i].useGravity = true;
             }
 
