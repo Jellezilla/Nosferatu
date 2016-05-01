@@ -12,6 +12,8 @@ public class HumanController : MonoBehaviour
     private Rigidbody m_Hrb;
     private Collider[] m_HColls;
     private Rigidbody[] m_rigRbs;
+    private Vector3[] m_rigRbsPos;
+    private Quaternion[] m_rigRbsRot;
     private Collider[] m_rigCols;
     private bool m_init;
 
@@ -46,6 +48,13 @@ public class HumanController : MonoBehaviour
         m_Hrb = GetComponent<Rigidbody>();
         m_HColls = GetComponents<Collider>();
         m_rigRbs = m_rig.GetComponentsInChildren<Rigidbody>();
+        m_rigRbsPos = new Vector3[m_rigRbs.Length];
+        m_rigRbsRot = new Quaternion[m_rigRbs.Length];
+        for (int i = 0; i < m_rigRbs.Length; i++)
+        {
+            m_rigRbsPos[i] = m_rigRbs[i].transform.localPosition;
+            m_rigRbsRot[i] = m_rigRbs[i].transform.localRotation;
+        } 
         m_rigCols = m_rig.GetComponentsInChildren<Collider>();
         m_init = true;
         Reset();
@@ -68,8 +77,13 @@ public class HumanController : MonoBehaviour
 
             for (int i = 0; i < m_rigRbs.Length; i++)
             {
+                m_rigRbs[i].transform.localPosition = m_rigRbsPos[i];
+                m_rigRbs[i].transform.localRotation = m_rigRbsRot[i];
+                m_rigRbs[i].velocity = Vector3.zero;
+                m_rigRbs[i].angularVelocity = Vector3.zero;
                 m_rigCols[i].enabled = false;
                 m_rigRbs[i].useGravity = false;
+
             }
         }
 

@@ -14,9 +14,13 @@ public class Tombstone : MonoBehaviour {
     void OnEnable()
     {
         Init();
-        Reset();
+
     }
 
+    void OnDisable()
+    {
+        Reset();
+    }
     private void Init()
     {
         if (!m_init)
@@ -65,9 +69,9 @@ public class Tombstone : MonoBehaviour {
     }
 
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collider)
     {
-        if (collision.gameObject.tag == Tags.player || collision.gameObject.tag == Tags.human)
+        if (collider.gameObject.tag == Tags.player || collider.gameObject.tag == Tags.human)
         {
             m_col.enabled = false;
 
