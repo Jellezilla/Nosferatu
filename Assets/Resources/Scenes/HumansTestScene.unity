@@ -479,7 +479,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 5415068, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_Mass
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_TractionControlAsist
@@ -528,6 +528,10 @@ Prefab:
     - target: {fileID: 14620894, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_SuspensionSpring.damper
       value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 11471720, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_BrakeTorque
+      value: 2350
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
