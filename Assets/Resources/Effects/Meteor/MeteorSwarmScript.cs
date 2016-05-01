@@ -137,10 +137,14 @@ namespace DigitalRuby.PyroParticles
         {
  	        base.Update();
 
-            if (Duration > 0.0f && (elapsedSecond += Time.deltaTime) >= 1.0f)
-            {
+            if (Duration > 0.0f && (elapsedSecond += Time.deltaTime) >= 1.0f) {
                 elapsedSecond = elapsedSecond - 1.0f;
                 SpawnMeteors();
+                Debug.Log("spawn meteor");
+            }
+            else if (Duration<=-2){ // good hardcoded skills, kills meteor storm after duration + buffer has ended
+                Debug.Log("die meteor");
+                Destroy(gameObject);
             }
         }
 

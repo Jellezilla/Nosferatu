@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 165786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 409.70438, y: -1.3826223e-16, z: 216.12677}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 466070}
@@ -102,7 +102,7 @@ MonoBehaviour:
   AudioSource: {fileID: 0}
   StartTime: 1
   StopTime: 3
-  Duration: 2
+  Duration: 3
   ForceAmount: 0
   ForceRadius: 0
   IsProjectile: 0
@@ -117,7 +117,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 72d1dae8d83540f42a8184e57366dac3, type: 2}
   MeteorMeshes:
   - {fileID: 4300000, guid: 2a596c2cc3ef3b74c9dc2e447ffe72a4, type: 3}
-  DestinationRadius: 0
+  - {fileID: 4300000, guid: 2a596c2cc3ef3b74c9dc2e447ffe72a4, type: 3}
+  DestinationRadius: 25
   SourceRadius: 10
   TimeToImpact: 1
   MeteorsPerSecondRange:
