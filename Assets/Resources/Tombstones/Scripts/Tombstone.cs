@@ -9,17 +9,19 @@ public class Tombstone : MonoBehaviour {
     private List<BoxCollider> m_childrenCols;
     private BoxCollider m_col;
     private bool m_init;
+    private bool m_broken;
 	// Use this for initialization
 
     void OnEnable()
     {
         Init();
+        Reset();
 
     }
 
     void OnDisable()
     {
-        Reset();
+
     }
     private void Init()
     {
@@ -48,25 +50,31 @@ public class Tombstone : MonoBehaviour {
 
     private void Reset()
     {
-
-        for (int i = 0; i < m_childrenCols.Count; i++)
+        if (m_broken)
         {
-            m_childrenCols[i].enabled = false;
+            m_broken = false;
+
+            for (int i = 0; i < m_childrenRbs.Length; i++)
+            {
+                m_childrenRbs[i].isKinematic = true;
+                m_childrenRbs[i].transform.localRotation = m_childRotations[i];
+                m_childrenRbs[i].transform.localPosition = m_childPositions[i];
+
+
+            }
+
+            for (int i = 0; i < m_childrenCols.Count; i++)
+            {
+                m_childrenCols[i].enabled = false;
+            }
+
+
+            m_col.enabled = true;
         }
 
-        for (int i = 0; i < m_childrenRbs.Length; i++)
-        {
-            m_childrenRbs[i].isKinematic = true;
-            m_childrenRbs[i].transform.localRotation = m_childRotations[i];
-            m_childrenRbs[i].transform.localPosition = m_childPositions[i];
-
-
-        }
-
-
-
-        m_col.enabled = true;
     }
+
+
 
 
     void OnTriggerEnter(Collider collider)
@@ -74,7 +82,7 @@ public class Tombstone : MonoBehaviour {
         if (collider.gameObject.tag == Tags.player || collider.gameObject.tag == Tags.human)
         {
             m_col.enabled = false;
-
+            m_broken = true;
             for (int i = 0; i < m_childrenCols.Count; i++)
             {
                 m_childrenCols[i].enabled = true;

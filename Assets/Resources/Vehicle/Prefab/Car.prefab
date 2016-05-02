@@ -842,7 +842,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaxCarSouls: 100
   m_MaxCarBlood: 100
-  m_BloodConsumption: 0.5
+  m_BloodConsumption: 3
   m_BloodPerHuman: 5
   m_SoulsPerHuman: 1
 --- !u!114 &11451128
@@ -860,7 +860,7 @@ MonoBehaviour:
   m_rotationSpeed: 15
   m_RotRevCooldown: 15
   m_HookPrefab: {fileID: 191332, guid: 8098c94d446a9b449a4f5d7de5fc8f70, type: 2}
-  m_MaxRopeLength: 15
+  m_MaxRopeLength: 18
   m_RopeSpringForce: 15000
   m_RopeSpringDamper: 1500
 --- !u!114 &11460920
@@ -887,7 +887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TractionControl: 2
   m_SteeringControl: 0
-  m_BrakingControl: 1
+  m_BrakingControl: 2
   m_SpeedUnits: 0
   m_lights:
   - {fileID: 10847900}
@@ -904,13 +904,13 @@ MonoBehaviour:
   - {fileID: 188080}
   m_CenterOfMass: {x: 0, y: -0.75, z: 0}
   m_SteeringRate: 1
-  m_MaxSteerAngle: 15
+  m_MaxSteerAngle: 20
   m_SteerSpeedThreshold: 5
   m_SteerAngleThreshold: 35
   m_SteerAsist: 0.106
-  m_TractionControlAsist: 0.117
+  m_TractionControlAsist: 0.5
   m_WheelTorque: 3000
-  m_ReverseTorque: 2000
+  m_ReverseTorque: 600
   m_Downforce: 100
   m_Topspeed: 80
   m_nrOfGears: 5

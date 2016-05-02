@@ -76,6 +76,38 @@ public class ObjectPool : MonoBehaviour
         return m_pools[objectIndex][m_pools[objectIndex].Count - 1];
     }
 
+
+    /// <summary>
+    /// Returns a pooled object corresponding to the given index.
+    /// </summary>
+    /// <param name="objectIndex"> position within the list of objects</param>
+    /// <param name="position"> object position </param>
+    /// <param name="rotation"> object rotation </param>
+    /// <returns></returns>
+    public GameObject GrabObject(int objectIndex, Vector3 position)
+    {
+        for (int i = 0; i < m_pools[objectIndex].Count; i++)
+        {
+            if (!m_pools[objectIndex][i].activeSelf)
+            {
+
+                m_pools[objectIndex][i].transform.position = position;
+                m_pools[objectIndex][i].SetActive(true);
+                return m_pools[objectIndex][i];
+
+            }
+        }
+
+        /// no objects are available
+
+        m_pools[objectIndex].Add(Instantiate(m_Prefabs[objectIndex]));
+        m_pools[objectIndex][m_pools[objectIndex].Count - 1].transform.position = position;
+        return m_pools[objectIndex][m_pools[objectIndex].Count - 1];
+    }
+
+
+
+
     /// <summary>
     /// Returns an object to the pool based on its index position
     /// </summary>
