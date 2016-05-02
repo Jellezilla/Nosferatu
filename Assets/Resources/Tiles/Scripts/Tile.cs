@@ -14,11 +14,10 @@ public class Tile : MonoBehaviour {
     [SerializeField]
     private GameObject m_TombstonesContainer;
 
-    private Vector3[] m_HumanSpawnPoints;
+    private Transform[] m_HumanSpawnPoints;
     private GameObject[] m_Humans;
-    private Vector3[] m_TombSpawnPoints;
+    private Transform[] m_TombSpawnPoints;
     private Dictionary<int,Stack<GameObject>> m_Tombstones;
-    private WaitForEndOfFrame m_tileStep = new WaitForEndOfFrame();
     // Use this for initialization
 
     void OnEnable()
@@ -46,40 +45,29 @@ public class Tile : MonoBehaviour {
                 m_Tombstones.Add(i, new Stack<GameObject>());
             }
 
-            m_HumanSpawnPoints = new Vector3[m_HumanContainer.transform.childCount];
-            m_TombSpawnPoints = new Vector3[m_TombstonesContainer.transform.childCount]; 
+            m_HumanSpawnPoints = new Transform[m_HumanContainer.transform.childCount];
+            m_TombSpawnPoints = new Transform[m_TombstonesContainer.transform.childCount]; 
 
             for (int i = 0; i < m_HumanContainer.transform.childCount; i++)
             {
-                m_HumanSpawnPoints[i] = m_HumanContainer.transform.GetChild(i).gameObject.transform.position;
+                m_HumanSpawnPoints[i] = m_HumanContainer.transform.GetChild(i);
             }
 
             for (int i = 0; i < m_TombstonesContainer.transform.childCount; i++)
             {
-                m_TombSpawnPoints[i] = m_TombstonesContainer.transform.GetChild(i).gameObject.transform.position;
+                m_TombSpawnPoints[i] = m_TombstonesContainer.transform.GetChild(i);
             }
 
-
-            //REMEMBER TO IMPLEMENT NEW TOMBSTONES
         }
 
     }
 
     void ResetTile()
     {
-        for (int i = 0; i < m_HumanContainer.transform.childCount; i++)
-        {
-            m_HumanSpawnPoints[i] = m_HumanContainer.transform.GetChild(i).gameObject.transform.position;
-        }
-
-        for (int i = 0; i < m_TombstonesContainer.transform.childCount; i++)
-        {
-            m_TombSpawnPoints[i] = m_TombstonesContainer.transform.GetChild(i).gameObject.transform.position;
-        }
 
         for (int i = 0; i < m_HumanSpawnPoints.Length; i++)
         {
-            m_Humans[i] = GameController.Instance.ObjectPool.GrabObject(m_HumanIndex, m_HumanSpawnPoints[i], Quaternion.identity);
+            m_Humans[i] = GameController.Instance.ObjectPool.GrabObject(m_HumanIndex, m_HumanSpawnPoints[i].position, Quaternion.identity);
             m_Humans[i].transform.SetParent(m_HumanContainer.transform);
         }
 
@@ -87,17 +75,12 @@ public class Tile : MonoBehaviour {
         {
             int dictIndex = Random.Range(0, m_TombstoneIndexs.Length);
             int randomIndex = m_TombstoneIndexs[dictIndex];
-            m_Tombstones[dictIndex].Push(GameController.Instance.ObjectPool.GrabObject(randomIndex, m_TombSpawnPoints[i], Quaternion.identity));
+            m_Tombstones[dictIndex].Push(GameController.Instance.ObjectPool.GrabObject(randomIndex, m_TombSpawnPoints[i].position));
             m_Tombstones[dictIndex].Peek().transform.SetParent(m_TombstonesContainer.transform);
         }
 
 
 
-    }
-
-    IEnumerator TileRoutine()
-    {
-        yield return m_tileStep;
     }
 
     void UnloadTile()

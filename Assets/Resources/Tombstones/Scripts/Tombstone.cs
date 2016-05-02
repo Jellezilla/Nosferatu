@@ -15,19 +15,19 @@ public class Tombstone : MonoBehaviour {
     void OnEnable()
     {
         Init();
+        Reset();
 
     }
 
     void OnDisable()
     {
-        Reset();
+
     }
     private void Init()
     {
         if (!m_init)
         {
             m_init = true;
-            m_broken = false;
             m_childrenRbs = new Rigidbody[transform.childCount];
             m_childPositions = new Vector3[transform.childCount];
             m_childRotations = new Quaternion[transform.childCount];
@@ -53,10 +53,6 @@ public class Tombstone : MonoBehaviour {
         if (m_broken)
         {
             m_broken = false;
-            for (int i = 0; i < m_childrenCols.Count; i++)
-            {
-                m_childrenCols[i].enabled = false;
-            }
 
             for (int i = 0; i < m_childrenRbs.Length; i++)
             {
@@ -66,10 +62,19 @@ public class Tombstone : MonoBehaviour {
 
 
             }
+
+            for (int i = 0; i < m_childrenCols.Count; i++)
+            {
+                m_childrenCols[i].enabled = false;
+            }
+
+
             m_col.enabled = true;
         }
 
     }
+
+
 
 
     void OnTriggerEnter(Collider collider)
@@ -77,7 +82,7 @@ public class Tombstone : MonoBehaviour {
         if (collider.gameObject.tag == Tags.player || collider.gameObject.tag == Tags.human)
         {
             m_col.enabled = false;
-
+            m_broken = true;
             for (int i = 0; i < m_childrenCols.Count; i++)
             {
                 m_childrenCols[i].enabled = true;
@@ -88,7 +93,7 @@ public class Tombstone : MonoBehaviour {
                 m_childrenRbs[i].isKinematic = false;
 
             }
-            m_broken = true;
+
 
         }
     }
