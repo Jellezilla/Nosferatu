@@ -646,6 +646,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30c725fd19b54340aa8819ab9e8f1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TombstoneDespawnTimer: 3
+  m_TombstonePoolID: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

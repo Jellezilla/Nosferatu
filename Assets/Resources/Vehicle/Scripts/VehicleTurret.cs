@@ -25,7 +25,6 @@ public class VehicleTurret : MonoBehaviour {
     private GameObject m_Hook;
     private Rigidbody m_HookRB;
     private VehicleTurretRope m_Rope;
-    private Rigidbody m_rb;
     private bool m_retracted;
     private HingeJoint m_turretChainJoint;
     private HingeJoint m_turretHookJoint;
@@ -54,7 +53,6 @@ public class VehicleTurret : MonoBehaviour {
         m_turretWaitStep = new WaitForFixedUpdate();
         m_retracted = true;
         m_prevMPos = Input.mousePosition;
-        m_rb = GetComponent<Rigidbody>();
         StartCoroutine(ReverseRotation());
     }
 

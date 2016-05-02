@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Tombstone : MonoBehaviour {
 
@@ -10,6 +11,11 @@ public class Tombstone : MonoBehaviour {
     private BoxCollider m_col;
     private bool m_init;
     private bool m_broken;
+    [SerializeField]
+    private float m_TombstoneDespawnTimer;
+    [SerializeField]
+    private int m_TombstonePoolID;
+    private WaitForSeconds m_DespawnWait;
     // Use this for initialization
 
     void Awake()
@@ -26,6 +32,7 @@ public class Tombstone : MonoBehaviour {
         if (!m_init)
         {
             m_init = true;
+            m_DespawnWait = new WaitForSeconds(m_TombstoneDespawnTimer);
             m_childrenRbs = new Rigidbody[transform.childCount];
             m_childPositions = new Vector3[transform.childCount];
             m_childRotations = new Quaternion[transform.childCount];
@@ -45,6 +52,7 @@ public class Tombstone : MonoBehaviour {
         }
 
     }
+
 
     private void Reset()
     {
@@ -76,7 +84,12 @@ public class Tombstone : MonoBehaviour {
     }
 
 
+    IEnumerator DespawnAndReturn()
+    {
 
+        yield return m_DespawnWait;
+        gameObject.SetActive(false);
+    }
 
     void OnTriggerEnter(Collider collider)
     {
@@ -97,7 +110,7 @@ public class Tombstone : MonoBehaviour {
 
             }
 
-
+            StartCoroutine(DespawnAndReturn());
         }
     }
 

@@ -16,7 +16,11 @@ public class HumanController : MonoBehaviour
     private Quaternion[] m_rigRbsRot;
     private Collider[] m_rigCols;
     private bool m_init;
-
+    [SerializeField]
+    private float m_DespawnTimer;
+    [SerializeField]
+    private int m_HumanPoolID;
+    private WaitForSeconds m_DespawnWait;
     // Use this for initialization
     void Awake()
     {
@@ -33,20 +37,24 @@ public class HumanController : MonoBehaviour
     /// </summary>
 	void Init()
     {
-
-        anim = GetComponent<Animator>();
-        m_Hrb = GetComponent<Rigidbody>();
-        m_HColls = GetComponents<Collider>();
-        m_rigRbs = m_rig.GetComponentsInChildren<Rigidbody>();
-        m_rigRbsPos = new Vector3[m_rigRbs.Length];
-        m_rigRbsRot = new Quaternion[m_rigRbs.Length];
-        for (int i = 0; i < m_rigRbs.Length; i++)
+        if (!m_init)
         {
-            m_rigRbsPos[i] = m_rigRbs[i].transform.localPosition;
-            m_rigRbsRot[i] = m_rigRbs[i].transform.localRotation;
-        } 
-        m_rigCols = m_rig.GetComponentsInChildren<Collider>();
-        m_init = true;
+            m_DespawnWait = new WaitForSeconds(m_DespawnTimer);
+            anim = GetComponent<Animator>();
+            m_Hrb = GetComponent<Rigidbody>();
+            m_HColls = GetComponents<Collider>();
+            m_rigRbs = m_rig.GetComponentsInChildren<Rigidbody>();
+            m_rigRbsPos = new Vector3[m_rigRbs.Length];
+            m_rigRbsRot = new Quaternion[m_rigRbs.Length];
+            for (int i = 0; i < m_rigRbs.Length; i++)
+            {
+                m_rigRbsPos[i] = m_rigRbs[i].transform.localPosition;
+                m_rigRbsRot[i] = m_rigRbs[i].transform.localRotation;
+            }
+            m_rigCols = m_rig.GetComponentsInChildren<Collider>();
+            m_init = true;
+        }
+
     }
 
     /// <summary>
@@ -69,7 +77,7 @@ public class HumanController : MonoBehaviour
                 m_rigCols[i].enabled = false;
                 m_rigRbs[i].transform.localPosition = m_rigRbsPos[i];
                 m_rigRbs[i].transform.localRotation = m_rigRbsRot[i];
-                m_rigRbs[i].isKinematic = true; 
+                m_rigRbs[i].isKinematic = true;
                 m_rigRbs[i].useGravity = false;
 
             }
@@ -97,9 +105,18 @@ public class HumanController : MonoBehaviour
                 m_rigRbs[i].useGravity = true;
             }
 
-            (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y , transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
-
+            (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
+            StartCoroutine(DespawnAndReturn());
         }
+
+    }
+
+    IEnumerator DespawnAndReturn()
+    {
+
+        yield return m_DespawnWait;
+        gameObject.SetActive(false);
+
 
     }
 
