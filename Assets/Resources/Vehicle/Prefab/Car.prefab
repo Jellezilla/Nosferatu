@@ -840,11 +840,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655fac3913e72e741bf203e6e5e640bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UICanvasRef: {fileID: 0}
   m_MaxCarSouls: 100
   m_MaxCarBlood: 100
-  m_BloodConsumption: 3
+  m_BloodConsumption: 2
   m_BloodPerHuman: 5
-  m_SoulsPerHuman: 1
+  m_SoulsPerHuman: 100
 --- !u!114 &11451128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -908,7 +909,7 @@ MonoBehaviour:
   m_SteerSpeedThreshold: 5
   m_SteerAngleThreshold: 35
   m_SteerAsist: 0.106
-  m_TractionControlAsist: 0.5
+  m_TractionControlAsist: 0.304
   m_WheelTorque: 3000
   m_ReverseTorque: 600
   m_Downforce: 100

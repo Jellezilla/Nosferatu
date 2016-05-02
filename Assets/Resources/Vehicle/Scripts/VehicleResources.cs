@@ -6,6 +6,9 @@ using System.Collections;
 /// </summary>
 public class VehicleResources : MonoBehaviour
 {
+    public GameObject UICanvasRef;
+    private UIManager _uiManagerRef;
+
     [SerializeField]
     private float m_MaxCarSouls;
     [SerializeField]
@@ -32,6 +35,7 @@ public class VehicleResources : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
+        _uiManagerRef = UICanvasRef.GetComponent<UIManager>();
         m_CarBlood = m_MaxCarBlood;
     }
 
@@ -45,6 +49,8 @@ public class VehicleResources : MonoBehaviour
     {
         if (other.tag == Tags.human)
         {
+            //Adding UI soul effect
+            _uiManagerRef.AddSoulEffect(new Vector2(other.transform.position.x, other.transform.position.z));
             if (m_CarSouls < m_MaxCarSouls)
             {
                 m_CarSouls += m_SoulsPerHuman;
@@ -63,6 +69,9 @@ public class VehicleResources : MonoBehaviour
                 {
                     m_CarBlood = m_MaxCarBlood;
                 }
+                //Adding UI blood effect
+                if (!_uiManagerRef.IsBloodFading())
+                    _uiManagerRef.AddBloodEffect();
             }
         }
     }

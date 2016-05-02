@@ -12,8 +12,11 @@ public class UIManager : MonoBehaviour {
     public GameObject RampageReady;
     public GameObject GameOverScreen;
     public GameObject HudScreen;
+    public GameObject SoulEffectObject;
 
+    private bool _bloodFading=false;
     private GameObject PlayerObject;
+    private Image _hpFill;
     private RectTransform _hpmask;
     private RectTransform _spmask;
     private Text _scoreText;
@@ -36,6 +39,9 @@ public class UIManager : MonoBehaviour {
         _oldPlayerDistance = 0;//(int)PlayerObject.transform.position.z;
         _oldPlayerPos = GameController.Instance.Player.transform.position;
         _scoreText = ScoreBoard.GetComponent<Text>();
+
+        //this is a really good one, have to dig deep due to mask parenting
+        _hpFill = Healthbar.GetComponent<Image>();
     }
 
     void Update() {
@@ -45,17 +51,17 @@ public class UIManager : MonoBehaviour {
         _hpmask.sizeDelta = new Vector2(_hpMaxWidth / 100 * fuelCurrent, _hpHeight);// _hpHeight);
         _spmask.sizeDelta = new Vector2(_spMaxWidth / 100 * (1 + soulsCurrent), _spHeight);// _hpHeight);
 
+        //Effect for rampage mode, when souls max has been reached
         if (soulsCurrent >= 100 && !SpecialEffectObject.activeSelf) {//hardcoded max
             SpecialEffectObject.SetActive(true);
             RampageReady.SetActive(true);
         }
 
+        //Taking care of score
         int newPlayerDistance = (int)PlayerObject.transform.position.z;
 
-        Debug.Log("new pos"+newPlayerDistance);
-        Debug.Log("old pos"+_oldPlayerDistance);
         if (_oldPlayerDistance < newPlayerDistance) {
-            Debug.Log("update score");
+
             _oldPlayerDistance = newPlayerDistance;
             _scoreText.text = _oldPlayerDistance.ToString();
         }
@@ -63,7 +69,6 @@ public class UIManager : MonoBehaviour {
         //Checking for gameover
         if (IsGameOver() && !GameOverScreen.activeSelf) {
             SetupGameOverScreen();
-            //Go to scoreboard, or have functionality on gameover screen
         }
     }
 
@@ -90,10 +95,33 @@ public class UIManager : MonoBehaviour {
         Text scorefield = GameOverScreen.transform.Find("ScoreField").GetComponent<Text>();
 
         scorefield.text = _scoreText.text;
-        //GameOverScreen;
     }
 
     public void RestartLevel() {
-        Application.LoadLevel(Application.loadedLevel);
+        Application.LoadLevel(Application.loadedLevel); //DPRCTD
+    }
+
+    public void AddSoulEffect(Vector2 spawnPos) {
+        GameObject s = Instantiate(SoulEffectObject,new Vector3(spawnPos.x,1,spawnPos.y),transform.rotation) as GameObject;
+        s.transform.SetParent(this.transform);
+    }
+
+    public void AddBloodEffect() {
+        _bloodFading = true;
+        StartCoroutine("FadeBlood");
+    }
+
+    public bool IsBloodFading() {
+        return _bloodFading;
+    }
+
+    IEnumerator FadeBlood() {
+        for (float f = 0.3f; f >= 0; f -= 0.1f) {
+            if (f < 0.1) f = 0;
+            _hpFill.material.SetFloat("_FlashAmount", f);
+
+            yield return new WaitForSeconds(.1f);
+        }
+        _bloodFading = false;
     }
 }
