@@ -11,9 +11,7 @@ public class ObjectPool : MonoBehaviour
     private GameObject[] m_Prefabs;
     [SerializeField]
     private int[] m_NrOfInstances;
-  //  private Dictionary<int,ListStack<GameObject>> m_UnUsedObjects;
     private Dictionary<int,List<GameObject>> m_pools;
-    private GameObject testObj;
 
 
 
@@ -27,11 +25,9 @@ public class ObjectPool : MonoBehaviour
     /// </summary>
     void InitPool()
     {
-     //   m_UnUsedObjects = new Dictionary<int, ListStack<GameObject>>();
         m_pools = new Dictionary<int, List<GameObject>>();
         for (int i = 0; i < m_Prefabs.Length; i++)
         {
-          //  m_UnUsedObjects.Add(i, new ListStack<GameObject>());
             m_pools.Add(i, new List<GameObject>());
             
 
@@ -119,6 +115,13 @@ public class ObjectPool : MonoBehaviour
         {
             m_pools[objectIndex][(m_pools[objectIndex].IndexOf(obj))].SetActive(false);
         }
+    }
+
+
+    void OnDestroy()
+    {
+        m_pools = null;
+
     }
 
 }

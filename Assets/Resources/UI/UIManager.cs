@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
@@ -52,10 +53,10 @@ public class UIManager : MonoBehaviour {
 
         int newPlayerDistance = (int)PlayerObject.transform.position.z;
 
-        Debug.Log("new pos"+newPlayerDistance);
-        Debug.Log("old pos"+_oldPlayerDistance);
+     //   Debug.Log("new pos"+newPlayerDistance);
+      //  Debug.Log("old pos"+_oldPlayerDistance);
         if (_oldPlayerDistance < newPlayerDistance) {
-            Debug.Log("update score");
+        //    Debug.Log("update score");
             _oldPlayerDistance = newPlayerDistance;
             _scoreText.text = _oldPlayerDistance.ToString();
         }
@@ -94,6 +95,8 @@ public class UIManager : MonoBehaviour {
     }
 
     public void RestartLevel() {
-        Application.LoadLevel(Application.loadedLevel);
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadSceneAsync(sceneIndex);
+     //   SceneManager.LoadScene(sceneIndex);
     }
 }

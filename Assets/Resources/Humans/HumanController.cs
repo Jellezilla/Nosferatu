@@ -24,21 +24,10 @@ public class HumanController : MonoBehaviour
 
     }
 
-    void OnEnable()
-    {
-        //check if human initialized, if not then initialize
-        if (!m_init)
-        {
-            Init();
-        }
-        Reset();
-    }
-
     void OnDisable()
     {
-
+        Reset();
     }
-
     /// <summary>
     ///  Initialize references and variables
     /// </summary>
@@ -58,13 +47,12 @@ public class HumanController : MonoBehaviour
         } 
         m_rigCols = m_rig.GetComponentsInChildren<Collider>();
         m_init = true;
-        Reset();
     }
 
     /// <summary>
     /// Human reset method
     /// </summary>
-    void Reset()
+    public void Reset()
     {
         if (m_isDead)
         {
@@ -81,7 +69,7 @@ public class HumanController : MonoBehaviour
                 m_rigCols[i].enabled = false;
                 m_rigRbs[i].transform.localPosition = m_rigRbsPos[i];
                 m_rigRbs[i].transform.localRotation = m_rigRbsRot[i];
-                m_rigRbs[i].isKinematic = true;
+                m_rigRbs[i].isKinematic = true; 
                 m_rigRbs[i].useGravity = false;
 
             }

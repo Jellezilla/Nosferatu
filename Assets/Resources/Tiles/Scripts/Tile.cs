@@ -20,15 +20,9 @@ public class Tile : MonoBehaviour {
     private Dictionary<int,Stack<GameObject>> m_Tombstones;
     // Use this for initialization
 
-    void OnEnable()
+    void Awake()
     {
         InitTile();
-        ResetTile();
-    }
-
-    void OnDisable()
-    {
-        UnloadTile();
     }
 
 
@@ -39,14 +33,15 @@ public class Tile : MonoBehaviour {
             m_initTile = true;
             m_Humans = new GameObject[m_HumanContainer.transform.childCount];
             m_Tombstones = new Dictionary<int, Stack<GameObject>>();
+            m_HumanSpawnPoints = new Transform[m_HumanContainer.transform.childCount];
+            m_TombSpawnPoints = new Transform[m_TombstonesContainer.transform.childCount];
 
             for (int i = 0; i < m_TombstoneIndexs.Length; i++)
             {
                 m_Tombstones.Add(i, new Stack<GameObject>());
             }
 
-            m_HumanSpawnPoints = new Transform[m_HumanContainer.transform.childCount];
-            m_TombSpawnPoints = new Transform[m_TombstonesContainer.transform.childCount]; 
+
 
             for (int i = 0; i < m_HumanContainer.transform.childCount; i++)
             {
@@ -62,13 +57,12 @@ public class Tile : MonoBehaviour {
 
     }
 
-    void ResetTile()
+    public void ResetTile()
     {
 
         for (int i = 0; i < m_HumanSpawnPoints.Length; i++)
         {
             m_Humans[i] = GameController.Instance.ObjectPool.GrabObject(m_HumanIndex, m_HumanSpawnPoints[i].position, Quaternion.identity);
-            m_Humans[i].transform.SetParent(m_HumanContainer.transform);
         }
 
         for (int i = 0; i < m_TombSpawnPoints.Length; i++)
@@ -76,20 +70,18 @@ public class Tile : MonoBehaviour {
             int dictIndex = Random.Range(0, m_TombstoneIndexs.Length);
             int randomIndex = m_TombstoneIndexs[dictIndex];
             m_Tombstones[dictIndex].Push(GameController.Instance.ObjectPool.GrabObject(randomIndex, m_TombSpawnPoints[i].position));
-            m_Tombstones[dictIndex].Peek().transform.SetParent(m_TombstonesContainer.transform);
         }
 
 
 
     }
 
-    void UnloadTile()
+    public void UnloadTile()
     {
         if (!GameController.isQuitting)
         {
             for (int i = 0; i < m_Humans.Length; i++)
             {
-                m_Humans[i].transform.SetParent(null);
                 GameController.Instance.ObjectPool.ReturnObject(m_HumanIndex, m_Humans[i]);
             }
 
@@ -97,7 +89,6 @@ public class Tile : MonoBehaviour {
             {
                 for (int j = m_Tombstones[i].Count; j >0; j--)
                 {
-                    m_Tombstones[i].Peek().transform.SetParent(null);
                     GameController.Instance.ObjectPool.ReturnObject(m_TombstoneIndexs[i], m_Tombstones[i].Pop());
                 }
             }
