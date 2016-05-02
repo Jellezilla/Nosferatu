@@ -79,9 +79,8 @@ public class TileManager : MonoBehaviour {
     {
         // m_curTileIndex = m_startTileIndex;
         m_curTile = m_startTile;
-        m_curTile.SetActive(true);
         m_curTileCol = m_curTile.GetComponent<Collider>();
-        m_curTile.GetComponent<Tile>().ResetTile();
+        m_curTile.GetComponent<Tile>().TileLoader();
         Vector3 tileCenter = m_curTileCol.bounds.center;
         m_carHeight = m_Player.GetComponent<Collider>().bounds.extents.y * 2;
         tileCenter.y = m_carHeight;
@@ -96,8 +95,7 @@ public class TileManager : MonoBehaviour {
         {
             if (m_prevTile != null && !m_prevTileCol.bounds.Contains(playerOnTile))
             {
-                m_prevTile.GetComponent<Tile>().UnloadTile();
-                m_prevTile.SetActive(false);
+                m_prevTile.GetComponent<Tile>().TileUnloader();
             }
             m_prevTile = m_curTile;
             m_prevTileCol = m_curTileCol;
@@ -147,9 +145,8 @@ public class TileManager : MonoBehaviour {
                     }
             }
 
-            m_curTile.SetActive(true);
             m_curTile.transform.position = nTilePos;
-            m_curTile.GetComponent<Tile>().ResetTile();
+            m_curTile.GetComponent<Tile>().TileLoader();
             m_curTileCol = m_curTile.GetComponent<Collider>();
 
         }
