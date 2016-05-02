@@ -8,22 +8,27 @@ public class TileManager : MonoBehaviour {
     [SerializeField]
     private float m_tileChangeDistance;
     [SerializeField]
-    private int m_startTileIndex;
+    private GameObject m_startTilePrefab;
+    private GameObject m_startTile;
     [SerializeField]
-    private int[] m_easyTileIndexs;
+    private GameObject m_rampageTilePrefab;
+    private GameObject m_rampageTile;
     [SerializeField]
-    private int[] m_mediumTileIndexs;
+    private GameObject[] m_easyTilePrefabs;
+    private GameObject[] m_easyTiles;
     [SerializeField]
-    private int[] m_hardTileIndexs;
+    private GameObject[] m_normalTilesPrefabs;
+    private GameObject[] m_normalTiles;
     [SerializeField]
-    private int m_rampageTileIndex;
+    private GameObject[] m_hardTilesPrefabs;
+    private GameObject[] m_hardTiles;
     private GameObject m_Player;
     private GameObject m_prevTile;
     private GameObject m_curTile;
-    private int m_curTileIndex;
-    private int m_prevTileIndex;
     private Collider m_curTileCol;
+    private Collider m_prevTileCol;
     private float m_carHeight;
+
     void Start()
     {
         Init();
@@ -33,6 +38,31 @@ public class TileManager : MonoBehaviour {
     private void Init()
     {
         m_Player = GameController.Instance.Player;
+        m_startTile = Instantiate(m_startTilePrefab);
+        m_startTile.SetActive(false);
+        m_rampageTile = Instantiate(m_rampageTilePrefab);
+        m_rampageTile.SetActive(false);
+
+        m_easyTiles = new GameObject[m_easyTilePrefabs.Length];
+        for (int i = 0; i < m_easyTilePrefabs.Length; i++)
+        {
+            m_easyTiles[i] = Instantiate(m_easyTilePrefabs[i]);
+            m_easyTiles[i].SetActive(false);
+        }
+
+        m_normalTiles = new GameObject[m_normalTilesPrefabs.Length];
+        for (int i = 0; i < m_normalTilesPrefabs.Length; i++)
+        {
+            m_normalTiles[i] = Instantiate(m_normalTilesPrefabs[i]);
+            m_normalTiles[i].SetActive(false);
+        }
+
+        m_hardTiles = new GameObject[m_hardTilesPrefabs.Length];
+        for (int i = 0; i < m_hardTilesPrefabs.Length; i++)
+        {
+            m_hardTiles[i] = Instantiate(m_hardTilesPrefabs[i]);
+            m_normalTiles[i].SetActive(false);
+        }
 
     }
 
@@ -47,9 +77,10 @@ public class TileManager : MonoBehaviour {
     /// </summary>
     private void StartTile()
     {
-        m_curTileIndex = m_startTileIndex;
-        m_curTile = GameController.Instance.ObjectPool.GrabObject(m_curTileIndex, m_LevelOrigin, Quaternion.identity);
+        // m_curTileIndex = m_startTileIndex;
+        m_curTile = m_startTile;
         m_curTileCol = m_curTile.GetComponent<Collider>();
+        m_curTile.GetComponent<Tile>().TileLoader();
         Vector3 tileCenter = m_curTileCol.bounds.center;
         m_carHeight = m_Player.GetComponent<Collider>().bounds.extents.y * 2;
         tileCenter.y = m_carHeight;
@@ -62,37 +93,60 @@ public class TileManager : MonoBehaviour {
         playerOnTile.y -= m_carHeight;
         if (m_curTileCol.bounds.Contains(playerOnTile) && playerOnTile.z > m_curTileCol.bounds.center.z)
         {
-
-            if (m_prevTile != null)
+            if (m_prevTile != null && !m_prevTileCol.bounds.Contains(playerOnTile))
             {
-                GameController.Instance.ObjectPool.ReturnObject(m_prevTileIndex, m_prevTile);
+                m_prevTile.GetComponent<Tile>().TileUnloader();
             }
-            Vector3 nTilePos = m_curTile.transform.position + new Vector3(0, 0, m_curTileCol.bounds.extents.z * 2);
-            m_prevTileIndex = m_curTileIndex;
             m_prevTile = m_curTile;
+            m_prevTileCol = m_curTileCol;
+            Vector3 nTilePos = m_curTile.transform.position + new Vector3(0, 0, m_curTileCol.bounds.extents.z * 2);
+
             int tileDifficulty = Random.Range(0,3); // testing line
             switch (tileDifficulty)
             {
                 case 0:
                     {
-                        m_curTileIndex = m_easyTileIndexs[Random.Range(0, m_easyTileIndexs.Length)];
+
+                        for (int i = 0; i < m_easyTiles.Length; i++)
+                        {
+                            if (m_easyTiles[i].activeSelf==false)
+                            {
+                                m_curTile = m_easyTiles[i];
+                                break;
+                            }
+                        }
                         break;
                     }
                 case 1:
                     {
-                        m_curTileIndex = m_mediumTileIndexs[Random.Range(0, m_mediumTileIndexs.Length)];
+                        for (int i = 0; i < m_normalTiles.Length; i++)
+                        {
+                            if (m_normalTiles[i].activeSelf == false)
+                            {
+                                m_curTile = m_normalTiles[i];
+                                break;
+                            }
+                        }
                         break;
                     }
 
                 case 2:
                     {
-                        m_curTileIndex = m_hardTileIndexs[Random.Range(0, m_hardTileIndexs.Length)];
+                        for (int i = 0; i < m_hardTiles.Length; i++)
+                        {
+                            if (!m_hardTiles[i].activeSelf==false)
+                            {
+                                
+                                m_curTile = m_hardTiles[i];
+                                break;
+                            }
+                        }
                         break;
                     }
             }
 
-
-            m_curTile = GameController.Instance.ObjectPool.GrabObject(m_curTileIndex, nTilePos, Quaternion.identity);
+            m_curTile.transform.position = nTilePos;
+            m_curTile.GetComponent<Tile>().TileLoader();
             m_curTileCol = m_curTile.GetComponent<Collider>();
 
         }

@@ -10,18 +10,16 @@ public class Tombstone : MonoBehaviour {
     private BoxCollider m_col;
     private bool m_init;
     private bool m_broken;
-	// Use this for initialization
+    // Use this for initialization
 
-    void OnEnable()
+    void Awake()
     {
         Init();
-        Reset();
-
     }
 
     void OnDisable()
     {
-
+        Reset();
     }
     private void Init()
     {
@@ -56,7 +54,10 @@ public class Tombstone : MonoBehaviour {
 
             for (int i = 0; i < m_childrenRbs.Length; i++)
             {
-                m_childrenRbs[i].isKinematic = true;
+                m_childrenRbs[i].useGravity = false;
+                m_childrenRbs[i].detectCollisions = false;
+                m_childrenRbs[i].velocity = Vector3.zero;
+                m_childrenRbs[i].angularVelocity = Vector3.zero;
                 m_childrenRbs[i].transform.localRotation = m_childRotations[i];
                 m_childrenRbs[i].transform.localPosition = m_childPositions[i];
 
@@ -90,7 +91,9 @@ public class Tombstone : MonoBehaviour {
 
             for (int i = 0; i < m_childrenRbs.Length; i++)
             {
-                m_childrenRbs[i].isKinematic = false;
+                m_childrenRbs[i].detectCollisions = true;
+                m_childrenRbs[i].useGravity = true;
+
 
             }
 
