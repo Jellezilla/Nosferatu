@@ -887,7 +887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TractionControl: 2
   m_SteeringControl: 0
-  m_BrakingControl: 1
+  m_BrakingControl: 2
   m_SpeedUnits: 0
   m_lights:
   - {fileID: 10847900}
@@ -908,9 +908,9 @@ MonoBehaviour:
   m_SteerSpeedThreshold: 5
   m_SteerAngleThreshold: 35
   m_SteerAsist: 0.106
-  m_TractionControlAsist: 0.304
+  m_TractionControlAsist: 0.5
   m_WheelTorque: 3000
-  m_ReverseTorque: 2000
+  m_ReverseTorque: 600
   m_Downforce: 100
   m_Topspeed: 80
   m_nrOfGears: 5
