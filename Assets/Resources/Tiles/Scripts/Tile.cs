@@ -15,10 +15,10 @@ public class Tile : MonoBehaviour {
     private GameObject m_TombstonesContainer;
 
     private Transform[] m_HumanSpawnPoints;
-    private GameObject[] m_Humans;
+    private HumanController[] m_Humans;
     private Transform[] m_TombSpawnPoints;
-    private List<GameObject>[] m_Tombstones;
-    WaitForEndOfFrame m_wait = new WaitForEndOfFrame();
+    private List<Tombstone>[] m_Tombstones;
+    WaitForFixedUpdate m_wait = new WaitForFixedUpdate();
     private bool m_loaded;
     // Use this for initialization
 
@@ -33,15 +33,15 @@ public class Tile : MonoBehaviour {
         if (!m_initTile)
         {
             m_initTile = true;
-            m_Humans = new GameObject[m_HumanContainer.transform.childCount];
-            m_Tombstones = new List<GameObject>[m_TombstoneIndexs.Length];
+           m_Humans = new HumanController[m_HumanContainer.transform.childCount];
+           m_Tombstones = new List<Tombstone>[m_TombstoneIndexs.Length];
 
             m_HumanSpawnPoints = new Transform[m_HumanContainer.transform.childCount];
             m_TombSpawnPoints = new Transform[m_TombstonesContainer.transform.childCount];
 
             for (int i = 0; i < m_TombstoneIndexs.Length; i++)
             {
-                m_Tombstones[i] = new List<GameObject>(0);
+                m_Tombstones[i] = new List<Tombstone>(0);
             }
 
 
@@ -63,11 +63,40 @@ public class Tile : MonoBehaviour {
     public void TileLoader()
     {
         gameObject.SetActive(true);
-        StartCoroutine(TileLoaderRoutine());
-    }
+        for (int i = 0; i < m_HumanSpawnPoints.Length; i++)
+        {
+           m_Humans[i]  = GameController.Instance.ObjectPool.GrabObject(m_HumanIndex, m_HumanSpawnPoints[i].position, Quaternion.identity).GetComponent<HumanController>();
+        }
+
+        for(int i = 0; i< m_TombSpawnPoints.Length; i++)
+        {
+            for (int j = 0; j < m_Tombstones.Length; j++)
+            {
+                m_Tombstones[j].Add(GameController.Instance.ObjectPool.GrabObject(m_TombstoneIndexs[j], m_TombSpawnPoints[i].position).GetComponent<Tombstone>());
+            }
+        }
+
+
+
+        }
     public void TileUnloader()
     {
-        StartCoroutine(TileUnloaderRoutine());
+        for (int i = 0; i < m_Humans.Length; i++)
+        {
+            m_Humans[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < m_Tombstones.Length; i++)
+        {
+            for (int j = 0; j < m_Tombstones[i].Count; j++)
+            {
+                m_Tombstones[i][j].gameObject.SetActive(false);
+                
+            }
+            m_Tombstones[i].Clear();
+        }
+
+        gameObject.SetActive(false);
     }
 
     IEnumerator TileLoaderRoutine()
@@ -80,7 +109,7 @@ public class Tile : MonoBehaviour {
         {
             if (humanCounter > 0)
             {
-                m_Humans[humanCounter] = GameController.Instance.ObjectPool.GrabObject(m_HumanIndex, m_HumanSpawnPoints[humanCounter].position, Quaternion.identity);
+                m_Humans[humanCounter] = GameController.Instance.ObjectPool.GrabObject(m_HumanIndex, m_HumanSpawnPoints[humanCounter].position, Quaternion.identity).GetComponent<HumanController>();
                 humanCounter--;
             }
 
@@ -89,45 +118,13 @@ public class Tile : MonoBehaviour {
                 for (int i = 0; i < m_TombstoneIndexs.Length; i++)
                 {
 
-                        m_Tombstones[i].Add(GameController.Instance.ObjectPool.GrabObject(m_TombstoneIndexs[i],m_TombSpawnPoints[tombstoneCounter].position));
+                     m_Tombstones[i].Add(GameController.Instance.ObjectPool.GrabObject(m_TombstoneIndexs[i],m_TombSpawnPoints[tombstoneCounter].position).GetComponent<Tombstone>());
                         tombstoneCounter--;
                 }
             }
             yield return m_wait;
         }
         m_loaded = true;
-    }
-    IEnumerator TileUnloaderRoutine()
-    {
-        int humanCounter = m_HumanSpawnPoints.Length-1;
-        int tombstoneCounter = m_TombSpawnPoints.Length-1;
-        while (m_loaded)
-        {
-            //m_Humans[humanCounter]
-            if (humanCounter > 0)
-            {
-                GameController.Instance.ObjectPool.ReturnObject(m_HumanIndex, m_Humans[humanCounter]);
-                humanCounter--;
-            }
-
-            if (tombstoneCounter > 0)
-            {
-                for (int i = 0; i < m_TombstoneIndexs.Length; i++)
-                {
-                    if (m_Tombstones[i].Count > 0)
-                    {
-                        GameController.Instance.ObjectPool.ReturnObject(m_TombstoneIndexs[i], m_Tombstones[i][0]);
-                        m_Tombstones[i].Remove(m_Tombstones[i][0]);
-                        tombstoneCounter--;
-                    }
-
-                }
-            }
-            yield return m_wait;
-        }
-        m_loaded = false;
-        gameObject.SetActive(false);
-
     }
 
     // Update is called once per frame

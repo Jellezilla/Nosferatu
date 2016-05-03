@@ -2307,6 +2307,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_rig: {fileID: 171378}
   bloodSpatterObject: {fileID: 100000, guid: 80cd87e5e66b84b35b29f75198eeda8b, type: 2}
+  m_DespawnTimer: 3
+  m_HumanPoolID: 0
 --- !u!135 &13545442
 SphereCollider:
   m_ObjectHideFlags: 1

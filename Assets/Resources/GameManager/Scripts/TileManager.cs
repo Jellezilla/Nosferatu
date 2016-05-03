@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TileManager : MonoBehaviour {
 
@@ -9,61 +10,82 @@ public class TileManager : MonoBehaviour {
     private float m_tileChangeDistance;
     [SerializeField]
     private GameObject m_startTilePrefab;
-    private GameObject m_startTile;
+    private Tile m_startTile;
     [SerializeField]
     private GameObject m_rampageTilePrefab;
-    private GameObject m_rampageTile;
+    private Tile m_rampageTile;
     [SerializeField]
     private GameObject[] m_easyTilePrefabs;
-    private GameObject[] m_easyTiles;
     [SerializeField]
     private GameObject[] m_normalTilesPrefabs;
-    private GameObject[] m_normalTiles;
     [SerializeField]
     private GameObject[] m_hardTilesPrefabs;
-    private GameObject[] m_hardTiles;
+    private Tile[][] m_Tiles;
     private GameObject m_Player;
-    private GameObject m_prevTile;
-    private GameObject m_curTile;
+    private int m_prevTileIndex;
+    private int m_curTileIndex;
+    private int m_curTileDiffIndex;
+    private int m_prevTileDiffIndex;
     private Collider m_curTileCol;
     private Collider m_prevTileCol;
     private float m_carHeight;
-
+    private const int m_nrOfDiffs = 3;
     void Start()
     {
         Init();
         StartTile();
     }
 
+    /// <summary>
+    /// Used to setup the instantiate and setup the tiles
+    /// </summary>
     private void Init()
     {
         m_Player = GameController.Instance.Player;
-        m_startTile = Instantiate(m_startTilePrefab);
-        m_startTile.SetActive(false);
-        m_rampageTile = Instantiate(m_rampageTilePrefab);
-        m_rampageTile.SetActive(false);
+        m_startTile = Instantiate(m_startTilePrefab).GetComponent<Tile>();
+        m_startTile.gameObject.SetActive(false);
+        m_rampageTile = Instantiate(m_rampageTilePrefab).GetComponent<Tile>();
+        m_rampageTile.gameObject.SetActive(false);
+        m_Tiles = new Tile[m_nrOfDiffs][];
 
-        m_easyTiles = new GameObject[m_easyTilePrefabs.Length];
-        for (int i = 0; i < m_easyTilePrefabs.Length; i++)
+        for (int i = 0; i < m_nrOfDiffs; i++)
         {
-            m_easyTiles[i] = Instantiate(m_easyTilePrefabs[i]);
-            m_easyTiles[i].SetActive(false);
-        }
+            switch (i)
+            {
+                case 0:
+                    {
+                        m_Tiles[i] = new Tile[m_easyTilePrefabs.Length];
+                        for (int j = 0; j < m_easyTilePrefabs.Length; j++)
+                        {
+                            m_Tiles[i][j] = Instantiate(m_easyTilePrefabs[i]).GetComponent<Tile>();
+                            m_Tiles[i][j].gameObject.SetActive(false);
+                        }
+                        break;
+                    }
 
-        m_normalTiles = new GameObject[m_normalTilesPrefabs.Length];
-        for (int i = 0; i < m_normalTilesPrefabs.Length; i++)
-        {
-            m_normalTiles[i] = Instantiate(m_normalTilesPrefabs[i]);
-            m_normalTiles[i].SetActive(false);
-        }
+                case 1:
+                    {
+                        m_Tiles[i] =  new Tile[m_normalTilesPrefabs.Length];
+                        for (int j = 0; j < m_normalTilesPrefabs.Length; j++)
+                        {
+                            m_Tiles[i][j] = Instantiate(m_normalTilesPrefabs[i]).GetComponent<Tile>();
+                            m_Tiles[i][j].gameObject.SetActive(false);
+                        }
+                        break;
+                    }
 
-        m_hardTiles = new GameObject[m_hardTilesPrefabs.Length];
-        for (int i = 0; i < m_hardTilesPrefabs.Length; i++)
-        {
-            m_hardTiles[i] = Instantiate(m_hardTilesPrefabs[i]);
-            m_normalTiles[i].SetActive(false);
+                case 2:
+                    {
+                        m_Tiles[i] = new Tile[m_hardTilesPrefabs.Length];
+                        for (int j = 0; j < m_hardTilesPrefabs.Length; j++)
+                        {
+                            m_Tiles[i][j] = Instantiate(m_hardTilesPrefabs[i]).GetComponent<Tile>();
+                            m_Tiles[i][j].gameObject.SetActive(false);
+                        }
+                        break;
+                    }
+            }
         }
-
     }
 
 
@@ -77,14 +99,14 @@ public class TileManager : MonoBehaviour {
     /// </summary>
     private void StartTile()
     {
-        // m_curTileIndex = m_startTileIndex;
-        m_curTile = m_startTile;
-        m_curTileCol = m_curTile.GetComponent<Collider>();
-        m_curTile.GetComponent<Tile>().TileLoader();
+        m_startTile.transform.position = m_LevelOrigin;
+        m_curTileCol = m_startTile.GetComponent<Collider>();
+        m_prevTileCol = m_curTileCol;
+        m_startTile.TileLoader();
         Vector3 tileCenter = m_curTileCol.bounds.center;
         m_carHeight = m_Player.GetComponent<Collider>().bounds.extents.y * 2;
-        tileCenter.y = m_carHeight;
-        m_Player.transform.position = tileCenter; 
+        tileCenter.y += m_carHeight;
+        m_Player.transform.position = tileCenter; // must replace with spawnPoint in new tiles
     }
 
     private void TileChanger()
@@ -93,61 +115,59 @@ public class TileManager : MonoBehaviour {
         playerOnTile.y -= m_carHeight;
         if (m_curTileCol.bounds.Contains(playerOnTile) && playerOnTile.z > m_curTileCol.bounds.center.z)
         {
-            if (m_prevTile != null && !m_prevTileCol.bounds.Contains(playerOnTile))
+            if (!m_prevTileCol.bounds.Contains(playerOnTile))
             {
-                m_prevTile.GetComponent<Tile>().TileUnloader();
-            }
-            m_prevTile = m_curTile;
-            m_prevTileCol = m_curTileCol;
-            Vector3 nTilePos = m_curTile.transform.position + new Vector3(0, 0, m_curTileCol.bounds.extents.z * 2);
+                if (m_prevTileCol.gameObject.GetInstanceID() == m_startTile.gameObject.GetInstanceID())
+                {
+                    m_startTile.TileUnloader();
+                }
+                else
+                {
+                    m_Tiles[m_prevTileDiffIndex][m_prevTileIndex].TileUnloader();
+                }
 
-            int tileDifficulty = Random.Range(0,3); // testing line
-            switch (tileDifficulty)
+
+            }
+            m_prevTileCol = m_curTileCol;
+            m_prevTileDiffIndex = m_curTileDiffIndex;
+            m_prevTileIndex = m_curTileIndex;
+             Vector3 nTilePos = m_curTileCol.transform.position + new Vector3(0, 0, m_curTileCol.bounds.extents.z * 2);
+
+            m_curTileDiffIndex = Random.Range(0, m_nrOfDiffs); // testing line
+
+            switch (m_curTileDiffIndex)
             {
                 case 0:
                     {
-
-                        for (int i = 0; i < m_easyTiles.Length; i++)
+                        do
                         {
-                            if (m_easyTiles[i].activeSelf==false)
-                            {
-                                m_curTile = m_easyTiles[i];
-                                break;
-                            }
+                            m_curTileIndex = Random.Range(0, m_Tiles[m_curTileDiffIndex].Length);
                         }
+                        while (m_Tiles[m_curTileDiffIndex][m_curTileIndex].gameObject.activeSelf);
                         break;
                     }
                 case 1:
                     {
-                        for (int i = 0; i < m_normalTiles.Length; i++)
+                        do
                         {
-                            if (m_normalTiles[i].activeSelf == false)
-                            {
-                                m_curTile = m_normalTiles[i];
-                                break;
-                            }
+                            m_curTileIndex = Random.Range(0, m_Tiles[m_curTileDiffIndex].Length);
                         }
+                        while (m_Tiles[m_curTileDiffIndex][m_curTileIndex].gameObject.activeSelf);
                         break;
                     }
-
                 case 2:
                     {
-                        for (int i = 0; i < m_hardTiles.Length; i++)
+                        do
                         {
-                            if (!m_hardTiles[i].activeSelf==false)
-                            {
-                                
-                                m_curTile = m_hardTiles[i];
-                                break;
-                            }
+                            m_curTileIndex = Random.Range(0, m_Tiles[m_curTileDiffIndex].Length);
                         }
+                        while (m_Tiles[m_curTileDiffIndex][m_curTileIndex].gameObject.activeSelf);
                         break;
                     }
             }
-
-            m_curTile.transform.position = nTilePos;
-            m_curTile.GetComponent<Tile>().TileLoader();
-            m_curTileCol = m_curTile.GetComponent<Collider>();
+            m_Tiles[m_curTileDiffIndex][m_curTileIndex].transform.position = nTilePos;
+            m_Tiles[m_curTileDiffIndex][m_curTileIndex].TileLoader();
+            m_curTileCol = m_Tiles[m_curTileDiffIndex][m_curTileIndex].GetComponent<Collider>();
 
         }
     }

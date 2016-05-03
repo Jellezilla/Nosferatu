@@ -103,21 +103,6 @@ public class ObjectPool : MonoBehaviour
 
 
 
-
-    /// <summary>
-    /// Returns an object to the pool based on its index position
-    /// </summary>
-    /// <param name="objectIndex"></param>
-    /// <param name="obj"></param>
-    public void ReturnObject(int objectIndex, GameObject obj)
-    {
-        if (m_pools[objectIndex].Contains(obj) && obj!=null)
-        {
-            m_pools[objectIndex][(m_pools[objectIndex].IndexOf(obj))].SetActive(false);
-        }
-    }
-
-
     void OnDestroy()
     {
         m_pools = null;

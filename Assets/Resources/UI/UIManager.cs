@@ -80,8 +80,8 @@ public class UIManager : MonoBehaviour {
     bool IsGameOver() {
         Vector3 playerPos = GameController.Instance.Player.transform.position;
         float squaredMag = (playerPos - _oldPlayerPos).sqrMagnitude;
-
-        if (GameController.Instance.OutOfFuel && squaredMag < .05f && squaredMag > -.05f) {
+        Debug.Log("-- " + playerPos + " - " + _oldPlayerPos + " | " + squaredMag);
+        if (GameController.Instance.OutOfFuel && squaredMag < .00005f && squaredMag > -.00005f && squaredMag != 0.0f) {
             return true;
         }
         _oldPlayerPos = playerPos;
