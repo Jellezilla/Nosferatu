@@ -10,6 +10,7 @@ public class GameController : Singleton<GameController>
     private VehicleResources m_playerRes;
     private GameObject m_player;
     private ObjectPool m_objPool;
+    private Rigidbody m_playerRB;
     // Use this for initialization
     void Awake()
     {
@@ -27,6 +28,7 @@ public class GameController : Singleton<GameController>
     {
         m_player = GameObject.FindGameObjectWithTag(Tags.player);
         m_playerRes = m_player.GetComponent<VehicleResources>();
+        m_playerRB = m_player.GetComponent<Rigidbody>();
     }
 
     private void LoadObjectPool()
@@ -50,6 +52,14 @@ public class GameController : Singleton<GameController>
         }
     }
 
+    public Rigidbody PlayerRigidBody
+    {
+        get
+        {
+            return m_playerRB;
+        }
+    }
+
     public float GetFuel {
         get {
             return m_playerRes.CarBlood;
@@ -65,6 +75,14 @@ public class GameController : Singleton<GameController>
     public bool OutOfFuel {
         get {
             return m_playerRes.OutOfFuel;
+        }
+    }
+
+    public bool PlayerDead
+    {
+        get
+        {
+            return m_playerRes.DeadInTheWater;
         }
     }
 }

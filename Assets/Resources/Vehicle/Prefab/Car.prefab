@@ -757,8 +757,8 @@ Light:
   m_Enabled: 0
   serializedVersion: 6
   m_Type: 0
-  m_Color: {r: 1, g: 0.99574035, b: 0.9117647, a: 1}
-  m_Intensity: 1.93
+  m_Color: {r: 1, g: 0.9324036, b: 0.6838235, a: 1}
+  m_Intensity: 4.45
   m_Range: 8.3
   m_SpotAngle: 45
   m_CookieSize: 10
@@ -790,8 +790,8 @@ Light:
   m_Enabled: 0
   serializedVersion: 6
   m_Type: 0
-  m_Color: {r: 1, g: 0.99574035, b: 0.9117647, a: 1}
-  m_Intensity: 1.93
+  m_Color: {r: 1, g: 0.9324036, b: 0.6838235, a: 1}
+  m_Intensity: 4.45
   m_Range: 8.3
   m_SpotAngle: 45
   m_CookieSize: 10
@@ -843,9 +843,10 @@ MonoBehaviour:
   UICanvasRef: {fileID: 0}
   m_MaxCarSouls: 100
   m_MaxCarBlood: 100
-  m_BloodConsumption: 2
+  m_BloodConsumption: 5
   m_BloodPerHuman: 5
-  m_SoulsPerHuman: 100
+  m_SoulsPerHuman: 1
+  m_FuelReplenishTime: 3
 --- !u!114 &11451128
 MonoBehaviour:
   m_ObjectHideFlags: 1

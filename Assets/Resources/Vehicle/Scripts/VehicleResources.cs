@@ -19,24 +19,31 @@ public class VehicleResources : MonoBehaviour
     private float m_BloodPerHuman;
     [SerializeField]
     private float m_SoulsPerHuman;
-   // [SerializeField]
- //   private float m_ConsumptionFactor;
+    private WaitForSeconds m_fuelWaitTick;
 
     private float m_CarBlood;
     private float m_CarSouls;
 
     private int m_playerMaxDistance;
-
+    public bool DeadInTheWater
+    {
+        private set;
+        get;
+    }
     public bool OutOfFuel
     {
         private set;
         get;
     }
+    [SerializeField]
+    private float m_FuelReplenishTime;
     // Use this for initialization
     void Awake()
     {
+        m_fuelWaitTick = new WaitForSeconds(Time.fixedDeltaTime);
         _uiManagerRef = UICanvasRef.GetComponent<UIManager>();
         m_CarBlood = m_MaxCarBlood;
+        StartCoroutine(FuelReplenishCheck());
     }
 
     // Update is called once per frame
@@ -83,11 +90,8 @@ public class VehicleResources : MonoBehaviour
     {
         if (m_CarBlood > 0)
         {
-          //  if ((int)gameObject.transform.position.z > m_playerMaxDistance)
-            //{
-              //  m_playerMaxDistance = (int)gameObject.transform.position.z;
-           // }
-            m_CarBlood -= m_BloodConsumption * Time.deltaTime; //* m_playerMaxDistance * m_ConsumptionFactor; //Please stop.
+
+            m_CarBlood -= m_BloodConsumption * Time.deltaTime;
             OutOfFuel = false;
 
             if (m_CarBlood < 0)
@@ -101,6 +105,22 @@ public class VehicleResources : MonoBehaviour
         }
     }
 
+    IEnumerator FuelReplenishCheck()
+    {
+        float counter = m_FuelReplenishTime;
+        while (!DeadInTheWater && counter > 0)
+        {
+            yield return m_fuelWaitTick;
+            if (OutOfFuel)
+            {
+                counter -= Time.deltaTime;
+            }
+
+        }
+
+        DeadInTheWater = true;
+
+    }
     #region Getters
     public float CarSouls
     {

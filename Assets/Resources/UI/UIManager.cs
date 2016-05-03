@@ -78,13 +78,22 @@ public class UIManager : MonoBehaviour {
     }
 
     bool IsGameOver() {
-        Vector3 playerPos = GameController.Instance.Player.transform.position;
-        float squaredMag = (playerPos - _oldPlayerPos).sqrMagnitude;
-        Debug.Log("-- " + playerPos + " - " + _oldPlayerPos + " | " + squaredMag);
-        if (GameController.Instance.OutOfFuel && squaredMag < .00005f && squaredMag > -.00005f && squaredMag != 0.0f) {
+        //  Vector3 playerPos = GameController.Instance.Player.transform.position;
+        // float squaredMag = (playerPos - _oldPlayerPos).sqrMagnitude;  /// WHY?! XD
+        //   float squaredMag = GameController.Instance.PlayerRigidBody.velocity.sqrMagnitude;
+        // Debug.Log(squaredMag);
+        //   Debug.Log("-- " + playerPos + " - " + _oldPlayerPos + " | " + squaredMag);
+
+
+
+        //!!! Temporary ruberbanding till I implement the UI Event System...Please do not tamper  <3
+        // Love, Alex.
+
+
+        if (GameController.Instance.PlayerDead) {
             return true;
         }
-        _oldPlayerPos = playerPos;
+        //_oldPlayerPos = playerPos;
         return false;
     }
 

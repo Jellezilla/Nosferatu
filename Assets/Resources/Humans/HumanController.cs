@@ -16,10 +16,6 @@ public class HumanController : MonoBehaviour
     private Quaternion[] m_rigRbsRot;
     private Collider[] m_rigCols;
     private bool m_init;
-    [SerializeField]
-    private float m_DespawnTimer;
-    [SerializeField]
-    private int m_HumanPoolID;
     private WaitForSeconds m_DespawnWait;
     // Use this for initialization
     void Awake()
@@ -39,7 +35,6 @@ public class HumanController : MonoBehaviour
     {
         if (!m_init)
         {
-            m_DespawnWait = new WaitForSeconds(m_DespawnTimer);
             anim = GetComponent<Animator>();
             m_Hrb = GetComponent<Rigidbody>();
             m_HColls = GetComponents<Collider>();
@@ -106,19 +101,10 @@ public class HumanController : MonoBehaviour
             }
 
             (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
-            StartCoroutine(DespawnAndReturn());
         }
 
     }
 
-    IEnumerator DespawnAndReturn()
-    {
-
-        yield return m_DespawnWait;
-        gameObject.SetActive(false);
-
-
-    }
 
     void OnTriggerEnter(Collider col)
     {
