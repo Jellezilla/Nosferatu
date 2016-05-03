@@ -102,8 +102,8 @@ public class UIManager : MonoBehaviour {
     }
 
     public void AddSoulEffect(Vector2 spawnPos) {
-        GameObject s = Instantiate(SoulEffectObject,new Vector3(spawnPos.x,1,spawnPos.y),transform.rotation) as GameObject;
-        s.transform.SetParent(this.transform);
+        //GameObject s = Instantiate(SoulEffectObject,new Vector3(spawnPos.x,1,spawnPos.y),transform.rotation) as GameObject;
+        //s.transform.SetParent(this.transform);
     }
 
     public void AddBloodEffect() {

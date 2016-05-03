@@ -17,10 +17,11 @@ public class SoulEffect : MonoBehaviour {
 
         startTime = Time.time;
         journeyLength = Vector3.Distance(_startMarker.position,_target.position);
+        _target = Camera.main.transform.GetChild(0).GetChild(0).Find("HUD").Find("SpBar").transform;
     }
 
     void Update() {
-        _target = Camera.main.transform.GetChild(0).GetChild(0).Find("HUD").Find("SpBar").transform;
+
         
         float distCovered = (Time.time - startTime) * speed;
         float fracJourney = distCovered / journeyLength;
