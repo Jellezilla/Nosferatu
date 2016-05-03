@@ -265,13 +265,13 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 1
-  m_Color: {r: 1, g: 0.9926978, b: 0.7352941, a: 1}
-  m_Intensity: 1
+  m_Color: {r: 0.9182556, g: 0.8088235, b: 1, a: 1}
+  m_Intensity: 0.64
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 1
     m_Resolution: -1
     m_Strength: 1
     m_Bias: 0.05
@@ -463,15 +463,51 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11432038, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_BloodPerHuman
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11432038, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_BloodConsumption
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11432038, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_SoulsPerHuman
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10847900, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_Intensity
+      value: 4.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 10864636, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_Intensity
+      value: 4.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 10864636, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_Color.g
+      value: 0.9324036
+      objectReference: {fileID: 0}
+    - target: {fileID: 10847900, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_Color.g
+      value: 0.9324036
+      objectReference: {fileID: 0}
+    - target: {fileID: 10864636, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_Color.b
+      value: 0.6838235
+      objectReference: {fileID: 0}
+    - target: {fileID: 10847900, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_Color.b
+      value: 0.6838235
+      objectReference: {fileID: 0}
+    - target: {fileID: 10864636, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_Shadows.m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 10847900, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_Shadows.m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11432038, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
+      propertyPath: m_ConsumptionFactor
+      value: 1.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
@@ -687,6 +723,10 @@ Prefab:
     - target: {fileID: 160108, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
       propertyPath: m_Name
       value: UICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 11457218, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
