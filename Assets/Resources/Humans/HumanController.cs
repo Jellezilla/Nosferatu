@@ -36,7 +36,9 @@ public class HumanController : MonoBehaviour
     {
         if (!m_init)
         {
-            m_BloodSplatPS = ((GameObject)Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation)).GetComponent<ParticleSystem>();
+            m_BloodSplatPS = (Instantiate(bloodSpatterObject)).GetComponent<ParticleSystem>();
+            m_BloodSplatPS.transform.SetParent(transform);
+            m_BloodSplatPS.transform.localPosition = Vector3.zero;
             m_BloodSplatPS.gameObject.SetActive(false);
             anim = GetComponent<Animator>();
             m_Hrb = GetComponent<Rigidbody>();
@@ -62,7 +64,7 @@ public class HumanController : MonoBehaviour
     {
         if (m_isDead)
         {
-            m_BloodSplatPS.gameObject.SetActive(false);
+
             m_isDead = false;
             anim.enabled = true;
             m_Hrb.isKinematic = false;
@@ -78,8 +80,8 @@ public class HumanController : MonoBehaviour
                 m_rigRbs[i].transform.localRotation = m_rigRbsRot[i];
                 m_rigRbs[i].isKinematic = true;
                 m_rigRbs[i].useGravity = false;
-
             }
+            m_BloodSplatPS.gameObject.SetActive(false);
         }
 
     }
