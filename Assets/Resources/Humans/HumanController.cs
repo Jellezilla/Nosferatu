@@ -90,6 +90,8 @@ public class HumanController : MonoBehaviour
                 m_rigRbs[i].transform.localPosition = m_rigRbsPos[i];
                 m_rigRbs[i].transform.localRotation = m_rigRbsRot[i];
                 m_rigRbs[i].useGravity = false;
+                m_rigRbs[i].velocity = Vector3.zero;
+                m_rigRbs[i].angularVelocity = Vector3.zero;
             }
 
             for (int i = 0; i < m_SoulPSs.Length; i++)
