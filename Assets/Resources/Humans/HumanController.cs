@@ -8,7 +8,8 @@ public class HumanController : MonoBehaviour
     [SerializeField]
     private GameObject m_rig;
     private bool m_isDead;
-    public GameObject bloodSpatterObject;
+    [SerializeField]
+    private GameObject bloodSpatterObject;
     private Rigidbody m_Hrb;
     private Collider[] m_HColls;
     private Rigidbody[] m_rigRbs;
@@ -16,7 +17,7 @@ public class HumanController : MonoBehaviour
     private Quaternion[] m_rigRbsRot;
     private Collider[] m_rigCols;
     private bool m_init;
-    private WaitForSeconds m_DespawnWait;
+    private ParticleSystem m_BloodSplatPS;
     // Use this for initialization
     void Awake()
     {
@@ -35,6 +36,8 @@ public class HumanController : MonoBehaviour
     {
         if (!m_init)
         {
+            m_BloodSplatPS = ((GameObject)Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation)).GetComponent<ParticleSystem>();
+            m_BloodSplatPS.gameObject.SetActive(false);
             anim = GetComponent<Animator>();
             m_Hrb = GetComponent<Rigidbody>();
             m_HColls = GetComponents<Collider>();
@@ -59,6 +62,7 @@ public class HumanController : MonoBehaviour
     {
         if (m_isDead)
         {
+            m_BloodSplatPS.gameObject.SetActive(false);
             m_isDead = false;
             anim.enabled = true;
             m_Hrb.isKinematic = false;
@@ -99,13 +103,16 @@ public class HumanController : MonoBehaviour
                 m_rigRbs[i].isKinematic = false;
                 m_rigRbs[i].useGravity = true;
             }
-
-            (Instantiate(bloodSpatterObject, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation) as GameObject).transform.parent = transform;
+            m_BloodSplatPS.gameObject.SetActive(true);
+            m_BloodSplatPS.Play();
         }
 
     }
 
+    void Update()
+    {
 
+    }
     void OnTriggerEnter(Collider col)
     {
 

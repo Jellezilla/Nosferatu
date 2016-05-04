@@ -198,6 +198,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad3209bcf5730d439fafdda81699766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &178027187 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 160108, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
+  m_PrefabInternal: {fileID: 866790077}
 --- !u!1001 &201637881
 Prefab:
   m_ObjectHideFlags: 0
@@ -462,53 +466,9 @@ Prefab:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11432038, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_BloodPerHuman
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11432038, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_BloodConsumption
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11432038, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_SoulsPerHuman
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 10847900, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_Intensity
-      value: 4.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 10864636, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_Intensity
-      value: 4.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 10864636, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_Color.g
-      value: 0.9324036
-      objectReference: {fileID: 0}
-    - target: {fileID: 10847900, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_Color.g
-      value: 0.9324036
-      objectReference: {fileID: 0}
-    - target: {fileID: 10864636, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_Color.b
-      value: 0.6838235
-      objectReference: {fileID: 0}
-    - target: {fileID: 10847900, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_Color.b
-      value: 0.6838235
-      objectReference: {fileID: 0}
-    - target: {fileID: 10864636, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_Shadows.m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 10847900, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_Shadows.m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 11432038, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_ConsumptionFactor
-      value: 1.02
-      objectReference: {fileID: 0}
+      propertyPath: UICanvasRef
+      value: 
+      objectReference: {fileID: 178027187}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
   m_IsPrefabParent: 0
@@ -590,46 +550,6 @@ Prefab:
     - target: {fileID: 22496470, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 135726, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 499218, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -161
-      objectReference: {fileID: 0}
-    - target: {fileID: 22416396, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22416396, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 72
-      objectReference: {fileID: 0}
-    - target: {fileID: 22406420, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 212
-      objectReference: {fileID: 0}
-    - target: {fileID: 22406420, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 803.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 11494406, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
-      propertyPath: m_FontData.m_MaxSize
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 190822, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
-      propertyPath: m_Name
-      value: Game Over Text
-      objectReference: {fileID: 0}
-    - target: {fileID: 11494406, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
-      propertyPath: m_FontData.m_FontSize
-      value: 160
-      objectReference: {fileID: 0}
-    - target: {fileID: 11494406, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
-      propertyPath: m_FontData.m_MinSize
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}

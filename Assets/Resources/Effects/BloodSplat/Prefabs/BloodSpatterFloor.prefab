@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2aea58a725ef99345855c80089b042bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materials:
+  m_materials:
   - {fileID: 2100000, guid: 28fbfa3ed7a05fd4eaca4a267bd4de42, type: 2}
   - {fileID: 2100000, guid: f33e0225e60e7304aa754cc96e9936e4, type: 2}
 --- !u!1001 &100100000

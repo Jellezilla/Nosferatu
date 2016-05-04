@@ -41,7 +41,7 @@ public class VehicleResources : MonoBehaviour
     void Awake()
     {
         m_fuelWaitTick = new WaitForSeconds(Time.fixedDeltaTime);
-        _uiManagerRef = UICanvasRef.GetComponent<UIManager>();
+    //    _uiManagerRef = UICanvasRef.GetComponent<UIManager>();
         m_CarBlood = m_MaxCarBlood;
         StartCoroutine(FuelReplenishCheck());
     }
@@ -57,7 +57,7 @@ public class VehicleResources : MonoBehaviour
         if (other.tag == Tags.human)
         {
             //Adding UI soul effect
-            _uiManagerRef.AddSoulEffect(new Vector2(other.transform.position.x, other.transform.position.z));
+           // _uiManagerRef.AddSoulEffect(new Vector2(other.transform.position.x, other.transform.position.z));
             if (m_CarSouls < m_MaxCarSouls)
             {
                 m_CarSouls += m_SoulsPerHuman;
@@ -77,8 +77,8 @@ public class VehicleResources : MonoBehaviour
                     m_CarBlood = m_MaxCarBlood;
                 }
                 //Adding UI blood effect
-                if (!_uiManagerRef.IsBloodFading())
-                    _uiManagerRef.AddBloodEffect();
+               // if (!_uiManagerRef.IsBloodFading())
+                 //   _uiManagerRef.AddBloodEffect();
             }
         }
     }

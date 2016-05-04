@@ -3,13 +3,14 @@ using System.Collections;
 
 public class BloodStain : MonoBehaviour {
 
-    public Material[] materials;
-    private Material _myMaterial;
+    [SerializeField]
+    private Material[] m_materials;
+    private Material m_myMaterial;
 
 	void Start () {
         //Debug.Log(materials.Length - 1);
-        _myMaterial = materials[Random.Range(0,materials.Length)];
-        gameObject.GetComponent<Renderer>().material = _myMaterial;
+        m_myMaterial = m_materials[Random.Range(0,m_materials.Length)];
+        gameObject.GetComponent<Renderer>().material = m_myMaterial;
         //Debug.Log(_myMaterial);
     }
 	

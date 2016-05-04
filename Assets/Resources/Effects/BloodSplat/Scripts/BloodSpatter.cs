@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class BloodSpatter : MonoBehaviour {
 
-    private ParticleSystem ps;
     public Transform PaintPrefab;
 
     private int MinSplashs = 30;
@@ -21,7 +20,7 @@ public class BloodSpatter : MonoBehaviour {
 //    private Vector3 mHitPoint;
     private List<Ray> mRaysDebug = new List<Ray>();
     public void Awake() {
-        gameObject.transform.Rotate(60, 0, 0, Space.Self);
+        transform.Rotate(60, 0, 0, Space.Self);
         // gameObject.transform.rotation = Quaternion.Euler(0f, 0f, -60f);
     }
     public void Start() {
@@ -82,7 +81,7 @@ public class BloodSpatter : MonoBehaviour {
                     b++;
                     // Create a splash if we found a surface
                     //Debug.Log("name"+hit.collider.gameObject.name);
-                    var paintSpatter = GameObject.Instantiate(PaintPrefab,
+                    var paintSpatter = Instantiate(PaintPrefab,
                                                                new Vector3 (hit.point.x, 0.01f, hit.point.z),
 
                                                                // Rotation from the original sprite to the normal
