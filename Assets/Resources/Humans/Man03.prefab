@@ -2306,7 +2306,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rig: {fileID: 171378}
-  bloodSpatterObject: {fileID: 134498, guid: 7f6c783a5ae6e4348824e1dbeff0170c, type: 2}
+  m_BloodSplatterPrefab: {fileID: 134498, guid: 7f6c783a5ae6e4348824e1dbeff0170c,
+    type: 2}
+  m_SoulPrefab: {fileID: 104720, guid: 769954bffd71dd3428023dd403ac4ad0, type: 2}
+  m_rigRbs:
+  - {fileID: 5430206}
+  - {fileID: 5428108}
+  - {fileID: 5409210}
+  - {fileID: 5448752}
+  - {fileID: 5459436}
+  - {fileID: 5440912}
+  - {fileID: 5493890}
+  - {fileID: 5454752}
+  - {fileID: 5436600}
+  - {fileID: 5439604}
+  - {fileID: 5484230}
+  m_rigCols:
+  - {fileID: 6570428}
+  - {fileID: 13645336}
+  - {fileID: 13608050}
+  - {fileID: 13667650}
+  - {fileID: 13614030}
+  - {fileID: 6504400}
+  - {fileID: 13545442}
+  - {fileID: 13636880}
+  - {fileID: 13694050}
+  - {fileID: 13613124}
+  - {fileID: 13614536}
 --- !u!135 &13545442
 SphereCollider:
   m_ObjectHideFlags: 1

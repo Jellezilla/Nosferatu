@@ -2217,7 +2217,6 @@ GameObject:
   - 4: {fileID: 452636}
   - 65: {fileID: 6521184}
   - 114: {fileID: 11408580}
-  - 54: {fileID: 5482906}
   m_Layer: 0
   m_Name: tut_3
   m_TagString: Untagged
@@ -8784,21 +8783,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156138}
   m_Mesh: {fileID: 4300000, guid: 1692cf98ad8e5d544ae981ffd93d64ef, type: 3}
---- !u!54 &5482906
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 177516}
-  serializedVersion: 2
-  m_Mass: 0.1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &6401116
 MeshCollider:
   m_ObjectHideFlags: 1

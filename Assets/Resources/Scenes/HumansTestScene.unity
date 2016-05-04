@@ -322,7 +322,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &300279347
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -380,6 +380,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1001 &340978500
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 488778, guid: 7f6c783a5ae6e4348824e1dbeff0170c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 59.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 488778, guid: 7f6c783a5ae6e4348824e1dbeff0170c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 488778, guid: 7f6c783a5ae6e4348824e1dbeff0170c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 231.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 488778, guid: 7f6c783a5ae6e4348824e1dbeff0170c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 488778, guid: 7f6c783a5ae6e4348824e1dbeff0170c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 488778, guid: 7f6c783a5ae6e4348824e1dbeff0170c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 488778, guid: 7f6c783a5ae6e4348824e1dbeff0170c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 488778, guid: 7f6c783a5ae6e4348824e1dbeff0170c, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 19870424, guid: 7f6c783a5ae6e4348824e1dbeff0170c, type: 2}
+      propertyPath: CollisionModule.collisionMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19870424, guid: 7f6c783a5ae6e4348824e1dbeff0170c, type: 2}
+      propertyPath: CollisionModule.maxCollisionShapes
+      value: 128
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7f6c783a5ae6e4348824e1dbeff0170c, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &404252038
 Prefab:
   m_ObjectHideFlags: 0
