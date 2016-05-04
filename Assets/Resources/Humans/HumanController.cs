@@ -36,9 +36,9 @@ public class HumanController : MonoBehaviour
     {
         if (!m_init)
         {
-            m_BloodSplatPS = (Instantiate(bloodSpatterObject)).GetComponent<ParticleSystem>();
-            m_BloodSplatPS.transform.SetParent(transform);
-            m_BloodSplatPS.transform.localPosition = Vector3.zero;
+            m_BloodSplatPS = (Instantiate(bloodSpatterObject)).GetComponentInChildren<ParticleSystem>();
+            m_BloodSplatPS.transform.parent.SetParent(transform);
+            m_BloodSplatPS.transform.parent.localPosition = Vector3.zero;
             m_BloodSplatPS.gameObject.SetActive(false);
             anim = GetComponent<Animator>();
             m_Hrb = GetComponent<Rigidbody>();
