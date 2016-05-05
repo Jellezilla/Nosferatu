@@ -81,8 +81,11 @@ ModelImporter:
     400070: joint9
     400072: //RootNode
     400074: pCube1
+    2300000: pCube1
+    3300000: pCube1
     4300000: pCube1
     9500000: //RootNode
+    11100000: //RootNode
     13700000: pCube1
   materials:
     importMaterials: 1
@@ -98,7 +101,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
