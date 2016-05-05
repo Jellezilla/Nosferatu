@@ -1,16 +1,16 @@
 ﻿using UnityEngine.Events;
 using System.Collections.Generic;
 
-public enum WorldEvents
+public enum UIEvents
 {
     None
 }
 
 
-public class WorldEventController : Singleton<WorldEventController>
+public class EventController : Singleton<EventController>
 {
 
-    private Dictionary<WorldEvents, UnityEvent> EventDatabase;
+    private Dictionary<UIEvents, UnityEvent> EventDatabase;
     private UnityEvent eventBuffer;
     // Use this for initialization
     void Awake()
@@ -24,12 +24,12 @@ public class WorldEventController : Singleton<WorldEventController>
     {
         if (this.EventDatabase == null)
         {
-            this.EventDatabase = new Dictionary<WorldEvents, UnityEvent>();
+            this.EventDatabase = new Dictionary<UIEvents, UnityEvent>();
         }
     }
     #endregion
     #region Event Subscription
-    public void SubscribeEvent(WorldEvents eventDesignation, UnityAction listener)
+    public void SubscribeEvent(UIEvents eventDesignation, UnityAction listener)
     {
         this.eventBuffer = null;
         if (this.EventDatabase.TryGetValue(eventDesignation, out eventBuffer))
@@ -44,7 +44,7 @@ public class WorldEventController : Singleton<WorldEventController>
         }
     }
 
-    public void UnSubscribeEvent(WorldEvents eventDesignation, UnityAction listener)
+    public void UnSubscribeEvent(UIEvents eventDesignation, UnityAction listener)
     {
         if (!Instance)
         {
@@ -62,13 +62,13 @@ public class WorldEventController : Singleton<WorldEventController>
 
     void UnSubscribeAllEvents()
     {
-        foreach (WorldEvents uiEvt in this.EventDatabase.Keys)
+        foreach (UIEvents uiEvt in this.EventDatabase.Keys)
         {
             EventDatabase[uiEvt].RemoveAllListeners();
         }
     }
 
-    public void TriggerEvent(WorldEvents eventDesignation)
+    public void TriggerEvent(UIEvents eventDesignation)
     {
         this.eventBuffer = null;
 
