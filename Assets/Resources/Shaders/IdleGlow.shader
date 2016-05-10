@@ -1,15 +1,17 @@
 ﻿Shader "Custom/IdleGlow" {
 	Properties {
+		_ContactPoint("Contact", Vector) = (0,0,0,0)
 		_Color ("Color", Color) = (1,1,1,1)
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_Glossiness("Smoothness", Range(0,1)) = 0.5
 		_Metallic("Metallic", Range(0,1)) = 0.0
 		_GlowColor ("Glow Color Tint", Color) = (1,1,1,1)
-		_GlowPower ("Glow Power", Range(1.0, 6)) = 1.0
+		_GlowPower ("Glow Power", Range(0.5, 6)) = 3.0
 		_NormalMap ("Normal Map", 2D) = "normal" {}
 		
 	}
-		/// I TRY and I FAIL T_T <3 Alex
+		/// GRAB VECTOR3 LOCAL SPACE multiply by point
+		/// I TRY and I FAIL T_T, Alex
 	SubShader {
 		Tags { "RenderType"="Opaque" }
 		LOD 200
@@ -28,6 +30,7 @@
 		half _Glossiness;
 		half _Metallic;
 		fixed4 _Color;
+		fixed3 _ContactPoint;
 
 		struct Input {
 			float2 uv_MainTex;

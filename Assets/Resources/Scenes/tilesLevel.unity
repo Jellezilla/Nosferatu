@@ -1265,6 +1265,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5de3864f3935d0a44b0ef50084096fe9, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &475848513
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 2c6a7fb54968545c3837b49edf648f13, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 59.74735
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 2c6a7fb54968545c3837b49edf648f13, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.17894435
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 2c6a7fb54968545c3837b49edf648f13, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 254.54033
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 2c6a7fb54968545c3837b49edf648f13, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 2c6a7fb54968545c3837b49edf648f13, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 2c6a7fb54968545c3837b49edf648f13, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 2c6a7fb54968545c3837b49edf648f13, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 2c6a7fb54968545c3837b49edf648f13, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 2c6a7fb54968545c3837b49edf648f13, type: 3}
+  m_IsPrefabParent: 0
 --- !u!1001 &499116684
 Prefab:
   m_ObjectHideFlags: 0
@@ -3438,7 +3480,7 @@ RectTransform:
   - {fileID: 1817034684}
   - {fileID: 1491547379}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 25
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -3978,7 +4020,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 24
 --- !u!1001 &2047512877
 Prefab:
   m_ObjectHideFlags: 0
@@ -4108,7 +4150,7 @@ Transform:
   m_Children:
   - {fileID: 1062744310}
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 23
 --- !u!114 &2071027167
 MonoBehaviour:
   m_ObjectHideFlags: 0
