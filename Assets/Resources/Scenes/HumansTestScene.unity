@@ -198,10 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ad3209bcf5730d439fafdda81699766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &178027187 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 160108, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
-  m_PrefabInternal: {fileID: 627393176}
 --- !u!1001 &201637881
 Prefab:
   m_ObjectHideFlags: 0
@@ -241,10 +237,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 11476430, guid: 3064779c69c9b5d42a51ce8bbeb30d9f, type: 2}
-      propertyPath: m_startTilePrefab
-      value: 
-      objectReference: {fileID: 138332, guid: 037fe23f9ddbe044f86d78e7556b54a4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3064779c69c9b5d42a51ce8bbeb30d9f, type: 2}
   m_IsPrefabParent: 0
@@ -415,7 +407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &300279347
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -607,14 +599,6 @@ Prefab:
     - target: {fileID: 409776, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 11432038, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: UICanvasRef
-      value: 
-      objectReference: {fileID: 178027187}
-    - target: {fileID: 11432038, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
-      propertyPath: m_BloodConsumption
-      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
