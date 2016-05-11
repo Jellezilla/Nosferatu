@@ -700,7 +700,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 135726, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11449904, guid: a4ee1561d97bbcb4999876da2cbee262, type: 2}
       propertyPath: ScoreBoardRef
