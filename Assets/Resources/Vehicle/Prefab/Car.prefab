@@ -840,7 +840,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655fac3913e72e741bf203e6e5e640bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UICanvasRef: {fileID: 0}
   m_MaxCarSouls: 100
   m_MaxCarBlood: 100
   m_BloodConsumption: 5

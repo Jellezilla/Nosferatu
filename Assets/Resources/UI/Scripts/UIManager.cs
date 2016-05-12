@@ -14,8 +14,6 @@ public class UIManager : MonoBehaviour {
     public GameObject GameOverScreen;
     public GameObject HudScreen;
     public GameObject SoulEffectObject;
-
-    private bool _bloodFading=false;
     private GameObject PlayerObject;
     private Image _hpFill;
     private RectTransform _hpmask;
@@ -24,14 +22,17 @@ public class UIManager : MonoBehaviour {
     private float _spMaxWidth, _hpMaxWidth, _spHeight, _hpHeight;
     private int _oldPlayerDistance = 0;
     private float m_oldFuelValue = 0;
-    private Vector3 _oldPlayerPos;
     private WaitForSeconds m_bloodPulse;
     private float m_maxFuel;
+    private float m_maxSouls;
+    float soulsCurrent;
     //TODO: Update with implementing only one variable for holding player pos datatatatata
 
     void Start() {
+        EventController.Instance.SubscribeEvent(UIEvents.Rampage, StartRampage);
         m_maxFuel = GameController.Instance.MaxFuel;
         m_oldFuelValue = m_maxFuel;
+        m_maxSouls = GameController.Instance.MaxSouls;
         PlayerObject = GameController.Instance.Player;
         m_bloodPulse = new WaitForSeconds(.1f);
         _hpmask = Healthbar.transform.GetChild(0).gameObject.GetComponent<RectTransform>();
@@ -43,7 +44,6 @@ public class UIManager : MonoBehaviour {
         _hpHeight = _hpmask.GetComponent<RectTransform>().rect.height;
 
         _oldPlayerDistance = 0;//(int)PlayerObject.transform.position.z;
-        _oldPlayerPos = GameController.Instance.Player.transform.position;
         _scoreText = ScoreBoard.GetComponent<Text>();
 
         //this is a really good one, have to dig deep due to mask parenting
@@ -52,11 +52,12 @@ public class UIManager : MonoBehaviour {
 
     void Update() {
         float fuelCurrent = GameController.Instance.GetFuel;
-        float soulsCurrent = GameController.Instance.GetSouls;
+        soulsCurrent = GameController.Instance.GetSouls;
         if (fuelCurrent > m_oldFuelValue)
         {
-            AddBloodEffect();
+            StartCoroutine(FadeBlood());
         }
+        m_oldFuelValue = fuelCurrent;
         _hpmask.sizeDelta = new Vector2(_hpMaxWidth / 100 * fuelCurrent, _hpHeight);// _hpHeight);
         _spmask.sizeDelta = new Vector2(_spMaxWidth / 100 * (1 + soulsCurrent), _spHeight);// _hpHeight);
 
@@ -66,7 +67,7 @@ public class UIManager : MonoBehaviour {
             RampageReady.SetActive(true);
         }
 
-        m_oldFuelValue = fuelCurrent;
+
 
         //Taking care of score
         int newPlayerDistance = (int)PlayerObject.transform.position.z;
@@ -84,18 +85,15 @@ public class UIManager : MonoBehaviour {
     }
 
     void StartRampage() {
-        RampageEffect.SetActive(true);
-        SpecialEffectObject.SetActive(false);
+        if (soulsCurrent == m_maxSouls)
+        {
+            RampageEffect.SetActive(true);
+            SpecialEffectObject.SetActive(false);
+        }
+
     }
 
     bool IsGameOver() {
-        //  Vector3 playerPos = GameController.Instance.Player.transform.position;
-        // float squaredMag = (playerPos - _oldPlayerPos).sqrMagnitude;  /// WHY?! XD
-        //   float squaredMag = GameController.Instance.PlayerRigidBody.velocity.sqrMagnitude;
-        // Debug.Log(squaredMag);
-        //   Debug.Log("-- " + playerPos + " - " + _oldPlayerPos + " | " + squaredMag);
-
-
 
         //!!! Temporary ruberbanding till I implement the UI Event System...Please do not tamper  <3
         // Love, Alex.
@@ -125,22 +123,12 @@ public class UIManager : MonoBehaviour {
     public void AddSoulEffect(Vector2 spawnPos) {
     }
 
-    private void AddBloodEffect() {
-        _bloodFading = true;
-        StartCoroutine("FadeBlood");
-    }
-
-    public bool IsBloodFading() {
-        return _bloodFading;
-    }
-
     IEnumerator FadeBlood() {
         for (float f = 0.3f; f >= 0; f -= 0.1f) {
             if (f < 0.1) f = 0;
             _hpFill.material.SetFloat("_FlashAmount", f);
 
-            yield return new WaitForSeconds(.1f);
+            yield return m_bloodPulse;
         }
-        _bloodFading = false;
     }
 }

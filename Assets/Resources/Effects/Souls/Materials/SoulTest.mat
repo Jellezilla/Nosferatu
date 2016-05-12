@@ -137,7 +137,7 @@ Material:
       data:
         first:
           name: _GlowPower
-        second: 0.5
+        second: 2.12
     m_Colors:
       data:
         first:
@@ -149,13 +149,13 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
+          name: _ContactPoint
+        second: {r: 0, g: 0, b: 0, a: 0}
+      data:
+        first:
           name: _GlowColor
         second: {r: 0, g: 0.95862055, b: 1, a: 1}
       data:
         first:
           name: _ColorTint
         second: {r: 1, g: 1, b: 1, a: 1}
-      data:
-        first:
-          name: _ContactPoint
-        second: {r: 0, g: 0, b: 0, a: 0}

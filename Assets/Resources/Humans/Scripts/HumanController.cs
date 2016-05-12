@@ -42,13 +42,6 @@ public class HumanController : MonoBehaviour
     {
         if (!m_init)
         {
-            m_BloodSplatPS = (Instantiate(m_BloodSplatterPrefab)).GetComponentInChildren<ParticleSystem>();
-            m_BloodSplatPS.transform.parent.SetParent(transform);
-            m_BloodSplatPS.transform.parent.localPosition = Vector3.zero;
-            m_Soul = Instantiate(m_SoulPrefab);
-            m_Soul.transform.SetParent(transform);
-            m_Soul.transform.localPosition = Vector3.zero;
-            m_SoulPSs = m_Soul.GetComponentsInChildren<ParticleSystem>();
             anim = GetComponent<Animator>();
             m_Hrb = GetComponent<Rigidbody>();
             m_HColls = GetComponents<Collider>();
@@ -62,7 +55,14 @@ public class HumanController : MonoBehaviour
                 m_rigCols[i].enabled = false;
                 m_rigRbs[i].useGravity = false;
             }
-           // m_rigCols = m_rig.GetComponentsInChildren<Collider>();
+            float offset = m_HColls[1].bounds.extents.y;
+            m_BloodSplatPS = (Instantiate(m_BloodSplatterPrefab)).GetComponentInChildren<ParticleSystem>();
+            m_BloodSplatPS.transform.parent.SetParent(transform);
+            m_BloodSplatPS.transform.parent.localPosition = new Vector3(0,offset,0);
+            m_Soul = Instantiate(m_SoulPrefab);
+            m_Soul.transform.SetParent(transform);
+            m_Soul.transform.localPosition = new Vector3(0,offset,0);
+            m_SoulPSs = m_Soul.GetComponentsInChildren<ParticleSystem>();
             m_init = true;
         }
 
@@ -73,9 +73,6 @@ public class HumanController : MonoBehaviour
     /// </summary>
     public void Reset()
     {
-        if (m_isDead)
-        {
-
             m_isDead = false;
             anim.enabled = true;
             m_Hrb.isKinematic = false;
@@ -93,7 +90,6 @@ public class HumanController : MonoBehaviour
                 m_rigRbs[i].velocity = Vector3.zero;
                 m_rigRbs[i].angularVelocity = Vector3.zero;
             }
-
             for (int i = 0; i < m_SoulPSs.Length; i++)
             {
                 m_SoulPSs[i].Stop();
@@ -102,7 +98,6 @@ public class HumanController : MonoBehaviour
 
         }
 
-    }
 
     void Death()
     {

@@ -134,7 +134,7 @@ Material:
       data:
         first:
           name: _FlashAmount
-        second: 0
+        second: 0.20000002
       data:
         first:
           name: _Stencil

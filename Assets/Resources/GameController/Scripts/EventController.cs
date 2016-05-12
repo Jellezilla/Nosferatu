@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public enum UIEvents
 {
-    None
+    Rampage
 }
 
 

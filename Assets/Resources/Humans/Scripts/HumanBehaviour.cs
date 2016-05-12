@@ -8,6 +8,7 @@ public class HumanBehaviour : MonoBehaviour {
 	void Start () {
 
         m_anim = GetComponent<Animator>();
+        m_anim.Stop();
 	
 	}
 	

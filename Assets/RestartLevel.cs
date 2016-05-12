@@ -44,7 +44,7 @@ public class RestartLevel : MonoBehaviour {
         
           GUI.Label(new Rect(10, 20, 150, 25), "Would you like to restart?");
         if(GUI.Button(new Rect(40, 100, 100, 25), "Yes")) {
-            Application.LoadLevel(Application.loadedLevel);
+           // Application.LoadLevel(Application.loadedLevel);
         }
         if (GUI.Button(new Rect(160, 100, 100, 25), "No"))
         {

@@ -9,7 +9,7 @@ public class SoulEffect : MonoBehaviour {
     private float speed = 5.0F;
     private float startTime;
     private float journeyLength;
-    Vector3 tpos = new Vector3(0, 0, 0);
+  //  Vector3 tpos = new Vector3(0, 0, 0);
 
     void Start() {
         _startMarker= transform;
