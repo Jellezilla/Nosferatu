@@ -37,6 +37,7 @@ public class HighscoreManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Return)){
             Debug.Log("ENTER");
             _newScoreName = _inputField.transform.GetChild(2).GetComponent<Text>().text;
+            if (_newScoreName == "") _newScoreName = "A Nameless soul";
             _inputField.SetActive(false);
             _nameFields[_newScoreIndex].text = _newScoreName;
             UpdateScore();
@@ -92,8 +93,8 @@ public class HighscoreManager : MonoBehaviour {
         Debug.Log("set new score");
         _inputField.transform.position = new Vector3 (_nameFields[index].transform.position.x-0.26f, _nameFields[index].transform.position.y, _nameFields[index].transform.position.z);
         _inputField.SetActive(true);
-        InputField f = _inputField.GetComponent<InputField>();
-        f.Select();
+        //InputField f = _inputField.GetComponent<InputField>();
+        //f.Select();
         _nameFields[index].text = "";
         _scoreFields[index].text = _currentScore.ToString();
         HighscoreEffect.SetActive(true);
