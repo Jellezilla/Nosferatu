@@ -41,7 +41,7 @@ public class TurretedVehicleUserControl : MonoBehaviour {
             m_controller.LightsToggle();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             EventController.Instance.TriggerEvent(UIEvents.Rampage);
         }

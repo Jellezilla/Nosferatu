@@ -6,11 +6,11 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: sprflash_mat
-  m_Shader: {fileID: 4800000, guid: 69716d9dcabbddb48a23e8257d120fde, type: 3}
-  m_ShaderKeywords: 
+  m_Name: MaterialTombstones_Outline
+  m_Shader: {fileID: 4800000, guid: 4277ec02d52a07c418e3d3b51f008c47, type: 3}
+  m_ShaderKeywords: _NORMALMAP
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
     serializedVersion: 2
@@ -19,14 +19,14 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: cc0677bfe3ce930428b0fa7a8628e94d, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
         second:
-          m_Texture: {fileID: 0}
+          m_Texture: {fileID: 2800000, guid: 65022e5f7458aa849aa615f2c5a262ba, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -78,6 +78,34 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _SpecGlossMap
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _Reflections
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _RoughnessMap
+        second:
+          m_Texture: {fileID: 2800000, guid: dc3c03c3ceec9ed408674496f4245d21, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _SpecularMap
+        second:
+          m_Texture: {fileID: 2800000, guid: c406ed897ff6c654aa6299ae426d8d88, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -93,10 +121,6 @@ Material:
         second: 0.5
       data:
         first:
-          name: PixelSnap
-        second: 0
-      data:
-        first:
           name: _Parallax
         second: 0.02
       data:
@@ -106,7 +130,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0.5
+        second: 0
       data:
         first:
           name: _BumpScale
@@ -133,32 +157,16 @@ Material:
         second: 0
       data:
         first:
-          name: _FlashAmount
-        second: 0
+          name: _SpecularPower
+        second: 1
       data:
         first:
-          name: _Stencil
-        second: 0
+          name: _Roughness
+        second: 0.01
       data:
         first:
-          name: _StencilComp
-        second: 8
-      data:
-        first:
-          name: _StencilOp
-        second: 0
-      data:
-        first:
-          name: _StencilReadMask
-        second: 255
-      data:
-        first:
-          name: _StencilWriteMask
-        second: 255
-      data:
-        first:
-          name: _ColorMask
-        second: 15
+          name: _Outline
+        second: 0.2
     m_Colors:
       data:
         first:
@@ -170,5 +178,13 @@ Material:
         second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
-          name: _FlashColor
-        second: {r: 1, g: 1, b: 1, a: 1}
+          name: _SpecColor
+        second: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+      data:
+        first:
+          name: _SpecularColor
+        second: {r: 1, g: 1, b: 1, a: 0}
+      data:
+        first:
+          name: _OutlineColor
+        second: {r: 0, g: 0.8602941, b: 0.8246956, a: 1}

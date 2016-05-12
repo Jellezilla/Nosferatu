@@ -130,46 +130,42 @@ public class VehicleTurret : MonoBehaviour {
     /// </summary>
     public void Fire()
     {
-        RaycastHit hit;
-        Ray ray;
         if (!m_Hook.gameObject.activeSelf)
         {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit, 1000,-1))
+            if (GameController.Instance.InteractionManager.SelectedObject != null)
             {
-                if (Vector3.Distance(transform.position, hit.collider.transform.position) <= m_MaxRopeLength)
+                GameObject target = GameController.Instance.InteractionManager.SelectedObject.gameObject;
+
+                if (Vector3.Distance(transform.position, target.transform.position) <= m_MaxRopeLength)
                 {
-                    if (hit.collider.gameObject.tag != Tags.human)
-                    {
-                        m_Hook.gameObject.SetActive(true);
-                        m_Hook.gameObject.transform.rotation = m_VehicleTurret.transform.rotation;
-                        Vector3 hitpos = hit.point;
-                        hitpos.y = m_VehicleTurret.transform.position.y;
-                        m_Hook.transform.position = hitpos;
 
-                        //add hook hinge
-                        m_turretHookJoint = m_Hook.gameObject.AddComponent<HingeJoint>();
-                       // m_turretHookJoint.spring = m_spring;
-                       // m_turretHookJoint.useSpring = true;
-                        m_turretHookJoint.axis = Vector3.up;
-                        m_turretHookJoint.anchor = Vector3.zero;
+                    m_Hook.gameObject.SetActive(true);
+                    m_Hook.gameObject.transform.rotation = m_VehicleTurret.transform.rotation;
+                    Vector3 hitpos = target.transform.position;
+                    hitpos.y = m_VehicleTurret.transform.position.y;
+                    m_Hook.transform.position = hitpos;
 
-                        //add car hinge
-                        m_turretChainJoint = gameObject.AddComponent<HingeJoint>();
-                        m_turretChainJoint.spring = m_spring;
-                        m_turretChainJoint.useSpring = true;
-                        m_turretChainJoint.anchor = Vector3.zero;
-                        m_turretChainJoint.axis = Vector3.up;
-                        m_turretChainJoint.connectedBody = m_HookRB;
-                        m_Rope.CreateRope(m_Hook.gameObject);
-                        m_CurentRopeLength = Vector3.Distance(m_Hook.transform.position, gameObject.transform.position);
-                        m_retracted = false;
-                    }
+                    //add hook hinge
+                    m_turretHookJoint = m_Hook.gameObject.AddComponent<HingeJoint>();
+                    // m_turretHookJoint.spring = m_spring;
+                    // m_turretHookJoint.useSpring = true;
+                    m_turretHookJoint.axis = Vector3.up;
+                    m_turretHookJoint.anchor = Vector3.zero;
+
+                    //add car hinge
+                    m_turretChainJoint = gameObject.AddComponent<HingeJoint>();
+                    m_turretChainJoint.spring = m_spring;
+                    m_turretChainJoint.useSpring = true;
+                    m_turretChainJoint.anchor = Vector3.zero;
+                    m_turretChainJoint.axis = Vector3.up;
+                    m_turretChainJoint.connectedBody = m_HookRB;
+                    m_Rope.CreateRope(m_Hook.gameObject);
+                    m_CurentRopeLength = Vector3.Distance(m_Hook.transform.position, gameObject.transform.position);
+                    m_retracted = false;
+
                 }
-
-
             }
+
         }
 
     }

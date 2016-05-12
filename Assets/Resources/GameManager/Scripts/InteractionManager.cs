@@ -17,36 +17,69 @@ public class InteractionManager : MonoBehaviour
     [SerializeField]
     private LayerMask m_InteractionLayer;
     private bool m_Clicked;
+    private InteractableObject m_currentInteractable;
+    private InteractableObject m_newInteractable;
 
+    public InteractableObject SelectedObject
+    {
+        get
+        {
+            return m_currentInteractable;
+        }
+    }
     CursorState currentState;
 
     // Use this for initialization
     void Start()
     {
-
-        //     currentState = CursorState.idle;
-
+        currentState = CursorState.idle;
     }
 
     // Update is called once per frame
     void Update()
     {
-        getCurrentTarget();
-      //  handleCursor();
 
+        handleCursor();
+
+    }
+
+    void FixedUpdate()
+    {
+        getCurrentTarget();
     }
 
     void getCurrentTarget()
     {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-
-        if (m_Clicked) // retarded but meh
+        if (Physics.Raycast(ray, out hit, 1000, m_InteractionLayer,QueryTriggerInteraction.Ignore))
         {
+            if (m_currentInteractable == null)
+            {
+                m_currentInteractable = hit.collider.gameObject.GetComponent<InteractableObject>();
+                m_currentInteractable.ToggleHighlight();
+            }
+            else if (!ReferenceEquals(m_currentInteractable.gameObject,hit.collider.gameObject))
+            {
+                m_currentInteractable.ToggleHighlight();
+                m_currentInteractable = hit.collider.gameObject.GetComponent<InteractableObject>();
+                m_currentInteractable.ToggleHighlight();
+            }
             currentState = CursorState.Interactable;
         }
         else
         {
-            currentState = CursorState.idle;
+            if (m_currentInteractable == null)
+            {
+                currentState = CursorState.idle;
+            }
+            else if (m_currentInteractable != null && !m_Clicked)
+            {
+                m_currentInteractable.ToggleHighlight();
+                m_currentInteractable = null;
+            }
+
         }
 
     }
@@ -56,26 +89,26 @@ public class InteractionManager : MonoBehaviour
         {
             if (m_Clicked)
             {
-                Cursor.SetCursor(m_CursorImages[1], Vector2.zero, CursorMode.Auto);
+              //  Cursor.SetCursor(m_CursorImages[1], Vector2.zero, CursorMode.Auto);
             }
             else
             {
-                Cursor.SetCursor(m_CursorImages[0], Vector2.zero, CursorMode.Auto);
+                //Cursor.SetCursor(m_CursorImages[0], Vector2.zero, CursorMode.Auto);
             }
         }
         else if (currentState == CursorState.Interactable)
         {
             if (m_Clicked)
             {
-                Cursor.SetCursor(m_CursorImages[3], Vector2.zero, CursorMode.Auto);
+               // Cursor.SetCursor(m_CursorImages[3], Vector2.zero, CursorMode.Auto);
             }
             else
             {
-                Cursor.SetCursor(m_CursorImages[2], Vector2.zero, CursorMode.Auto);
+               // Cursor.SetCursor(m_CursorImages[2], Vector2.zero, CursorMode.Auto);
             }
         }
 
-        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButton(0) || Input.GetMouseButton(1))
         {
             m_Clicked = true;
         }
