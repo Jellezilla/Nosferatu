@@ -78,6 +78,14 @@ public class GameController : Singleton<GameController>
         }
     }
 
+    public float MaxFuel
+    {
+        get
+        {
+            return m_playerRes.MaxCarBlood;
+        }
+    }
+
     public bool PlayerDead
     {
         get

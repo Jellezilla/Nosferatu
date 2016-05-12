@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour {
 
@@ -22,12 +23,17 @@ public class UIManager : MonoBehaviour {
     private Text _scoreText;
     private float _spMaxWidth, _hpMaxWidth, _spHeight, _hpHeight;
     private int _oldPlayerDistance = 0;
+    private float m_oldFuelValue = 0;
     private Vector3 _oldPlayerPos;
-
+    private WaitForSeconds m_bloodPulse;
+    private float m_maxFuel;
     //TODO: Update with implementing only one variable for holding player pos datatatatata
 
     void Start() {
+        m_maxFuel = GameController.Instance.MaxFuel;
+        m_oldFuelValue = m_maxFuel;
         PlayerObject = GameController.Instance.Player;
+        m_bloodPulse = new WaitForSeconds(.1f);
         _hpmask = Healthbar.transform.GetChild(0).gameObject.GetComponent<RectTransform>();
         _spmask = Soulsbar.transform.GetChild(0).gameObject.GetComponent<RectTransform>();
 
@@ -47,15 +53,20 @@ public class UIManager : MonoBehaviour {
     void Update() {
         float fuelCurrent = GameController.Instance.GetFuel;
         float soulsCurrent = GameController.Instance.GetSouls;
-
+        if (fuelCurrent > m_oldFuelValue)
+        {
+            AddBloodEffect();
+        }
         _hpmask.sizeDelta = new Vector2(_hpMaxWidth / 100 * fuelCurrent, _hpHeight);// _hpHeight);
         _spmask.sizeDelta = new Vector2(_spMaxWidth / 100 * (1 + soulsCurrent), _spHeight);// _hpHeight);
 
         //Effect for rampage mode, when souls max has been reached
-        if (soulsCurrent >= 100 && !SpecialEffectObject.activeSelf) {//hardcoded max
+        if (soulsCurrent >= m_maxFuel && !SpecialEffectObject.activeSelf) {//hardcoded max
             SpecialEffectObject.SetActive(true);
             RampageReady.SetActive(true);
         }
+
+        m_oldFuelValue = fuelCurrent;
 
         //Taking care of score
         int newPlayerDistance = (int)PlayerObject.transform.position.z;
@@ -107,15 +118,14 @@ public class UIManager : MonoBehaviour {
     }
 
     public void RestartLevel() {
-        Application.LoadLevel(Application.loadedLevel); //DPRCTD
+       // Application.LoadLevel(Application.loadedLevel); //DPRCTD
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void AddSoulEffect(Vector2 spawnPos) {
-        //GameObject s = Instantiate(SoulEffectObject,new Vector3(spawnPos.x,1,spawnPos.y),transform.rotation) as GameObject;
-        //s.transform.SetParent(this.transform);
     }
 
-    public void AddBloodEffect() {
+    private void AddBloodEffect() {
         _bloodFading = true;
         StartCoroutine("FadeBlood");
     }

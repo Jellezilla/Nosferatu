@@ -137,5 +137,13 @@ public class VehicleResources : MonoBehaviour
             return m_CarBlood;
         }
     }
+
+    public float MaxCarBlood
+    {
+        get
+        {
+            return m_MaxCarBlood;
+        }
+    }
     #endregion
 }
