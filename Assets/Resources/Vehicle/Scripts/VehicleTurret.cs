@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(VehicleTurretRope))]
 public class VehicleTurret : MonoBehaviour {
 
     [SerializeField]
