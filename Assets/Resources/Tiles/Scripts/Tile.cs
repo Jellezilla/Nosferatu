@@ -4,6 +4,8 @@ using System.Collections;
 
 public class Tile : MonoBehaviour {
 
+    [SerializeField]
+    private bool m_IsTesting;
     private bool m_initTile;
     [SerializeField]
     private int m_HumanIndex;
@@ -27,6 +29,10 @@ public class Tile : MonoBehaviour {
         InitTile();
     }
 
+    void Start() 
+    {
+        if (m_IsTesting) TileLoader();
+    }
 
     void InitTile()
     {
