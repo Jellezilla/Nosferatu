@@ -30,6 +30,7 @@ public class TurretedVehicleUserControl : MonoBehaviour {
         }
         else
         {
+            
             m_vAxis = Input.GetAxis("Vertical");
         }
         m_hAxis = Input.GetAxis("Horizontal");

@@ -76,11 +76,12 @@ public class VehicleController : MonoBehaviour {
     private float m_SlipLimit;
     [SerializeField]
     private float m_BrakeTorque;
-
+    [SerializeField]
+    private float m_RevRangeBoundary = 1f;
     private Quaternion[] m_WheelMeshLocalRotations;
     private Vector3 m_Prevpos, m_Pos;
     private float m_SteerAngle;
-    private int m_GearNum;
+    private int m_GearNum = 0;
     private float m_GearFactor;
     private float m_OldRotation;
     private float m_CurrentTorque;
@@ -162,18 +163,57 @@ public class VehicleController : MonoBehaviour {
     private void Gears()
     {
         float speedRatio = Mathf.Abs(CurrentSpeed / m_Topspeed);
-        float upGearLimit = ((1 / m_nrOfGears) * (m_GearNum + 1));
-        float downGearLimit = ((1 / m_nrOfGears) * m_GearNum);
-
+        float upGearLimit = (1 / (float)m_nrOfGears) * (m_GearNum + 1);
+        float downGearLimit = (1 / (float)m_nrOfGears) * m_GearNum;
         if (m_GearNum > 0 && speedRatio < downGearLimit)
         {
             m_GearNum--;
         }
-        else if(m_GearNum > upGearLimit && (m_GearNum < (m_nrOfGears - 1)))
+
+        if (speedRatio > upGearLimit && (m_GearNum < (m_nrOfGears - 1)))
         {
             m_GearNum++;
+            Debug.Log(m_GearNum);
         }
     }
+
+
+    private void CalculateGearFactor()
+    {
+        float f = (1 / (float)m_nrOfGears);
+        // gear factor is a normalised representation of the current speed within the current gear's range of speeds.
+        // We smooth towards the 'target' gear factor, so that revs don't instantly snap up or down when changing gear.
+        var targetGearFactor = Mathf.InverseLerp(f * m_GearNum, f * (m_GearNum + 1), Mathf.Abs(CurrentSpeed / m_Topspeed));
+        m_GearFactor = Mathf.Lerp(m_GearFactor, targetGearFactor, Time.deltaTime * 5f);
+    }
+
+
+    // simple function to add a curved bias towards 1 for a value in the 0-1 range
+    private static float CurveFactor(float factor)
+    {
+        return 1 - (1 - factor) * (1 - factor);
+    }
+
+
+    // unclamped version of Lerp, to allow value to exceed the from-to range
+    private static float ULerp(float from, float to, float value)
+    {
+        return (1.0f - value) * from + value * to;
+    }
+
+
+
+    private void ComputeRevs()
+    {
+        // calculate engine revs (for display / sound)
+        // (this is done in retrospect - revs are not used in force/power calculations)
+        CalculateGearFactor();
+        var gearNumFactor = m_GearNum / (float)m_nrOfGears;
+        var revsRangeMin = ULerp(0f, m_RevRangeBoundary, CurveFactor(gearNumFactor));
+        var revsRangeMax = ULerp(m_RevRangeBoundary, 1f, gearNumFactor);
+        Revs = ULerp(revsRangeMin, revsRangeMax, m_GearFactor);
+    }
+
 
     /// <summary>
     /// Used to cap speed based on use unit.
@@ -532,7 +572,7 @@ public class VehicleController : MonoBehaviour {
         Gears();
         AddExtraGForce();
         TractionControl();
-
+        ComputeRevs();
 
 
     }

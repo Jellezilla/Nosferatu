@@ -22,10 +22,9 @@ public class Tile : MonoBehaviour {
     private bool m_loaded;
     // Use this for initialization
 
-    void Start()
+    void Awake()
     {
         InitTile();
-        TileLoader();
     }
 
 
