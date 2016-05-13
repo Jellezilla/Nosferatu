@@ -54,8 +54,6 @@
 			half glowRim = 1.0 - saturate(dot(normalize(IN.viewDir), o.Normal));
 			// Pass Emission data by multiplying the glow color with the normalized glowRim ^ glow power
 			o.Emission = _GlowColor.rgb * pow(glowRim, _GlowPower);
-
-
 		}
 		ENDCG
 	}

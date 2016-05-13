@@ -80,13 +80,13 @@ Shader "Outlined Standard (Specular setup)"
 				// ------------------------------------------------------------------
 				
 			Pass
-		{
+			{
 			Name "OUTLINE"
 			Tags{ "LightMode" = "Always" }
-			Cull off
+			Cull Off
 			ZWrite Off
 			ColorMask RGB // alpha not used
-			ZTest Always
+			ZTest Off
 						  // you can choose what kind of blending mode you want for the outline
 			Blend One OneMinusDstColor
 						  //Blend SrcAlpha OneMinusSrcAlpha // Normal

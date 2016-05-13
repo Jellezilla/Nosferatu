@@ -62,17 +62,27 @@ public class Tile : MonoBehaviour {
 
     public void TileLoader()
     {
+        Debug.Log(m_TombSpawnPoints.Length);
         gameObject.SetActive(true);
         for (int i = 0; i < m_HumanSpawnPoints.Length; i++)
         {
            m_Humans[i]  = GameController.Instance.ObjectPool.GrabObject(m_HumanIndex, m_HumanSpawnPoints[i].position, Quaternion.identity).GetComponent<HumanController>();
         }
 
-        for(int i = 0; i< m_TombSpawnPoints.Length; i++)
+        for(int i = 0; i< m_TombSpawnPoints.Length; i=i+m_Tombstones.Length)
         {
             for (int j = 0; j < m_Tombstones.Length; j++)
             {
-                m_Tombstones[j].Add(GameController.Instance.ObjectPool.GrabObject(m_TombstoneIndexs[j], m_TombSpawnPoints[i].position).GetComponent<Tombstone>());
+                if (i == m_TombSpawnPoints.Length - 1)
+                {
+                    m_Tombstones[j].Add(GameController.Instance.ObjectPool.GrabObject(m_TombstoneIndexs[j], m_TombSpawnPoints[i].position).GetComponent<Tombstone>());
+                    break;
+                }
+                else
+                {
+                    m_Tombstones[j].Add(GameController.Instance.ObjectPool.GrabObject(m_TombstoneIndexs[j], m_TombSpawnPoints[i + j].position).GetComponent<Tombstone>());
+                }
+
             }
         }
 

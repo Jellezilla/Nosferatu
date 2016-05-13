@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour {
         _spmask.sizeDelta = new Vector2(_spMaxWidth / 100 * (1 + soulsCurrent), _spHeight);// _hpHeight);
 
         //Effect for rampage mode, when souls max has been reached
-        if (soulsCurrent >= m_maxFuel && !SpecialEffectObject.activeSelf) {//hardcoded max
+        if (soulsCurrent >= m_maxSouls && !SpecialEffectObject.activeSelf) {//hardcoded max
             SpecialEffectObject.SetActive(true);
             RampageReady.SetActive(true);
         }
@@ -127,7 +127,6 @@ public class UIManager : MonoBehaviour {
         for (float f = 0.3f; f >= 0; f -= 0.1f) {
             if (f < 0.1) f = 0;
             _hpFill.material.SetFloat("_FlashAmount", f);
-
             yield return m_bloodPulse;
         }
     }
