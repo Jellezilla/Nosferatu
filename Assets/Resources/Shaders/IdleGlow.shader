@@ -6,7 +6,7 @@
 		_Glossiness("Smoothness", Range(0,1)) = 0.5
 		_Metallic("Metallic", Range(0,1)) = 0.0
 		_GlowColor ("Glow Color Tint", Color) = (1,1,1,1)
-		_GlowPower ("Glow Power", Range(0.5, 6)) = 3.0
+		_GlowPower ("Glow Power", Range(1, 25)) = 3.0
 		_NormalMap ("Normal Map", 2D) = "normal" {}
 		
 	}

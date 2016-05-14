@@ -56,6 +56,8 @@ Shader "Outlined Standard (Specular setup)"
 			float4 color : COLOR;
 		};
 
+
+
 		uniform float _Outline;
 		uniform float4 _OutlineColor;
 
@@ -81,14 +83,14 @@ Shader "Outlined Standard (Specular setup)"
 				
 			Pass
 			{
-			Name "OUTLINE"
-			Tags{ "LightMode" = "Always" }
-			Cull Off
-			ZWrite Off
-			ColorMask RGB // alpha not used
-			ZTest Off
+				Name "OUTLINE"
+				Tags{ "LightMode" = "Always" }
+				Cull Off
+				ZWrite Off
+				ColorMask RGB // alpha not used
+				ZTest Always
 						  // you can choose what kind of blending mode you want for the outline
-			Blend One OneMinusDstColor
+				Blend SrcAlpha OneMinusSrcAlpha
 						  //Blend SrcAlpha OneMinusSrcAlpha // Normal
 											//Blend One One // Additive
 											//Blend One OneMinusDstColor // Soft Additive
