@@ -112,7 +112,7 @@ public class TileManager : MonoBehaviour {
     private void TileChanger()
     {
         Vector3 playerOnTile = m_Player.transform.position;
-        playerOnTile.y -= m_carHeight;
+        playerOnTile.y = m_curTileCol.transform.position.y;
         if (m_curTileCol.bounds.Contains(playerOnTile) && playerOnTile.z > m_curTileCol.bounds.center.z)
         {
             if (!m_prevTileCol.bounds.Contains(playerOnTile))

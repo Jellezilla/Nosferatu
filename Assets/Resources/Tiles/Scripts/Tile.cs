@@ -31,7 +31,11 @@ public class Tile : MonoBehaviour {
 
     void Start() 
     {
-        if (m_IsTesting) TileLoader();
+        if (m_IsTesting)
+        {
+            TileLoader();
+        }
+
     }
 
     void InitTile()
