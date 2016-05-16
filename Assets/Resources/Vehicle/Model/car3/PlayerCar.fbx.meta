@@ -1,0 +1,127 @@
+fileFormatVersion: 2
+guid: 68b4ba854f300e1478552b859bd3eccc
+timeCreated: 1463140961
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Camera
+    100002: car_high1
+    100004: Lamp
+    100006: pCylinder4
+    100008: pCylinder5
+    100010: pCylinder6
+    100012: pCylinder7
+    100014: //RootNode
+    100016: back_L_Wheel
+    100018: back_R_Wheel
+    100020: carBody
+    100022: front_L_Wheel
+    100024: front_R_Wheel
+    400000: Camera
+    400002: car_high1
+    400004: Lamp
+    400006: pCylinder4
+    400008: pCylinder5
+    400010: pCylinder6
+    400012: pCylinder7
+    400014: //RootNode
+    400016: back_L_Wheel
+    400018: back_R_Wheel
+    400020: carBody
+    400022: front_L_Wheel
+    400024: front_R_Wheel
+    2300000: car_high1
+    2300002: pCylinder4
+    2300004: pCylinder5
+    2300006: pCylinder6
+    2300008: pCylinder7
+    2300010: back_L_Wheel
+    2300012: back_R_Wheel
+    2300014: carBody
+    2300016: front_L_Wheel
+    2300018: front_R_Wheel
+    3300000: car_high1
+    3300002: pCylinder4
+    3300004: pCylinder5
+    3300006: pCylinder6
+    3300008: pCylinder7
+    3300010: back_L_Wheel
+    3300012: back_R_Wheel
+    3300014: carBody
+    3300016: front_L_Wheel
+    3300018: front_R_Wheel
+    4300000: car_high1
+    4300002: pCylinder7
+    4300004: pCylinder6
+    4300006: pCylinder5
+    4300008: pCylinder4
+    4300010: carBody
+    4300012: front_L_Wheel
+    4300014: back_L_Wheel
+    4300016: back_R_Wheel
+    4300018: front_R_Wheel
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

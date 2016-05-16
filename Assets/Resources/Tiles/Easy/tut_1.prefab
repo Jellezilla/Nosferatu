@@ -2372,7 +2372,8 @@ GameObject:
   - 33: {fileID: 3389128}
   - 23: {fileID: 2325478}
   - 65: {fileID: 6533664}
-  m_Layer: 0
+  - 114: {fileID: 11440714}
+  m_Layer: 9
   m_Name: Tombstones.005 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4948,7 +4949,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127342}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 397.53143, y: 58.156517, z: 133.28177}
+  m_LocalPosition: {x: 63.51683, y: 121.026855, z: 211.66345}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 435206}
@@ -10319,6 +10320,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11440714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a16c7c06004db4bb940be99c9fd526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OutlineMaterial: {fileID: 2100000, guid: e3873e154c7248a49918b372958156fc, type: 2}
 --- !u!114 &11474014
 MonoBehaviour:
   m_ObjectHideFlags: 1

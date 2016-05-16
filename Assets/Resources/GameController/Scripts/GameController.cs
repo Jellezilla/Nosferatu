@@ -10,18 +10,21 @@ public class GameController : Singleton<GameController>
     private VehicleResources m_playerRes;
     private GameObject m_player;
     private ObjectPool m_objPool;
+    private InteractionManager m_interactionM;
     private Rigidbody m_playerRB;
     // Use this for initialization
     void Awake()
     {
         LoadObjectPool();
         LoadPlayer();
+        LoadInteractionManager();
     }
 
     void OnLevelWasLoaded(int level)
     {
         LoadObjectPool();
         LoadPlayer();
+        LoadInteractionManager();
     }
 
     private void LoadPlayer()
@@ -36,6 +39,18 @@ public class GameController : Singleton<GameController>
         m_objPool = GameObject.FindGameObjectWithTag(Tags.objectpool).GetComponent<ObjectPool>();
     }
 
+    private void LoadInteractionManager()
+    {
+        m_interactionM = GameObject.FindGameObjectWithTag(Tags.interactionManager).GetComponent<InteractionManager>();
+    }
+
+    public InteractionManager InteractionManager
+    {
+        get
+        {
+            return m_interactionM;
+        }
+    }
     public GameObject Player
     {
         get
@@ -77,6 +92,23 @@ public class GameController : Singleton<GameController>
             return m_playerRes.OutOfFuel;
         }
     }
+
+    public float MaxFuel
+    {
+        get
+        {
+            return m_playerRes.MaxCarBlood;
+        }
+    }
+
+    public float MaxSouls
+    {
+        get
+        {
+            return m_playerRes.MaxCarSouls;
+        }
+    }
+
 
     public bool PlayerDead
     {

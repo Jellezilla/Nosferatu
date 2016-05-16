@@ -9,6 +9,7 @@ TagManager:
   - UI Camera
   - ObjectPool
   - TileManager
+  - InteractionManager
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - 
   - Human
-  - Hook
+  - Interactable
   - PlayerWheels
   - Tombstone
   - PlayerBody

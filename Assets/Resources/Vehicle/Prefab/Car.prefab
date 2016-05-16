@@ -64,6 +64,7 @@ GameObject:
   - 114: {fileID: 11405432}
   - 114: {fileID: 11432038}
   - 65: {fileID: 6564882}
+  - 114: {fileID: 11407416}
   m_Layer: 12
   m_Name: Car
   m_TagString: Player
@@ -287,7 +288,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 126868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 50.19, y: 1.21, z: 255.1}
+  m_LocalPosition: {x: 63, y: 0.9, z: 253.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 450742}
@@ -715,7 +716,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 100
   m_Drag: 0.45
-  m_AngularDrag: 0.075
+  m_AngularDrag: 0.045
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -829,6 +830,29 @@ MonoBehaviour:
   m_RopeMaterial: {fileID: 2100000, guid: c2caad9e29195ed40997696f42d29f67, type: 2}
   m_ropeWidth: 0.15
   m_segmentRate: 2
+--- !u!114 &11407416
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 126868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70e4cff3a4f2a4343ae5704341f987fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engineSoundStyle: 1
+  lowAccelClip: {fileID: 8300000, guid: b709723a9f4abcc41ab8853006cf282b, type: 3}
+  lowDecelClip: {fileID: 8300000, guid: 21584a66e34e972449c6c2fa8d1c2878, type: 3}
+  highAccelClip: {fileID: 8300000, guid: 1541c1761d0b8534482be86eb65f9208, type: 3}
+  highDecelClip: {fileID: 8300000, guid: a95b0d3e6cf32d940a9c8bc5c2ed367a, type: 3}
+  pitchMultiplier: 0.75
+  lowPitchMin: 1.5
+  lowPitchMax: 5
+  highPitchMultiplier: 0.25
+  maxRolloffDistance: 500
+  dopplerLevel: 1
+  useDoppler: 1
 --- !u!114 &11432038
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -840,12 +864,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655fac3913e72e741bf203e6e5e640bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UICanvasRef: {fileID: 0}
   m_MaxCarSouls: 100
   m_MaxCarBlood: 100
   m_BloodConsumption: 5
   m_BloodPerHuman: 5
-  m_SoulsPerHuman: 1
+  m_SoulsPerHuman: 5
   m_FuelReplenishTime: 3
 --- !u!114 &11451128
 MonoBehaviour:
@@ -911,13 +934,14 @@ MonoBehaviour:
   m_SteerAngleThreshold: 35
   m_SteerAsist: 0.106
   m_TractionControlAsist: 0.304
-  m_WheelTorque: 3000
-  m_ReverseTorque: 600
-  m_Downforce: 100
-  m_Topspeed: 80
+  m_WheelTorque: 800
+  m_ReverseTorque: 300
+  m_Downforce: 80
+  m_Topspeed: 150
   m_nrOfGears: 5
   m_SlipLimit: 0.2
-  m_BrakeTorque: 2350
+  m_BrakeTorque: 500
+  m_RevRangeBoundary: 1
 --- !u!146 &14620894
 WheelCollider:
   m_ObjectHideFlags: 1

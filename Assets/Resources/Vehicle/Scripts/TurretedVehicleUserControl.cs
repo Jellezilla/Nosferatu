@@ -30,11 +30,22 @@ public class TurretedVehicleUserControl : MonoBehaviour {
         }
         else
         {
+            
             m_vAxis = Input.GetAxis("Vertical");
         }
         m_hAxis = Input.GetAxis("Horizontal");
         m_brakeAxis = Input.GetAxis("Jump");
         m_fireAxis = Input.GetAxis("Fire1");
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            m_controller.LightsToggle();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            EventController.Instance.TriggerEvent(UIEvents.Rampage);
+        }
     }
 
 	void Update ()
@@ -43,10 +54,7 @@ public class TurretedVehicleUserControl : MonoBehaviour {
         GetInput();
         TurretLogic();
 
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            m_controller.LightsToggle();
-        }
+
 
 
 

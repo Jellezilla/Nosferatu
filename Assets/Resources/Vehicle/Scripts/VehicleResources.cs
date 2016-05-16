@@ -6,8 +6,6 @@ using System.Collections;
 /// </summary>
 public class VehicleResources : MonoBehaviour
 {
-    public GameObject UICanvasRef;
-    private UIManager _uiManagerRef;
 
     [SerializeField]
     private float m_MaxCarSouls;
@@ -135,6 +133,22 @@ public class VehicleResources : MonoBehaviour
         get
         {
             return m_CarBlood;
+        }
+    }
+
+    public float MaxCarBlood
+    {
+        get
+        {
+            return m_MaxCarBlood;
+        }
+    }
+
+    public float MaxCarSouls
+    {
+        get
+        {
+            return m_MaxCarSouls;
         }
     }
     #endregion
