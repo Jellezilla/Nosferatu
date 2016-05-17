@@ -10,6 +10,7 @@ TagManager:
   - ObjectPool
   - TileManager
   - InteractionManager
+  - Lava
   layers:
   - Default
   - TransparentFX

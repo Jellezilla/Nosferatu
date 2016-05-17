@@ -52,6 +52,11 @@ public class VehicleResources : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.tag == Tags.lava)
+        {
+            m_CarBlood = 0;
+        }
+
         if (other.tag == Tags.human)
         {
             //Adding UI soul effect

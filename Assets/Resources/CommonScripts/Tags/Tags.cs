@@ -10,5 +10,6 @@ public static class Tags {
     public const string environment = "Environment";
     public const string objectpool = "ObjectPool";
     public const string interactionManager = "InteractionManager";
+    public const string lava = "Lava";
 }
 
