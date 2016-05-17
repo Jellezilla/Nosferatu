@@ -173,7 +173,6 @@ public class VehicleController : MonoBehaviour {
         if (speedRatio > upGearLimit && (m_GearNum < (m_nrOfGears - 1)))
         {
             m_GearNum++;
-            Debug.Log(m_GearNum);
         }
     }
 

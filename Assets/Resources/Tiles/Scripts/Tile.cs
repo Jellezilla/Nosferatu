@@ -31,7 +31,12 @@ public class Tile : MonoBehaviour {
 
     void Start() 
     {
-        if (m_IsTesting) TileLoader();
+        //used for testing if the tile works 
+        if (m_IsTesting)
+        {
+            TileLoader();
+        }
+
     }
 
     void InitTile()
@@ -68,14 +73,15 @@ public class Tile : MonoBehaviour {
 
     public void TileLoader()
     {
-        Debug.Log(m_TombSpawnPoints.Length);
+
         gameObject.SetActive(true);
+       
         for (int i = 0; i < m_HumanSpawnPoints.Length; i++)
         {
            m_Humans[i]  = GameController.Instance.ObjectPool.GrabObject(m_HumanIndex, m_HumanSpawnPoints[i].position, Quaternion.identity).GetComponent<HumanController>();
         }
 
-        for(int i = 0; i< m_TombSpawnPoints.Length; i=i+m_Tombstones.Length)
+        for (int i = 0; i < m_TombSpawnPoints.Length; i = i + m_Tombstones.Length)
         {
             for (int j = 0; j < m_Tombstones.Length; j++)
             {
@@ -91,10 +97,7 @@ public class Tile : MonoBehaviour {
 
             }
         }
-
-
-
-        }
+   }
     public void TileUnloader()
     {
         for (int i = 0; i < m_Humans.Length; i++)
@@ -118,29 +121,52 @@ public class Tile : MonoBehaviour {
     IEnumerator TileLoaderRoutine()
     {
 
-        int humanCounter = m_HumanSpawnPoints.Length - 1;
-        int tombstoneCounter = m_TombSpawnPoints.Length - 1;
+        int humanCounter = m_HumanSpawnPoints.Length-1;
+        int tombstoneCounter = m_TombSpawnPoints.Length-1;
 
         while (!m_loaded)
         {
-            if (humanCounter > 0)
+            if (humanCounter >= 0)
             {
                 m_Humans[humanCounter] = GameController.Instance.ObjectPool.GrabObject(m_HumanIndex, m_HumanSpawnPoints[humanCounter].position, Quaternion.identity).GetComponent<HumanController>();
-                humanCounter--;
+                if (humanCounter != 0)
+                {
+                    humanCounter--;
+                }
+
+
             }
 
-            if (tombstoneCounter > 0)
+            if (tombstoneCounter >= 0)
             {
                 for (int i = 0; i < m_TombstoneIndexs.Length; i++)
                 {
 
                      m_Tombstones[i].Add(GameController.Instance.ObjectPool.GrabObject(m_TombstoneIndexs[i],m_TombSpawnPoints[tombstoneCounter].position).GetComponent<Tombstone>());
+                    if (tombstoneCounter != 0)
+                    {
                         tombstoneCounter--;
+                    }
+
+                     Debug.Log(tombstoneCounter);
                 }
             }
+
+            if (humanCounter == 0 && tombstoneCounter == 0)
+            {
+
+
+                m_loaded = true;
+            }
+
             yield return m_wait;
+
         }
-        m_loaded = true;
+
+        Debug.Log("Loaded");
+
+
+
     }
 
     // Update is called once per frame
