@@ -12,9 +12,6 @@ public class TileManager : MonoBehaviour {
     private GameObject m_startTilePrefab;
     private Tile m_startTile;
     [SerializeField]
-    private GameObject m_rampageTilePrefab;
-    private Tile m_rampageTile;
-    [SerializeField]
     private GameObject[] m_easyTilePrefabs;
     [SerializeField]
     private GameObject[] m_normalTilesPrefabs;
@@ -44,8 +41,6 @@ public class TileManager : MonoBehaviour {
         m_Player = GameController.Instance.Player;
         m_startTile = Instantiate(m_startTilePrefab).GetComponent<Tile>();
         m_startTile.gameObject.SetActive(false);
-        m_rampageTile = Instantiate(m_rampageTilePrefab).GetComponent<Tile>();
-        m_rampageTile.gameObject.SetActive(false);
         m_Tiles = new Tile[m_nrOfDiffs][];
 
         for (int i = 0; i < m_nrOfDiffs; i++)
@@ -57,7 +52,7 @@ public class TileManager : MonoBehaviour {
                         m_Tiles[i] = new Tile[m_easyTilePrefabs.Length];
                         for (int j = 0; j < m_easyTilePrefabs.Length; j++)
                         {
-                            m_Tiles[i][j] = Instantiate(m_easyTilePrefabs[i]).GetComponent<Tile>();
+                            m_Tiles[i][j] = Instantiate(m_easyTilePrefabs[j]).GetComponent<Tile>();
                             m_Tiles[i][j].gameObject.SetActive(false);
                         }
                         break;
@@ -68,7 +63,7 @@ public class TileManager : MonoBehaviour {
                         m_Tiles[i] =  new Tile[m_normalTilesPrefabs.Length];
                         for (int j = 0; j < m_normalTilesPrefabs.Length; j++)
                         {
-                            m_Tiles[i][j] = Instantiate(m_normalTilesPrefabs[i]).GetComponent<Tile>();
+                            m_Tiles[i][j] = Instantiate(m_normalTilesPrefabs[j]).GetComponent<Tile>();
                             m_Tiles[i][j].gameObject.SetActive(false);
                         }
                         break;
@@ -79,7 +74,7 @@ public class TileManager : MonoBehaviour {
                         m_Tiles[i] = new Tile[m_hardTilesPrefabs.Length];
                         for (int j = 0; j < m_hardTilesPrefabs.Length; j++)
                         {
-                            m_Tiles[i][j] = Instantiate(m_hardTilesPrefabs[i]).GetComponent<Tile>();
+                            m_Tiles[i][j] = Instantiate(m_hardTilesPrefabs[j]).GetComponent<Tile>();
                             m_Tiles[i][j].gameObject.SetActive(false);
                         }
                         break;
