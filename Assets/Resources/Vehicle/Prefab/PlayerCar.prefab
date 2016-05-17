@@ -894,7 +894,7 @@ MonoBehaviour:
   - {fileID: 172124}
   - {fileID: 169274}
   - {fileID: 194494}
-  m_CenterOfMass: {x: 0, y: -0.2, z: 0}
+  m_CenterOfMass: {x: 0, y: 0.1, z: -0.7}
   m_SteeringRate: 1
   m_MaxSteerAngle: 20
   m_SteerSpeedThreshold: 5

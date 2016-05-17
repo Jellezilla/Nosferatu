@@ -11,13 +11,13 @@ public class FollowCam : MonoBehaviour {
     private Rigidbody _pRb;
     private float _offsetY;
     private float _cOffsetY;
-    private float _terrainY;
     
 	// Use this for initialization
 	void Start () {
 
         _pObject = GameController.Instance.Player;
-        _terrainY = _pObject.transform.position.y;
+        Debug.Log(_pObject);
+
         Vector3 eurot = gameObject.transform.rotation.eulerAngles;
         eurot.y = _pObject.transform.eulerAngles.y;
         transform.rotation = Quaternion.Euler(eurot);
@@ -42,8 +42,8 @@ public class FollowCam : MonoBehaviour {
         if (_pObject != null)
         //if (_player != null)
         {
-            gameObject.transform.position = new Vector3(_pObject.transform.position.x, 
-                _terrainY+DistanceToPlayerUp+_cOffsetY, 
+            gameObject.transform.position = new Vector3(_pObject.transform.position.x,
+                _pObject.transform.position.y + DistanceToPlayerUp+_cOffsetY, 
                 _pObject.transform.position.z+ DistanceToPlayerForward);
 
             //transform.position = new Vector3(_player.position.x, transform.position.y, _player.position.z);

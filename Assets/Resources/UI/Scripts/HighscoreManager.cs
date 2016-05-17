@@ -116,8 +116,8 @@ public class HighscoreManager : MonoBehaviour {
 
     void PrintScores() {
         for (int i = 0; i < _scoreData.playerNames.Length; i++) {
-            Debug.Log(_scoreData.playerNames[i]);
-            Debug.Log(_scoreData.playerScores[i]);
+         //   Debug.Log(_scoreData.playerNames[i]);
+          //  Debug.Log(_scoreData.playerScores[i]);
         }
     }
 

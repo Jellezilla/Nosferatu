@@ -117,7 +117,7 @@ public class UIManager : MonoBehaviour {
 
     public void RestartLevel() {
        // Application.LoadLevel(Application.loadedLevel); //DPRCTD
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(1);
     }
 
     public void AddSoulEffect(Vector2 spawnPos) {
