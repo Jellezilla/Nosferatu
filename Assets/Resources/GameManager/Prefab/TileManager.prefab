@@ -41,7 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LevelOrigin: {x: 0, y: 0, z: 0}
   m_tileChangeDistance: 3
-  m_startTilePrefab: {fileID: 194172, guid: a8c118ed82dda464dba46eacbb80215e, type: 2}
+  m_startTilePrefab: {fileID: 177532, guid: d88aa80eae624454dae744fc484484ba, type: 2}
   m_easyTilePrefabs:
   - {fileID: 177532, guid: d88aa80eae624454dae744fc484484ba, type: 2}
   - {fileID: 160478, guid: d077605ef6426b24e8a4c2293e68ac50, type: 2}
