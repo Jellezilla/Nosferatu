@@ -384,6 +384,7 @@ GameObject:
   - 23: {fileID: 2377516}
   - 114: {fileID: 11445698}
   - 65: {fileID: 6570242}
+  - 65: {fileID: 6569008}
   m_Layer: 9
   m_Name: Lightpole
   m_TagString: Untagged
@@ -20005,7 +20006,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 517.3, y: 244.2, z: -11.611786}
+  m_LocalPosition: {x: 178.13766, y: 19.715372, z: 292.65955}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400546}
@@ -39272,6 +39273,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 2, z: 100}
   m_Center: {x: 0, y: 1, z: 50}
+--- !u!65 &6569008
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103536}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.26376307, y: 0.2637631, z: 14.415486}
+  m_Center: {x: -0.000000007450581, y: -1.28035205e-14, z: 7.207743}
 --- !u!65 &6569310
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -39294,8 +39307,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.78, y: 4.79, z: 6.89}
-  m_Center: {x: 0.06, y: 0.04, z: 11.71}
+  m_Size: {x: 4.78, y: 4.79, z: 0.47980064}
+  m_Center: {x: 0.05999943, y: 0.039999276, z: 14.915145}
 --- !u!65 &6588442
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -39681,7 +39694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e6b439b714ca14ba9eda9ccbcd81d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IsTesting: 1
+  m_IsTesting: 0
   m_HumanIndex: 0
   m_TombstoneIndexs: 0100000002000000
   m_HumanContainer: {fileID: 180014}
