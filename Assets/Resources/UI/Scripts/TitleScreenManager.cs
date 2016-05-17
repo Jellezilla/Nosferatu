@@ -17,6 +17,7 @@ public class TitleScreenManager : MonoBehaviour {
 
     private ScoreTable _scoreData;
     private List<Text> _nameFields, _scoreFields;
+    public GameObject LoadingText;
 
     void OnEnable() {
         SetupRefs();
@@ -83,6 +84,7 @@ public class TitleScreenManager : MonoBehaviour {
     }
 
     public void OnStartGame() {
+        LoadingText.SetActive(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
     }
 
