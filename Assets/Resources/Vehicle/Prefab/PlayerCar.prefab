@@ -274,7 +274,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160540}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 59.75, y: 0, z: 253.85}
+  m_LocalPosition: {x: 566.26, y: 246.15, z: -5.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 482464}
@@ -680,7 +680,7 @@ Rigidbody:
   m_GameObject: {fileID: 160540}
   serializedVersion: 2
   m_Mass: 100
-  m_Drag: 0.35
+  m_Drag: 0.3
   m_AngularDrag: 0.045
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -901,13 +901,13 @@ MonoBehaviour:
   m_SteerAngleThreshold: 35
   m_SteerAsist: 0.106
   m_TractionControlAsist: 0.304
-  m_WheelTorque: 1200
-  m_ReverseTorque: 450
+  m_WheelTorque: 6000
+  m_ReverseTorque: 1500
   m_Downforce: 80
-  m_Topspeed: 150
+  m_Topspeed: 200
   m_nrOfGears: 5
   m_SlipLimit: 0.2
-  m_BrakeTorque: 500
+  m_BrakeTorque: 4500
   m_RevRangeBoundary: 1
 --- !u!146 &14655656
 WheelCollider:
