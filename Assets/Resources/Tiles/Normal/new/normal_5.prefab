@@ -36297,7 +36297,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 100, y: 0.34, z: 100}
-  m_Center: {x: 50, y: -0.17, z: 50}
+  m_Center: {x: 50, y: -0.11, z: 50}
 --- !u!65 &6527170
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -36765,6 +36765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e6b439b714ca14ba9eda9ccbcd81d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IsTesting: 0
   m_HumanIndex: 0
   m_TombstoneIndexs: 0100000002000000
   m_HumanContainer: {fileID: 139562}

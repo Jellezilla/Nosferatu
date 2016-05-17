@@ -229,6 +229,7 @@ GameObject:
   - 4: {fileID: 463988}
   - 95: {fileID: 9535714}
   - 114: {fileID: 11457344}
+  - 114: {fileID: 11495888}
   - 54: {fileID: 5496224}
   - 65: {fileID: 6573982}
   - 136: {fileID: 13671390}
@@ -2333,6 +2334,19 @@ MonoBehaviour:
   - {fileID: 13607688}
   - {fileID: 13633442}
   - {fileID: 13625810}
+--- !u!114 &11495888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37919cbbb8a8e62499c43f3dfabd16fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_volume: 0.3
+  m_HumanSplat: {fileID: 8300000, guid: f4f978db13e6044eb93d1697f0f2cb3f, type: 3}
 --- !u!135 &13507746
 SphereCollider:
   m_ObjectHideFlags: 1

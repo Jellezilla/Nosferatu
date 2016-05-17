@@ -64,7 +64,6 @@ public class VehicleTurret : MonoBehaviour {
     {
         m_Hook = Instantiate(m_HookPrefab);
         m_HookRB = m_Hook.GetComponent<Rigidbody>();
-        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), m_Hook.gameObject.GetComponent<Collider>());
         m_Hook.gameObject.SetActive(false);
         m_spring = new JointSpring();
         m_spring.targetPosition = 0;
