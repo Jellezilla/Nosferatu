@@ -9998,7 +9998,7 @@ GameObject:
   - 65: {fileID: 6509214}
   - 114: {fileID: 11425874}
   m_Layer: 0
-  m_Name: Lava_1
+  m_Name: lava_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

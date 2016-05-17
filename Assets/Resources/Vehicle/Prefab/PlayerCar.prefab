@@ -680,7 +680,7 @@ Rigidbody:
   m_GameObject: {fileID: 160540}
   serializedVersion: 2
   m_Mass: 100
-  m_Drag: 0.45
+  m_Drag: 0.35
   m_AngularDrag: 0.045
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -855,14 +855,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   engineSoundStyle: 1
-  lowAccelClip: {fileID: 8300000, guid: dccdd60c3239c45859a944fca5a65e9c, type: 3}
-  lowDecelClip: {fileID: 8300000, guid: 8ef3877534f5e48f4b01ff564f0bee10, type: 3}
-  highAccelClip: {fileID: 8300000, guid: ee9505d6477e04757bfd2405a86be43e, type: 3}
-  highDecelClip: {fileID: 8300000, guid: a5cd33303e97e4d64bb94b87f4b740aa, type: 3}
-  pitchMultiplier: 0.75
-  lowPitchMin: 1.5
-  lowPitchMax: 5
-  highPitchMultiplier: 0.25
+  lowAccelClip: {fileID: 8300000, guid: b709723a9f4abcc41ab8853006cf282b, type: 3}
+  lowDecelClip: {fileID: 8300000, guid: 21584a66e34e972449c6c2fa8d1c2878, type: 3}
+  highAccelClip: {fileID: 8300000, guid: 1541c1761d0b8534482be86eb65f9208, type: 3}
+  highDecelClip: {fileID: 8300000, guid: a95b0d3e6cf32d940a9c8bc5c2ed367a, type: 3}
+  pitchMultiplier: 0.85
+  lowPitchMin: 1.25
+  lowPitchMax: 4.5
+  highPitchMultiplier: 0.3
   maxRolloffDistance: 500
   dopplerLevel: 1
   useDoppler: 1
@@ -901,8 +901,8 @@ MonoBehaviour:
   m_SteerAngleThreshold: 35
   m_SteerAsist: 0.106
   m_TractionControlAsist: 0.304
-  m_WheelTorque: 800
-  m_ReverseTorque: 300
+  m_WheelTorque: 1200
+  m_ReverseTorque: 450
   m_Downforce: 80
   m_Topspeed: 150
   m_nrOfGears: 5
