@@ -23,7 +23,7 @@ public class HighscoreManager : MonoBehaviour {
 
     void OnEnable () {
         SetupRefs();
-        ResetScores();
+        //ResetScores();
         _scoreData = GetScores();
 
         ChangeScores();
