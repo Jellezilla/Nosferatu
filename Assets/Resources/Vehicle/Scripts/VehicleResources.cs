@@ -33,6 +33,7 @@ public class VehicleResources : MonoBehaviour
         private set;
         get;
     }
+    
     [SerializeField]
     private float m_FuelReplenishTime;
     // Use this for initialization
@@ -55,6 +56,7 @@ public class VehicleResources : MonoBehaviour
         if (other.gameObject.tag == Tags.lava)
         {
             m_CarBlood = 0;
+            DeadInTheWater = true;
         }
 
         if (other.tag == Tags.human)
@@ -120,8 +122,12 @@ public class VehicleResources : MonoBehaviour
             }
 
         }
+        if (!DeadInTheWater)
+        {
+            DeadInTheWater = true;
+        }
 
-        DeadInTheWater = true;
+
 
     }
     #region Getters
