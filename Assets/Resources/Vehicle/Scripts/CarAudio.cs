@@ -26,7 +26,8 @@ public class CarAudio : MonoBehaviour
         Simple, // Simple style audio
         FourChannel // four Channel audio
     }
-
+    [SerializeField]
+    private AudioClip hookLaunchClip;
     [SerializeField]
     private EngineAudioOptions engineSoundStyle = EngineAudioOptions.FourChannel;// Set the default audio options to be four channel
     [SerializeField]
@@ -57,24 +58,33 @@ public class CarAudio : MonoBehaviour
     private AudioSource m_LowDecel; // Source for the low deceleration sounds
     private AudioSource m_HighAccel; // Source for the high acceleration sounds
     private AudioSource m_HighDecel; // Source for the high deceleration sounds
+    private AudioSource m_HookLaunch;
     private bool m_StartedSound; // flag for knowing if we have started sounds
     private VehicleController m_CarController; // Reference to car we are controlling
-
-
+    private VehicleTurret m_CarTurret;
+    private bool m_Shoot;
     private void StartSound()
     {
         // get the carcontroller ( this will not be null as we have require component)
         m_CarController = GetComponent<VehicleController>();
+        m_CarTurret = GetComponent<VehicleTurret>();
 
         // setup the simple audio source
-        m_HighAccel = SetUpEngineAudioSource(highAccelClip);
+
 
         // if we have four channel audio setup the four audio sources
         if (engineSoundStyle == EngineAudioOptions.FourChannel)
         {
-            m_LowAccel = SetUpEngineAudioSource(lowAccelClip);
-            m_LowDecel = SetUpEngineAudioSource(lowDecelClip);
-            m_HighDecel = SetUpEngineAudioSource(highDecelClip);
+            m_HighAccel = SetUpAudioSource(highAccelClip, true, true, true, true);
+            m_LowAccel = SetUpAudioSource(lowAccelClip, true, true, true, true);
+            m_LowDecel = SetUpAudioSource(lowDecelClip, true, true, true, true);
+            m_HighDecel = SetUpAudioSource(highDecelClip, true, true, true, true);
+            m_HookLaunch = SetUpAudioSource(hookLaunchClip, false, false, false, false);
+        }
+        else
+        {
+            m_HighAccel = SetUpAudioSource(highAccelClip, true, true, true, true);
+            m_HookLaunch = SetUpAudioSource(hookLaunchClip, false, false, false, false);
         }
 
         // flag that we have started the sounds playing
@@ -97,6 +107,18 @@ public class CarAudio : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (m_StartedSound && !m_Shoot && !m_CarTurret.isRetracted)
+        {
+            Debug.Log("false");
+            m_HookLaunch.Play();
+            m_Shoot = true;
+        }
+
+        if (m_StartedSound && m_CarTurret.isRetracted)
+        {
+            Debug.Log("true");
+            m_Shoot = false;
+        }
         // get the distance to main camera
         float camDist = (Camera.main.transform.position - transform.position).sqrMagnitude;
 
@@ -126,6 +148,7 @@ public class CarAudio : MonoBehaviour
                 m_HighAccel.pitch = pitch * pitchMultiplier * highPitchMultiplier;
                 m_HighAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_HighAccel.volume = 1;
+                m_HookLaunch.volume = 0.5f;
             }
             else
             {
@@ -156,8 +179,9 @@ public class CarAudio : MonoBehaviour
                 m_LowDecel.volume = lowFade * decFade;
                 m_HighAccel.volume = highFade * accFade;
                 m_HighDecel.volume = highFade * decFade;
-
+                m_HookLaunch.volume = 0.5f;
                 // adjust the doppler levels
+                m_HookLaunch.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_HighAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_LowAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_HighDecel.dopplerLevel = useDoppler ? dopplerLevel : 0;
@@ -168,17 +192,27 @@ public class CarAudio : MonoBehaviour
 
 
     // sets up and adds new audio source to the gane object
-    private AudioSource SetUpEngineAudioSource(AudioClip clip)
+    private AudioSource SetUpAudioSource(AudioClip clip, bool looping, bool playing,bool randomStartPoint,bool playOnAwake)
     {
         // create the new audio source component on the game object and set up its properties
         AudioSource source = gameObject.AddComponent<AudioSource>();
         source.clip = clip;
         source.volume = 0;
-        source.loop = true;
+        source.loop = looping;
+        source.playOnAwake = playOnAwake;
 
-        // start the clip from a random point
-        source.time = Random.Range(0f, clip.length);
-        source.Play();
+        if (randomStartPoint)
+        {
+            // start the clip from a random point
+            source.time = Random.Range(0f, clip.length);
+        }
+
+
+        if (playing)
+        {
+            source.Play();
+        }
+
         source.minDistance = 5;
         source.maxDistance = maxRolloffDistance;
         source.dopplerLevel = 0;

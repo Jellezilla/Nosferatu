@@ -854,6 +854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e4cff3a4f2a4343ae5704341f987fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hookLaunchClip: {fileID: 8300000, guid: 784d244840ed342f9a2b89809d9dfb22, type: 3}
   engineSoundStyle: 1
   lowAccelClip: {fileID: 8300000, guid: b709723a9f4abcc41ab8853006cf282b, type: 3}
   lowDecelClip: {fileID: 8300000, guid: 21584a66e34e972449c6c2fa8d1c2878, type: 3}
