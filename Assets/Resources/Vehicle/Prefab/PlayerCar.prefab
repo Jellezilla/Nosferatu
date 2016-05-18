@@ -826,11 +826,7 @@ MonoBehaviour:
   m_RotRevCooldown: 15
   m_HookPrefab: {fileID: 152528, guid: 7b711825a36b10e4b8bfdb9fe37253ec, type: 2}
   m_MaxRopeLength: 18
-<<<<<<< HEAD
-  m_RopeSpringForce: 10000
-=======
   m_RopeSpringForce: 20000
->>>>>>> 2c8edcc422d7597da25933454e2b3e892b7c517f
   m_RopeSpringDamper: 1500
 --- !u!114 &11455646
 MonoBehaviour:
