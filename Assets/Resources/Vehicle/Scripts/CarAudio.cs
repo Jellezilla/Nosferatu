@@ -148,7 +148,7 @@ public class CarAudio : MonoBehaviour
                 m_HighAccel.pitch = pitch * pitchMultiplier * highPitchMultiplier;
                 m_HighAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_HighAccel.volume = 1;
-                m_HookLaunch.volume = 0.5f;
+                m_HookLaunch.volume = 0.75f;
             }
             else
             {
@@ -179,9 +179,8 @@ public class CarAudio : MonoBehaviour
                 m_LowDecel.volume = lowFade * decFade;
                 m_HighAccel.volume = highFade * accFade;
                 m_HighDecel.volume = highFade * decFade;
-                m_HookLaunch.volume = 0.5f;
+                m_HookLaunch.volume = 0.75f;
                 // adjust the doppler levels
-                m_HookLaunch.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_HighAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_LowAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_HighDecel.dopplerLevel = useDoppler ? dopplerLevel : 0;
