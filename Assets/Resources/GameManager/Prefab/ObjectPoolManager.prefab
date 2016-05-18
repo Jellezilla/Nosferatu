@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Prefabs:
-  - {fileID: 103946, guid: 568421df3654e6a47861262ee5b1932d, type: 2}
+  - {fileID: 121578, guid: 3216d4b9e30014a4bb054f8ccd703980, type: 2}
   - {fileID: 100216, guid: 72335e6526eda20499b31f1a29f3fa48, type: 2}
   - {fileID: 142100, guid: a8746d85efed5084896b9e31b2629567, type: 2}
   m_NrOfInstances: 190000005000000050000000

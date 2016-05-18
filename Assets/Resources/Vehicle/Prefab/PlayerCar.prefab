@@ -274,7 +274,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 160540}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 59.75, y: 0, z: 253.85}
+  m_LocalPosition: {x: 566.26, y: 246.15, z: -5.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 482464}
@@ -680,8 +680,8 @@ Rigidbody:
   m_GameObject: {fileID: 160540}
   serializedVersion: 2
   m_Mass: 100
-  m_Drag: 0.35
-  m_AngularDrag: 0.045
+  m_Drag: 0.5
+  m_AngularDrag: 0.025
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -697,8 +697,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.5545385, y: 0.6609292, z: 5.576172}
-  m_Center: {x: -0.023273468, y: 0.84637475, z: -0.110443115}
+  m_Size: {x: 2.5545385, y: 0.88099957, z: 5.576172}
+  m_Center: {x: -0.023254395, y: 0.95640564, z: -0.110443115}
 --- !u!95 &9586630
 Animator:
   serializedVersion: 3
@@ -826,7 +826,7 @@ MonoBehaviour:
   m_RotRevCooldown: 15
   m_HookPrefab: {fileID: 152528, guid: 7b711825a36b10e4b8bfdb9fe37253ec, type: 2}
   m_MaxRopeLength: 18
-  m_RopeSpringForce: 15000
+  m_RopeSpringForce: 20000
   m_RopeSpringDamper: 1500
 --- !u!114 &11455646
 MonoBehaviour:
@@ -854,6 +854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e4cff3a4f2a4343ae5704341f987fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hookLaunchClip: {fileID: 8300000, guid: 784d244840ed342f9a2b89809d9dfb22, type: 3}
   engineSoundStyle: 1
   lowAccelClip: {fileID: 8300000, guid: b709723a9f4abcc41ab8853006cf282b, type: 3}
   lowDecelClip: {fileID: 8300000, guid: 21584a66e34e972449c6c2fa8d1c2878, type: 3}
@@ -894,16 +895,16 @@ MonoBehaviour:
   - {fileID: 172124}
   - {fileID: 169274}
   - {fileID: 194494}
-  m_CenterOfMass: {x: 0, y: -0, z: 0}
+  m_CenterOfMass: {x: 0, y: 0.3, z: -0.35}
   m_SteeringRate: 1
   m_MaxSteerAngle: 20
   m_SteerSpeedThreshold: 5
-  m_SteerAngleThreshold: 35
-  m_SteerAsist: 0.106
-  m_TractionControlAsist: 0.304
-  m_WheelTorque: 1200
-  m_ReverseTorque: 450
-  m_Downforce: 80
+  m_SteerAngleThreshold: 50
+  m_SteerAsist: 0.115
+  m_TractionControlAsist: 0.35
+  m_WheelTorque: 800
+  m_ReverseTorque: 300
+  m_Downforce: 50
   m_Topspeed: 150
   m_nrOfGears: 5
   m_SlipLimit: 0.2
@@ -916,11 +917,11 @@ WheelCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174400}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.55
+  m_Radius: 0.28
   m_SuspensionSpring:
     spring: 0.06
     damper: 0.03
-    targetPosition: 0.5
+    targetPosition: 1
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
   m_Mass: 20
@@ -945,11 +946,11 @@ WheelCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101814}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.55
+  m_Radius: 0.28
   m_SuspensionSpring:
     spring: 0.06
     damper: 0.03
-    targetPosition: 0.5
+    targetPosition: 1
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
   m_Mass: 20
@@ -959,13 +960,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1.25
+    m_Stiffness: 1.75
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1.25
+    m_Stiffness: 1.75
   m_Enabled: 1
 --- !u!146 &14687516
 WheelCollider:
@@ -974,11 +975,11 @@ WheelCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192458}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.55
+  m_Radius: 0.28
   m_SuspensionSpring:
     spring: 0.06
     damper: 0.03
-    targetPosition: 0.5
+    targetPosition: 1
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
   m_Mass: 20
@@ -1003,11 +1004,11 @@ WheelCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 112604}
   m_Center: {x: 0, y: 0, z: 0}
-  m_Radius: 0.55
+  m_Radius: 0.28
   m_SuspensionSpring:
     spring: 0.06
     damper: 0.03
-    targetPosition: 0.5
+    targetPosition: 1
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
   m_Mass: 20
@@ -1017,13 +1018,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.8
     m_AsymptoteValue: 0.5
-    m_Stiffness: 1.25
+    m_Stiffness: 1.75
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 0.75
-    m_Stiffness: 1.25
+    m_Stiffness: 1.75
   m_Enabled: 1
 --- !u!1001 &100100000
 Prefab:
