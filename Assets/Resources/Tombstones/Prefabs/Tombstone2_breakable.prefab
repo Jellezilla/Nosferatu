@@ -30,6 +30,7 @@ GameObject:
   - 65: {fileID: 6586042}
   - 54: {fileID: 5454180}
   - 114: {fileID: 11478092}
+  - 114: {fileID: 11421550}
   m_Layer: 0
   m_Name: Tombstone2_breakable
   m_TagString: Untagged
@@ -635,6 +636,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.25950933, y: 0.19839048, z: 0.27419934}
   m_Center: {x: -0.023551354, y: -0.000011815817, z: 0.6566988}
+--- !u!114 &11421550
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 142100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e8371eea83beb458b3b23e8bc6e324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TombstoneImpact: {fileID: 8300000, guid: f665c1744d1a9f34585f1462a66fd247, type: 3}
+  m_volume: 0.5
 --- !u!114 &11478092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -646,8 +660,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30c725fd19b54340aa8819ab9e8f1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TombstoneDespawnTimer: 3
-  m_TombstonePoolID: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

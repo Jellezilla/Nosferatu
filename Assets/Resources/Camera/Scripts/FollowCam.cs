@@ -16,8 +16,6 @@ public class FollowCam : MonoBehaviour {
 	void Start () {
 
         _pObject = GameController.Instance.Player;
-        Debug.Log(_pObject);
-
         Vector3 eurot = gameObject.transform.rotation.eulerAngles;
         eurot.y = _pObject.transform.eulerAngles.y;
         transform.rotation = Quaternion.Euler(eurot);

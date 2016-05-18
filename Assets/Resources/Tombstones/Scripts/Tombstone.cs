@@ -13,6 +13,14 @@ public class Tombstone : MonoBehaviour {
     private bool m_broken;
     // Use this for initialization
 
+    public bool IsBroken
+    {
+        get
+        {
+            return m_broken;
+        }
+    }
+
     void Awake()
     {
         Init();

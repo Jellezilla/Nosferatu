@@ -826,7 +826,7 @@ MonoBehaviour:
   m_RotRevCooldown: 15
   m_HookPrefab: {fileID: 152528, guid: 7b711825a36b10e4b8bfdb9fe37253ec, type: 2}
   m_MaxRopeLength: 18
-  m_RopeSpringForce: 10000
+  m_RopeSpringForce: 20000
   m_RopeSpringDamper: 1500
 --- !u!114 &11455646
 MonoBehaviour:
@@ -854,6 +854,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70e4cff3a4f2a4343ae5704341f987fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hookLaunchClip: {fileID: 8300000, guid: 784d244840ed342f9a2b89809d9dfb22, type: 3}
   engineSoundStyle: 1
   lowAccelClip: {fileID: 8300000, guid: b709723a9f4abcc41ab8853006cf282b, type: 3}
   lowDecelClip: {fileID: 8300000, guid: 21584a66e34e972449c6c2fa8d1c2878, type: 3}
@@ -882,8 +883,8 @@ MonoBehaviour:
   m_BrakingControl: 2
   m_SpeedUnits: 0
   m_lights:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 10862238}
+  - {fileID: 10880316}
   m_WheelColliders:
   - {fileID: 14687516}
   - {fileID: 14655656}

@@ -77,10 +77,10 @@ public class HighscoreManager : MonoBehaviour {
                 break;
             }
         }
-        Debug.Log("hello");
+     //   Debug.Log("hello");
         //need setup for moving all the scores down by starting at last
         for (int i = len-1; i > _newScoreIndex; i--) {
-            Debug.Log("handling score movement"+i);
+           // Debug.Log("handling score movement"+i);
             _scoreData.playerNames[i] = _scoreData.playerNames[i - 1];
             _scoreData.playerScores[i] = _scoreData.playerScores[i - 1];
 
@@ -90,7 +90,7 @@ public class HighscoreManager : MonoBehaviour {
     }
 
     void SetNewScore(int index) {
-        Debug.Log("set new score");
+      //  Debug.Log("set new score");
         _inputField.transform.position = new Vector3 (_nameFields[index].transform.position.x-0.26f, _nameFields[index].transform.position.y, _nameFields[index].transform.position.z);
         _inputField.SetActive(true);
         //InputField f = _inputField.GetComponent<InputField>();
@@ -134,8 +134,8 @@ public class HighscoreManager : MonoBehaviour {
         for (int i = 0; i < _scoreData.playerNames.Length; i++) {
             _scoreFields[i].text = _scoreData.playerScores[i].ToString();
             _nameFields[i].text = _scoreData.playerNames[i];
-            Debug.Log(_scoreData.playerNames[i]);
-            Debug.Log(_scoreData.playerScores[i]);
+          //  Debug.Log(_scoreData.playerNames[i]);
+          //  Debug.Log(_scoreData.playerScores[i]);
         }
     }
 
