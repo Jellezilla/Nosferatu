@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &135056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 493688}
+  - 122: {fileID: 12266936}
+  m_Layer: 9
+  m_Name: Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &180668
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,6 +28,7 @@ GameObject:
   - 23: {fileID: 2318308}
   - 114: {fileID: 11443494}
   - 65: {fileID: 6549310}
+  - 65: {fileID: 6571612}
   m_Layer: 9
   m_Name: Lightpole
   m_TagString: Untagged
@@ -26,10 +43,23 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180668}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 63.57198, y: 0, z: 48.448578}
+  m_LocalPosition: {x: 396.23682, y: 47.645706, z: 219.4647}
   m_LocalScale: {x: 2.7176163, y: 2.7176163, z: 0.5331077}
-  m_Children: []
+  m_Children:
+  - {fileID: 493688}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &493688
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135056}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.003, z: 13.57}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 445782}
   m_RootOrder: 0
 --- !u!23 &2318308
 MeshRenderer:
@@ -74,8 +104,20 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.78, y: 4.79, z: 6.89}
-  m_Center: {x: 0.06, y: 0.04, z: 11.71}
+  m_Size: {x: 2, y: 2, z: 0.41000152}
+  m_Center: {x: 0.05999943, y: 0.03978592, z: 14.486297}
+--- !u!65 &6571612
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180668}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.26376307, y: 0.2637631, z: 14.415486}
+  m_Center: {x: -0.000000007450581, y: 0.0000076293945, z: 7.207751}
 --- !u!114 &11443494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,6 +130,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_OutlineMaterial: {fileID: 2100000, guid: 4a216505958f99841b4ac4dd96ef9579, type: 2}
+--- !u!122 &12266936
+Halo:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135056}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4282908661
+  m_Size: 0.34
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

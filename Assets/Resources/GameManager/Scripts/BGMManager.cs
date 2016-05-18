@@ -28,6 +28,10 @@ public class BGMManager : MonoBehaviour {
         m_bgmSource.maxDistance = 500;
         m_bgmSource.dopplerLevel = 0;
         m_bgmSource.volume = m_volume;
+
+        //add initial song
+        m_bgmSource.clip = m_BackgroundMusic[0];
+        m_bgmSource.Play();
     }
 	// Update is called once per frame
 	void Update ()

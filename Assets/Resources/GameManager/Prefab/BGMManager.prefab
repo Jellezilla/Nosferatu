@@ -40,11 +40,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BackgroundMusic:
-  - {fileID: 8300000, guid: 370f7e778671b469aa0e3dc138f97530, type: 3}
+  - {fileID: 8300000, guid: cb12707f52dfe46c8807a9f24d0d57fa, type: 3}
   - {fileID: 8300000, guid: 770b3105ab6da43e68888fb76865d813, type: 3}
   - {fileID: 8300000, guid: ed8605a0609444bb39bf7860e6967959, type: 3}
   - {fileID: 8300000, guid: 83cd9c6f4bfd34e07bf6ec713b4f6bc1, type: 3}
-  m_volume: 0.6
+  m_volume: 0.5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

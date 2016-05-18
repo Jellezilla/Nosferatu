@@ -90,5 +90,7 @@ public class TitleScreenManager : MonoBehaviour {
 
     public void OnEndGame() {
 
+        Application.Quit();
+
     }
 }
