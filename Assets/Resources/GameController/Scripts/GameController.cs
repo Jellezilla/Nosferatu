@@ -11,6 +11,7 @@ public class GameController : Singleton<GameController>
     private GameObject m_player;
     private ObjectPool m_objPool;
     private InteractionManager m_interactionM;
+    private ScoreManager m_scoreM;
     private Rigidbody m_playerRB;
     // Use this for initialization
     void Awake()
@@ -37,6 +38,7 @@ public class GameController : Singleton<GameController>
         GameObject gameManager = GameObject.FindGameObjectWithTag(Tags.gameManager);
         m_objPool = gameManager.GetComponent<ObjectPool>();
         m_interactionM = gameManager.GetComponent<InteractionManager>();
+        m_scoreM = gameManager.GetComponent<ScoreManager>();
     }
 
     public InteractionManager InteractionManager
@@ -67,6 +69,14 @@ public class GameController : Singleton<GameController>
         get
         {
             return m_playerRB;
+        }
+    }
+
+    public ScoreManager ScoreManager
+    {
+        get
+        {
+            return m_scoreM;
         }
     }
 

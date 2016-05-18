@@ -146,6 +146,7 @@ GameObject:
   - 114: {fileID: 11455646}
   - 114: {fileID: 11414782}
   - 114: {fileID: 11443054}
+  - 114: {fileID: 11402484}
   m_Layer: 12
   m_Name: PlayerCar
   m_TagString: Player
@@ -782,6 +783,17 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11402484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 644c0f33cd8334444bc9ac1a0e3c822c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11414782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -897,7 +909,7 @@ MonoBehaviour:
   - {fileID: 172124}
   - {fileID: 169274}
   - {fileID: 194494}
-  m_CenterOfMass: {x: 0, y: 0.3, z: -0.35}
+  m_CenterOfMass: {x: 0, y: 0.3, z: 0}
   m_SteeringRate: 1
   m_MaxSteerAngle: 20
   m_SteerSpeedThreshold: 5

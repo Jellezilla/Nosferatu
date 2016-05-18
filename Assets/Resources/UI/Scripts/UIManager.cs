@@ -20,7 +20,6 @@ public class UIManager : MonoBehaviour {
     private RectTransform _spmask;
     private Text _scoreText;
     private float _spMaxWidth, _hpMaxWidth, _spHeight, _hpHeight;
-    private int _oldPlayerDistance = 0;
     private float m_oldFuelValue = 0;
     private WaitForSeconds m_bloodPulse;
     private float m_maxFuel;
@@ -53,12 +52,11 @@ public class UIManager : MonoBehaviour {
     void Update() {
 
         float fuelCurrent = 0;
-        int newPlayerDistance = 0;
         if (PlayerObject != null)
         {
             fuelCurrent = GameController.Instance.GetFuel;
             soulsCurrent = GameController.Instance.GetSouls;
-            newPlayerDistance = (int)PlayerObject.transform.position.z;
+         //   newPlayerDistance = (int)PlayerObject.transform.position.z;
         }
 
         if (fuelCurrent > m_oldFuelValue)
@@ -74,13 +72,8 @@ public class UIManager : MonoBehaviour {
             SpecialEffectObject.SetActive(true);
             RampageReady.SetActive(true);
         }
-
-        if (_oldPlayerDistance < newPlayerDistance) {
-
-            _oldPlayerDistance = newPlayerDistance;
-            _scoreText.text = _oldPlayerDistance.ToString();
-        }
-
+        _scoreText.text = GameController.Instance.ScoreManager.Score.ToString();
+       
         //Checking for gameover
         if (IsGameOver() && !GameOverScreen.activeSelf) {
             SetupGameOverScreen();

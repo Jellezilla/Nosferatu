@@ -15,7 +15,7 @@ GameObject:
   - 114: {fileID: 11402582}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc8b2a23380ea7a4cbe448c9a3cf5970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_scoreMultiplier: 1
 --- !u!114 &11412014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -74,7 +75,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 770b3105ab6da43e68888fb76865d813, type: 3}
   - {fileID: 8300000, guid: ed8605a0609444bb39bf7860e6967959, type: 3}
   - {fileID: 8300000, guid: 83cd9c6f4bfd34e07bf6ec713b4f6bc1, type: 3}
-  m_volume: 0.5
+  m_volume: 0.35
 --- !u!114 &11415522
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,6 +89,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LevelOrigin: {x: 0, y: 0, z: 0}
   m_tileChangeDistance: 3
+  normalTileStartThreshold: 500
+  hardTileStartThreshold: 2500
+  easyTileEndThreshold: 1500
+  normalTileEndThreshold: 4000
   m_startTilePrefab: {fileID: 157924, guid: c8fcffa2a0e4d0848a20c55a9f1c0317, type: 2}
   m_easyTilePrefabs:
   - {fileID: 157924, guid: c8fcffa2a0e4d0848a20c55a9f1c0317, type: 2}

@@ -17,7 +17,6 @@ public class VehicleResources : MonoBehaviour
     private float m_BloodPerHuman;
     [SerializeField]
     private float m_SoulsPerHuman;
-    private WaitForSeconds m_fuelWaitTick;
     [SerializeField]
     private GameObject m_explosion;
     private float m_CarBlood;
@@ -46,7 +45,6 @@ public class VehicleResources : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-        m_fuelWaitTick = new WaitForSeconds(Time.fixedDeltaTime);
         m_rb = GetComponent<Rigidbody>();
         m_CarBlood = m_MaxCarBlood;
     }
