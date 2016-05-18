@@ -109,14 +109,12 @@ public class CarAudio : MonoBehaviour
     {
         if (m_StartedSound && !m_Shoot && !m_CarTurret.isRetracted)
         {
-            Debug.Log("false");
             m_HookLaunch.Play();
             m_Shoot = true;
         }
 
         if (m_StartedSound && m_CarTurret.isRetracted)
         {
-            Debug.Log("true");
             m_Shoot = false;
         }
         // get the distance to main camera

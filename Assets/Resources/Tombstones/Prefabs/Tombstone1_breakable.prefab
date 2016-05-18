@@ -11,6 +11,7 @@ GameObject:
   - 65: {fileID: 6534138}
   - 54: {fileID: 5407654}
   - 114: {fileID: 11431776}
+  - 114: {fileID: 11474010}
   m_Layer: 0
   m_Name: Tombstone1_breakable
   m_TagString: Untagged
@@ -659,8 +660,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b30c725fd19b54340aa8819ab9e8f1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TombstoneDespawnTimer: 3
-  m_TombstonePoolID: 1
+--- !u!114 &11474010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1e8371eea83beb458b3b23e8bc6e324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TombstoneImpact: {fileID: 8300000, guid: f665c1744d1a9f34585f1462a66fd247, type: 3}
+  m_volume: 0.65
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
