@@ -60,8 +60,9 @@ public class CarAudio : MonoBehaviour
     private AudioSource m_HighDecel; // Source for the high deceleration sounds
     private AudioSource m_HookLaunch;
     private bool m_StartedSound; // flag for knowing if we have started sounds
-    private VehicleController m_CarController; // Reference to car we are controlling
-    private VehicleTurret m_CarTurret;
+    private VehicleController m_CarController; // Reference to the car we are controlling
+    private VehicleTurret m_CarTurret; // Reference to the turret we are firing
+    private VehicleResources m_Resources;
     private bool m_Shoot;
     private void StartSound()
     {

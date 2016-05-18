@@ -120,6 +120,11 @@ public class UIManager : MonoBehaviour {
         SceneManager.LoadScene(1);
     }
 
+    public void EndGame()
+    {
+        Application.Quit();
+    }
+
     public void AddSoulEffect(Vector2 spawnPos) {
     }
 
