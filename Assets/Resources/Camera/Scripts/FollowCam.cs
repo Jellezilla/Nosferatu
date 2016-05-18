@@ -4,9 +4,9 @@ using System.Collections;
 public class FollowCam : MonoBehaviour {
 
     [SerializeField]
-    private float DistanceToPlayerUp = 15;
+    private float DistanceToPlayerUp = 20;
     [SerializeField]
-    private float DistanceToPlayerForward = 10;
+    private float DistanceToPlayerForward = 5.5f;
     private GameObject _pObject;
     private Rigidbody _pRb;
     private float _offsetY;
