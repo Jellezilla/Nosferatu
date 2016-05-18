@@ -46,18 +46,18 @@ MonoBehaviour:
   - {fileID: 157924, guid: c8fcffa2a0e4d0848a20c55a9f1c0317, type: 2}
   - {fileID: 155470, guid: aeb9afe69f7638549a17e4cc6475ef31, type: 2}
   - {fileID: 191892, guid: 606bfba06dde25548b0ba24a1d69a019, type: 2}
-  - {fileID: 194172, guid: a8c118ed82dda464dba46eacbb80215e, type: 2}
   m_normalTilesPrefabs:
   - {fileID: 101926, guid: c241231468d826943a5dc354aa0e4138, type: 2}
   - {fileID: 195092, guid: 7ef03489b61a18a43a861083a11337e9, type: 2}
   - {fileID: 189186, guid: d75e60ee124aee84fa2ac2f96000e48e, type: 2}
-  - {fileID: 106032, guid: 95a38b72f0cdf9b46ab572fef218f080, type: 2}
-  - {fileID: 139708, guid: f641ecda0687a8244970bb900e713474, type: 2}
-  - {fileID: 126198, guid: 65ae294c421a60649a2db7de0b8be424, type: 2}
-  m_hardTilesPrefabs:
   - {fileID: 122628, guid: 413ac8ee6f01b694083e46f5f757e6ae, type: 2}
   - {fileID: 152496, guid: 9d3a680680124d0468876bd37e58aaac, type: 2}
   - {fileID: 191240, guid: 1b9cbff06308c26439e774df2e21f6ea, type: 2}
+  m_hardTilesPrefabs:
+  - {fileID: 194172, guid: a8c118ed82dda464dba46eacbb80215e, type: 2}
+  - {fileID: 106032, guid: 95a38b72f0cdf9b46ab572fef218f080, type: 2}
+  - {fileID: 139708, guid: f641ecda0687a8244970bb900e713474, type: 2}
+  - {fileID: 126198, guid: 65ae294c421a60649a2db7de0b8be424, type: 2}
   - {fileID: 170342, guid: 8c29795441fce83488264c5591075e0b, type: 2}
   - {fileID: 132814, guid: fc79f6b913ede004fb31dceaff464470, type: 2}
   - {fileID: 102416, guid: 8afa4bc9c9876ed4b89145ab5dc00b96, type: 2}
