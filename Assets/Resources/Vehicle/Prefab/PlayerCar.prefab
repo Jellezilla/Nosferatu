@@ -680,8 +680,8 @@ Rigidbody:
   m_GameObject: {fileID: 160540}
   serializedVersion: 2
   m_Mass: 100
-  m_Drag: 0.45
-  m_AngularDrag: 0.045
+  m_Drag: 0.5
+  m_AngularDrag: 0.025
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -826,7 +826,7 @@ MonoBehaviour:
   m_RotRevCooldown: 15
   m_HookPrefab: {fileID: 152528, guid: 7b711825a36b10e4b8bfdb9fe37253ec, type: 2}
   m_MaxRopeLength: 18
-  m_RopeSpringForce: 15000
+  m_RopeSpringForce: 10000
   m_RopeSpringDamper: 1500
 --- !u!114 &11455646
 MonoBehaviour:
@@ -894,16 +894,16 @@ MonoBehaviour:
   - {fileID: 172124}
   - {fileID: 169274}
   - {fileID: 194494}
-  m_CenterOfMass: {x: 0, y: 0.1, z: -0.7}
+  m_CenterOfMass: {x: 0, y: 0.3, z: -0.35}
   m_SteeringRate: 1
   m_MaxSteerAngle: 20
   m_SteerSpeedThreshold: 5
-  m_SteerAngleThreshold: 35
-  m_SteerAsist: 0.106
-  m_TractionControlAsist: 0.304
+  m_SteerAngleThreshold: 50
+  m_SteerAsist: 0.115
+  m_TractionControlAsist: 0.35
   m_WheelTorque: 800
   m_ReverseTorque: 300
-  m_Downforce: 80
+  m_Downforce: 50
   m_Topspeed: 150
   m_nrOfGears: 5
   m_SlipLimit: 0.2
@@ -920,7 +920,7 @@ WheelCollider:
   m_SuspensionSpring:
     spring: 0.06
     damper: 0.03
-    targetPosition: 0.5
+    targetPosition: 1
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
   m_Mass: 20
@@ -949,7 +949,7 @@ WheelCollider:
   m_SuspensionSpring:
     spring: 0.06
     damper: 0.03
-    targetPosition: 0.5
+    targetPosition: 1
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
   m_Mass: 20
@@ -978,7 +978,7 @@ WheelCollider:
   m_SuspensionSpring:
     spring: 0.06
     damper: 0.03
-    targetPosition: 0.5
+    targetPosition: 1
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
   m_Mass: 20
@@ -1007,7 +1007,7 @@ WheelCollider:
   m_SuspensionSpring:
     spring: 0.06
     damper: 0.03
-    targetPosition: 0.5
+    targetPosition: 1
   m_SuspensionDistance: 0.3
   m_ForceAppPointDistance: 0
   m_Mass: 20
