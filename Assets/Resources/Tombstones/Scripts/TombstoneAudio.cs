@@ -41,12 +41,10 @@ public class TombstoneAudio : MonoBehaviour {
     {
         if (m_played && !m_Tomb.IsBroken)
         {
-            Debug.Log("false");
             m_played = false;
         }
         else if (m_Tomb.IsBroken && !m_played)
         {
-            Debug.Log("true");
             m_played = true;
             m_Tombstone.Play();
         }

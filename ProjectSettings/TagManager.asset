@@ -7,9 +7,7 @@ TagManager:
   - Human
   - Environment
   - UI Camera
-  - ObjectPool
-  - TileManager
-  - InteractionManager
+  - GameManager
   - Lava
   layers:
   - Default

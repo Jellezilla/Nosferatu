@@ -102,7 +102,6 @@ public class HumanController : MonoBehaviour
     void Death(GameObject hiter)
     {
         Rigidbody hitterRB = hiter.GetComponent<Rigidbody>();
-        Vector3 hitforce = hitterRB.velocity.normalized * hitterRB.velocity.magnitude;
         if (!m_isDead)
         {
             m_isDead = true;
@@ -118,7 +117,7 @@ public class HumanController : MonoBehaviour
             {
                 m_rigCols[i].enabled = true;
                 m_rigRbs[i].useGravity = true;
-                m_rigRbs[i].AddForce(hitforce, ForceMode.Impulse);
+                m_rigRbs[i].AddForce(hitterRB.velocity, ForceMode.VelocityChange);
             }
             m_BloodSplatPS.Play();
             for (int i = 0; i < m_SoulPSs.Length; i++)

@@ -27,26 +27,31 @@ public class FollowCam : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        _offsetY = _pRb.velocity.magnitude / 2;
-        _cOffsetY = Mathf.Lerp(_cOffsetY, _offsetY, Time.deltaTime);
 
-
-        if (_offsetY > 5f) _offsetY = 5f;
-
-
-        //Debug.Log(_offsetY);
-       // Debug.Log(_pObject.transform.InverseTransformDirection(_pRb.velocity));
-        //transform.InverseTransformDirection(rigidbody.velocity);
-        if (_pObject != null)
-        //if (_player != null)
+        if (_pRb != null)
         {
-            gameObject.transform.position = new Vector3(_pObject.transform.position.x,
-                _pObject.transform.position.y + DistanceToPlayerUp+_cOffsetY, 
-                _pObject.transform.position.z+ DistanceToPlayerForward);
+            _offsetY = _pRb.velocity.magnitude / 2;
+            _cOffsetY = Mathf.Lerp(_cOffsetY, _offsetY, Time.deltaTime);
 
-            //transform.position = new Vector3(_player.position.x, transform.position.y, _player.position.z);
+
+            if (_offsetY > 5f) _offsetY = 5f;
+
+
+            //Debug.Log(_offsetY);
+            // Debug.Log(_pObject.transform.InverseTransformDirection(_pRb.velocity));
+            //transform.InverseTransformDirection(rigidbody.velocity);
+            if (_pObject != null)
+            //if (_player != null)
+            {
+                gameObject.transform.position = new Vector3(_pObject.transform.position.x,
+                    _pObject.transform.position.y + DistanceToPlayerUp + _cOffsetY,
+                    _pObject.transform.position.z + DistanceToPlayerForward);
+
+                //transform.position = new Vector3(_player.position.x, transform.position.y, _player.position.z);
+            }
+
         }
 
-	
-	}
+
+    }
 }

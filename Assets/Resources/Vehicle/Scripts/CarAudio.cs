@@ -29,6 +29,8 @@ public class CarAudio : MonoBehaviour
     [SerializeField]
     private AudioClip hookLaunchClip;
     [SerializeField]
+    private AudioClip lavaSplashClip;
+    [SerializeField]
     private EngineAudioOptions engineSoundStyle = EngineAudioOptions.FourChannel;// Set the default audio options to be four channel
     [SerializeField]
     private AudioClip lowAccelClip;                                              // Audio clip for low acceleration
@@ -58,17 +60,20 @@ public class CarAudio : MonoBehaviour
     private AudioSource m_LowDecel; // Source for the low deceleration sounds
     private AudioSource m_HighAccel; // Source for the high acceleration sounds
     private AudioSource m_HighDecel; // Source for the high deceleration sounds
-    private AudioSource m_HookLaunch;
+    private AudioSource m_HookLaunch; // Source for the hook launcher sounds
+    private AudioSource m_LavaSplash;
     private bool m_StartedSound; // flag for knowing if we have started sounds
     private VehicleController m_CarController; // Reference to the car we are controlling
     private VehicleTurret m_CarTurret; // Reference to the turret we are firing
-    private VehicleResources m_Resources;
+    private VehicleResources m_CarResources;
     private bool m_Shoot;
+    private bool m_Splash;
     private void StartSound()
     {
         // get the carcontroller ( this will not be null as we have require component)
         m_CarController = GetComponent<VehicleController>();
         m_CarTurret = GetComponent<VehicleTurret>();
+        m_CarResources = GetComponent<VehicleResources>();
 
         // setup the simple audio source
 
@@ -81,11 +86,13 @@ public class CarAudio : MonoBehaviour
             m_LowDecel = SetUpAudioSource(lowDecelClip, true, true, true, true);
             m_HighDecel = SetUpAudioSource(highDecelClip, true, true, true, true);
             m_HookLaunch = SetUpAudioSource(hookLaunchClip, false, false, false, false);
+            m_LavaSplash = SetUpAudioSource(lavaSplashClip, false, false, false, false);
         }
         else
         {
             m_HighAccel = SetUpAudioSource(highAccelClip, true, true, true, true);
             m_HookLaunch = SetUpAudioSource(hookLaunchClip, false, false, false, false);
+            m_LavaSplash = SetUpAudioSource(lavaSplashClip, false, false, false, false);
         }
 
         // flag that we have started the sounds playing
@@ -114,9 +121,20 @@ public class CarAudio : MonoBehaviour
             m_Shoot = true;
         }
 
+        if (m_StartedSound && !m_Splash && m_CarResources.InLava)
+        {
+            m_LavaSplash.Play();
+            m_Splash = true;
+        }
+
         if (m_StartedSound && m_CarTurret.isRetracted)
         {
             m_Shoot = false;
+        }
+
+        if (m_StartedSound && m_Splash && !m_CarResources.InLava)
+        {
+            m_Splash = false;
         }
         // get the distance to main camera
         float camDist = (Camera.main.transform.position - transform.position).sqrMagnitude;
@@ -148,6 +166,7 @@ public class CarAudio : MonoBehaviour
                 m_HighAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_HighAccel.volume = 1;
                 m_HookLaunch.volume = 0.75f;
+                m_LavaSplash.volume = 0.5f;
             }
             else
             {
@@ -179,6 +198,7 @@ public class CarAudio : MonoBehaviour
                 m_HighAccel.volume = highFade * accFade;
                 m_HighDecel.volume = highFade * decFade;
                 m_HookLaunch.volume = 0.75f;
+                m_LavaSplash.volume = 0.5f;
                 // adjust the doppler levels
                 m_HighAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_LowAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;

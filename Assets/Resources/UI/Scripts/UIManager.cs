@@ -28,7 +28,8 @@ public class UIManager : MonoBehaviour {
     float soulsCurrent;
     //TODO: Update with implementing only one variable for holding player pos datatatatata
 
-    void Start() {
+    void Start()
+    {
         EventController.Instance.SubscribeEvent(UIEvents.Rampage, StartRampage);
         m_maxFuel = GameController.Instance.MaxFuel;
         m_oldFuelValue = m_maxFuel;
@@ -43,7 +44,6 @@ public class UIManager : MonoBehaviour {
         _spHeight = _spmask.GetComponent<RectTransform>().rect.height;
         _hpHeight = _hpmask.GetComponent<RectTransform>().rect.height;
 
-        _oldPlayerDistance = 0;//(int)PlayerObject.transform.position.z;
         _scoreText = ScoreBoard.GetComponent<Text>();
 
         //this is a really good one, have to dig deep due to mask parenting
@@ -51,8 +51,16 @@ public class UIManager : MonoBehaviour {
     }
 
     void Update() {
-        float fuelCurrent = GameController.Instance.GetFuel;
-        soulsCurrent = GameController.Instance.GetSouls;
+
+        float fuelCurrent = 0;
+        int newPlayerDistance = 0;
+        if (PlayerObject != null)
+        {
+            fuelCurrent = GameController.Instance.GetFuel;
+            soulsCurrent = GameController.Instance.GetSouls;
+            newPlayerDistance = (int)PlayerObject.transform.position.z;
+        }
+
         if (fuelCurrent > m_oldFuelValue)
         {
             StartCoroutine(FadeBlood());
@@ -66,11 +74,6 @@ public class UIManager : MonoBehaviour {
             SpecialEffectObject.SetActive(true);
             RampageReady.SetActive(true);
         }
-
-
-
-        //Taking care of score
-        int newPlayerDistance = (int)PlayerObject.transform.position.z;
 
         if (_oldPlayerDistance < newPlayerDistance) {
 
@@ -95,15 +98,15 @@ public class UIManager : MonoBehaviour {
 
     bool IsGameOver() {
 
-        //!!! Temporary ruberbanding till I implement the UI Event System...Please do not tamper  <3
-        // Love, Alex.
-
-
-        if (GameController.Instance.PlayerDead) {
+        if (GameController.Instance.PlayerDead)
+        {
             return true;
         }
-        //_oldPlayerPos = playerPos;
-        return false;
+        else
+        {
+            return false;
+        }
+
     }
 
     void SetupGameOverScreen(){
