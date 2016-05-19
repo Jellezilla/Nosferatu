@@ -11,20 +11,19 @@ public class GameController : Singleton<GameController>
     private GameObject m_player;
     private ObjectPool m_objPool;
     private InteractionManager m_interactionM;
+    private ScoreManager m_scoreM;
     private Rigidbody m_playerRB;
     // Use this for initialization
     void Awake()
     {
-        LoadObjectPool();
+        LoadGameManager();
         LoadPlayer();
-        LoadInteractionManager();
     }
 
     void OnLevelWasLoaded(int level)
     {
-        LoadObjectPool();
+        LoadGameManager();
         LoadPlayer();
-        LoadInteractionManager();
     }
 
     private void LoadPlayer()
@@ -34,14 +33,12 @@ public class GameController : Singleton<GameController>
         m_playerRB = m_player.GetComponent<Rigidbody>();
     }
 
-    private void LoadObjectPool()
+    private void LoadGameManager()
     {
-        m_objPool = GameObject.FindGameObjectWithTag(Tags.objectpool).GetComponent<ObjectPool>();
-    }
-
-    private void LoadInteractionManager()
-    {
-        m_interactionM = GameObject.FindGameObjectWithTag(Tags.interactionManager).GetComponent<InteractionManager>();
+        GameObject gameManager = GameObject.FindGameObjectWithTag(Tags.gameManager);
+        m_objPool = gameManager.GetComponent<ObjectPool>();
+        m_interactionM = gameManager.GetComponent<InteractionManager>();
+        m_scoreM = gameManager.GetComponent<ScoreManager>();
     }
 
     public InteractionManager InteractionManager
@@ -72,6 +69,14 @@ public class GameController : Singleton<GameController>
         get
         {
             return m_playerRB;
+        }
+    }
+
+    public ScoreManager ScoreManager
+    {
+        get
+        {
+            return m_scoreM;
         }
     }
 

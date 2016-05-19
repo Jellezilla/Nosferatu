@@ -9,6 +9,15 @@ public class TileManager : MonoBehaviour {
     [SerializeField]
     private float m_tileChangeDistance;
     [SerializeField]
+    private int normalTileStartThreshold = 500;
+    [SerializeField]
+    private int hardTileStartThreshold = 2500;
+    [SerializeField]
+    private int easyTileEndThreshold = 1500;
+    [SerializeField]
+    private int normalTileEndThreshold = 4000;
+
+    [SerializeField]
     private GameObject m_startTilePrefab;
     private Tile m_startTile;
     [SerializeField]
@@ -27,17 +36,49 @@ public class TileManager : MonoBehaviour {
     private Collider m_prevTileCol;
     private float m_carHeight;
     private const int m_nrOfDiffs = 3;
+    private ScoreManager m_ScoreManager;
+    private int maxDiff = 0;
+    private int minDiff = 0;
     void Start()
     {
         Init();
         StartTile();
     }
 
+    private void DifficultyChanger()
+    {
+        if (m_ScoreManager.Score < normalTileStartThreshold)
+        {
+            maxDiff = 0;
+            minDiff = maxDiff;
+        }
+        else if (m_ScoreManager.Score >= normalTileStartThreshold && m_ScoreManager.Score < easyTileEndThreshold)
+        {
+            maxDiff = 1;
+            minDiff = 0;
+        }
+        else if (m_ScoreManager.Score >= easyTileEndThreshold && m_ScoreManager.Score < hardTileStartThreshold)
+        {
+            maxDiff = 1;
+            minDiff = maxDiff;
+        }
+        else if (m_ScoreManager.Score >= hardTileStartThreshold && m_ScoreManager.Score < normalTileEndThreshold)
+        {
+            maxDiff = 2;
+            minDiff = 1;
+        }
+        else if (m_ScoreManager.Score >= normalTileEndThreshold)
+        {
+            maxDiff = 2;
+            minDiff = maxDiff;
+        }
+    }
     /// <summary>
     /// Used to setup the instantiate and setup the tiles
     /// </summary>
     private void Init()
     {
+        m_ScoreManager = GameController.Instance.ScoreManager;
         m_Player = GameController.Instance.Player;
         m_startTile = Instantiate(m_startTilePrefab).GetComponent<Tile>();
         m_startTile.gameObject.SetActive(false);
@@ -86,7 +127,9 @@ public class TileManager : MonoBehaviour {
 
     void Update()
     {
+        DifficultyChanger();
         TileChanger();
+
     }
 
     /// <summary>
@@ -106,65 +149,69 @@ public class TileManager : MonoBehaviour {
 
     private void TileChanger()
     {
-        Vector3 playerOnTile = m_Player.transform.position;
-        playerOnTile.y = m_curTileCol.transform.position.y;
-        if (m_curTileCol.bounds.Contains(playerOnTile) && playerOnTile.z > m_curTileCol.bounds.center.z)
+        if (m_Player != null)
         {
-            if (!m_prevTileCol.bounds.Contains(playerOnTile))
+            Vector3 playerOnTile = m_Player.transform.position;
+            playerOnTile.y = m_curTileCol.transform.position.y;
+            if (m_curTileCol.bounds.Contains(playerOnTile) && playerOnTile.z > m_curTileCol.bounds.center.z)
             {
-                if (m_prevTileCol.gameObject.GetInstanceID() == m_startTile.gameObject.GetInstanceID())
+                if (!m_prevTileCol.bounds.Contains(playerOnTile))
                 {
-                    m_startTile.TileUnloader();
-                }
-                else
-                {
-                    m_Tiles[m_prevTileDiffIndex][m_prevTileIndex].TileUnloader();
-                }
+                    if (m_prevTileCol.gameObject.GetInstanceID() == m_startTile.gameObject.GetInstanceID())
+                    {
+                        m_startTile.TileUnloader();
+                    }
+                    else
+                    {
+                        m_Tiles[m_prevTileDiffIndex][m_prevTileIndex].TileUnloader();
+                    }
 
+
+                }
+                m_prevTileCol = m_curTileCol;
+                m_prevTileDiffIndex = m_curTileDiffIndex;
+                m_prevTileIndex = m_curTileIndex;
+                Vector3 nTilePos = m_curTileCol.transform.position + new Vector3(0, 0, m_curTileCol.bounds.extents.z * 2);
+
+                m_curTileDiffIndex = Random.Range(minDiff, maxDiff+1);
+
+                switch (m_curTileDiffIndex)
+                {
+                    case 0:
+                        {
+                            do
+                            {
+                                m_curTileIndex = Random.Range(0, m_Tiles[m_curTileDiffIndex].Length);
+                            }
+                            while (m_Tiles[m_curTileDiffIndex][m_curTileIndex].gameObject.activeSelf);
+                            break;
+                        }
+                    case 1:
+                        {
+                            do
+                            {
+                                m_curTileIndex = Random.Range(0, m_Tiles[m_curTileDiffIndex].Length);
+                            }
+                            while (m_Tiles[m_curTileDiffIndex][m_curTileIndex].gameObject.activeSelf);
+                            break;
+                        }
+                    case 2:
+                        {
+                            do
+                            {
+                                m_curTileIndex = Random.Range(0, m_Tiles[m_curTileDiffIndex].Length);
+                            }
+                            while (m_Tiles[m_curTileDiffIndex][m_curTileIndex].gameObject.activeSelf);
+                            break;
+                        }
+                }
+                m_Tiles[m_curTileDiffIndex][m_curTileIndex].transform.position = nTilePos;
+                m_Tiles[m_curTileDiffIndex][m_curTileIndex].TileLoader();
+                m_curTileCol = m_Tiles[m_curTileDiffIndex][m_curTileIndex].GetComponent<Collider>();
 
             }
-            m_prevTileCol = m_curTileCol;
-            m_prevTileDiffIndex = m_curTileDiffIndex;
-            m_prevTileIndex = m_curTileIndex;
-             Vector3 nTilePos = m_curTileCol.transform.position + new Vector3(0, 0, m_curTileCol.bounds.extents.z * 2);
-
-            m_curTileDiffIndex = Random.Range(0, m_nrOfDiffs); // testing line
-
-            switch (m_curTileDiffIndex)
-            {
-                case 0:
-                    {
-                        do
-                        {
-                            m_curTileIndex = Random.Range(0, m_Tiles[m_curTileDiffIndex].Length);
-                        }
-                        while (m_Tiles[m_curTileDiffIndex][m_curTileIndex].gameObject.activeSelf);
-                        break;
-                    }
-                case 1:
-                    {
-                        do
-                        {
-                            m_curTileIndex = Random.Range(0, m_Tiles[m_curTileDiffIndex].Length);
-                        }
-                        while (m_Tiles[m_curTileDiffIndex][m_curTileIndex].gameObject.activeSelf);
-                        break;
-                    }
-                case 2:
-                    {
-                        do
-                        {
-                            m_curTileIndex = Random.Range(0, m_Tiles[m_curTileDiffIndex].Length);
-                        }
-                        while (m_Tiles[m_curTileDiffIndex][m_curTileIndex].gameObject.activeSelf);
-                        break;
-                    }
-            }
-            m_Tiles[m_curTileDiffIndex][m_curTileIndex].transform.position = nTilePos;
-            m_Tiles[m_curTileDiffIndex][m_curTileIndex].TileLoader();
-            m_curTileCol = m_Tiles[m_curTileDiffIndex][m_curTileIndex].GetComponent<Collider>();
-
         }
+
     }
 
 

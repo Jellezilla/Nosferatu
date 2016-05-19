@@ -17,12 +17,14 @@ public class VehicleResources : MonoBehaviour
     private float m_BloodPerHuman;
     [SerializeField]
     private float m_SoulsPerHuman;
-    private WaitForSeconds m_fuelWaitTick;
-
+    [SerializeField]
+    private GameObject m_explosion;
     private float m_CarBlood;
     private float m_CarSouls;
-
+    private bool m_dead;
     private int m_playerMaxDistance;
+    private bool m_deadIntheWater;
+    private Rigidbody m_rb;
     public bool DeadInTheWater
     {
         private set;
@@ -33,36 +35,56 @@ public class VehicleResources : MonoBehaviour
         private set;
         get;
     }
-    
+    public bool InLava
+    {
+        private set;
+        get;
+    }
     [SerializeField]
-    private float m_FuelReplenishTime;
+    private float m_MovementThreshold;
     // Use this for initialization
     void Awake()
     {
-        m_fuelWaitTick = new WaitForSeconds(Time.fixedDeltaTime);
-    //    _uiManagerRef = UICanvasRef.GetComponent<UIManager>();
+        m_rb = GetComponent<Rigidbody>();
         m_CarBlood = m_MaxCarBlood;
-        StartCoroutine(FuelReplenishCheck());
     }
 
     // Update is called once per frame
     void Update()
     {
         BloodConsumption();
+        FuelReplenishCheck();
+        CarDeath();
     }
 
+
+    /// <summary>
+    /// death effects function
+    /// </summary>
+    private void CarDeath()
+    {
+        if (m_deadIntheWater && !m_dead)
+        {
+            m_dead = true;
+            Destroy(gameObject, 1.0f);
+            Instantiate(m_explosion, transform.position,Quaternion.identity);
+        }
+    }
+    void OnDestroy()
+    {
+        DeadInTheWater = true;
+    }
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == Tags.lava)
         {
             m_CarBlood = 0;
-            DeadInTheWater = true;
+            InLava = true;
         }
 
         if (other.tag == Tags.human)
         {
-            //Adding UI soul effect
-           // _uiManagerRef.AddSoulEffect(new Vector2(other.transform.position.x, other.transform.position.z));
+           
             if (m_CarSouls < m_MaxCarSouls)
             {
                 m_CarSouls += m_SoulsPerHuman;
@@ -81,9 +103,6 @@ public class VehicleResources : MonoBehaviour
                 {
                     m_CarBlood = m_MaxCarBlood;
                 }
-                //Adding UI blood effect
-               // if (!_uiManagerRef.IsBloodFading())
-                 //   _uiManagerRef.AddBloodEffect();
             }
         }
     }
@@ -110,23 +129,17 @@ public class VehicleResources : MonoBehaviour
         }
     }
 
-    IEnumerator FuelReplenishCheck()
+    void FuelReplenishCheck()
     {
-        float counter = m_FuelReplenishTime;
-        while (!DeadInTheWater && counter > 0)
-        {
-            yield return m_fuelWaitTick;
-            if (OutOfFuel)
-            {
-                counter -= Time.deltaTime;
-            }
 
-        }
-        if (!DeadInTheWater)
+        if (OutOfFuel && m_rb.velocity.magnitude < m_MovementThreshold)
         {
-            DeadInTheWater = true;
+            m_deadIntheWater = true;
         }
-
+        else if(InLava)
+        {
+            m_deadIntheWater = true;
+        }
 
 
     }
