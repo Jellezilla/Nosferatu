@@ -7,6 +7,7 @@ public class TurretedVehicleUserControl : MonoBehaviour {
     private VehicleController m_controller;
     private VehicleTurret m_turret;
     private VehicleResources m_resources;
+    private VehicleNitro m_nitro;
     private float m_hAxis;
     private float m_vAxis;
     private float m_brakeAxis;
@@ -18,6 +19,7 @@ public class TurretedVehicleUserControl : MonoBehaviour {
         m_controller = GetComponent<VehicleController>();
         m_turret = GetComponent<VehicleTurret>();
         m_resources = GetComponent<VehicleResources>();
+        m_nitro = GetComponent<VehicleNitro>();
 	}
 
     // Update is called once per frame
@@ -42,9 +44,16 @@ public class TurretedVehicleUserControl : MonoBehaviour {
             m_controller.LightsToggle();
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse1))
+        if (Input.GetKey(KeyCode.Mouse1))
         {
-            EventController.Instance.TriggerEvent(UIEvents.Rampage);
+            //EventController.Instance.TriggerEvent(UIEvents.Rampage);
+            m_nitro.UseNitro();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse1))
+        {
+            //EventController.Instance.TriggerEvent(UIEvents.Rampage);
+            m_nitro.ReleaseNitro();
         }
     }
 

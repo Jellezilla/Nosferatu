@@ -74,6 +74,12 @@ public class VehicleResources : MonoBehaviour
     {
         DeadInTheWater = true;
     }
+
+    public void ConsumeSouls(float value)
+    {
+        m_CarSouls -= value;
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == Tags.lava)
