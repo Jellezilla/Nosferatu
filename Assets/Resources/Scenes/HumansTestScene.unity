@@ -325,10 +325,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11491472, guid: 8a7a07b782c38574c9819b97eed1702f, type: 2}
-      propertyPath: m_CenterOfMass.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a7a07b782c38574c9819b97eed1702f, type: 2}
   m_IsPrefabParent: 0
@@ -549,14 +545,6 @@ Prefab:
     - target: {fileID: 415670, guid: 80311a046dc532245b1c7153d8ada929, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 113296, guid: 80311a046dc532245b1c7153d8ada929, type: 2}
-      propertyPath: m_TagString
-      value: GameManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 11412014, guid: 80311a046dc532245b1c7153d8ada929, type: 2}
-      propertyPath: m_volume
-      value: 0.35
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 80311a046dc532245b1c7153d8ada929, type: 2}
