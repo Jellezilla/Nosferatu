@@ -173,7 +173,7 @@ Transform:
   m_Children:
   - {fileID: 1513245511}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!114 &40392835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DistanceToPlayerUp: 20
-  DistanceToPlayerForward: 5.5
+  DistanceToPlayerForward: 7.5
 --- !u!114 &40392836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,8 +502,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 415670, guid: 80311a046dc532245b1c7153d8ada929, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11415522, guid: 80311a046dc532245b1c7153d8ada929, type: 2}
+      propertyPath: hardTileStartThreshold
+      value: 1400
+      objectReference: {fileID: 0}
+    - target: {fileID: 11415522, guid: 80311a046dc532245b1c7153d8ada929, type: 2}
+      propertyPath: easyTileEndThreshold
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11415522, guid: 80311a046dc532245b1c7153d8ada929, type: 2}
+      propertyPath: m_normalTilesPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 194172, guid: a8c118ed82dda464dba46eacbb80215e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 80311a046dc532245b1c7153d8ada929, type: 2}
   m_IsPrefabParent: 0
@@ -544,7 +556,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409776, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 51f11bfb156275a4f9ed71bd6035285f, type: 2}

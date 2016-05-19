@@ -12,7 +12,7 @@ public class TitleScreenManager : MonoBehaviour {
     [Serializable]
     public class ScoreTable {
         public string[] playerNames = { "Peter", "Jesper", "Maja", "Emil", "Alex" };
-        public int[] playerScores = { 10000, 10, 5, 1, -5 };
+        public int[] playerScores = { 500, 10, 5, 1, -5 };
     }
 
     private ScoreTable _scoreData;
@@ -21,6 +21,7 @@ public class TitleScreenManager : MonoBehaviour {
 
     void OnEnable() {
         SetupRefs();
+
         _scoreData = GetScores();
 
         ChangeScores();
