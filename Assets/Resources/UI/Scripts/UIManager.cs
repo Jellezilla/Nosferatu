@@ -68,9 +68,14 @@ public class UIManager : MonoBehaviour {
         _spmask.sizeDelta = new Vector2(_spMaxWidth / 100 * (1 + soulsCurrent), _spHeight);// _hpHeight);
 
         //Effect for rampage mode, when souls max has been reached
-        if (soulsCurrent >= m_maxSouls && !SpecialEffectObject.activeSelf) {//hardcoded max
+        if (soulsCurrent >= m_maxSouls && !SpecialEffectObject.activeSelf)
+        {//hardcoded max
             SpecialEffectObject.SetActive(true);
-            RampageReady.SetActive(true);
+            //  RampageReady.SetActive(true);
+        }
+        else if (SpecialEffectObject.activeSelf && soulsCurrent < m_maxSouls)
+        {
+            SpecialEffectObject.SetActive(false);
         }
         _scoreText.text = GameController.Instance.ScoreManager.Score.ToString();
        
