@@ -34,7 +34,6 @@ public class TileManager : MonoBehaviour {
     private int m_prevTileDiffIndex;
     private Collider m_curTileCol;
     private Collider m_prevTileCol;
-    private float m_carHeight;
     private const int m_nrOfDiffs = 3;
     private ScoreManager m_ScoreManager;
     private int maxDiff = 0;
@@ -141,10 +140,7 @@ public class TileManager : MonoBehaviour {
         m_curTileCol = m_startTile.GetComponent<Collider>();
         m_prevTileCol = m_curTileCol;
         m_startTile.TileLoader();
-        Vector3 tileCenter = m_curTileCol.bounds.center;
-        m_carHeight = m_Player.GetComponent<Collider>().bounds.extents.y * 2;
-        tileCenter.y += m_carHeight;
-        m_Player.transform.position = tileCenter; // must replace with spawnPoint in new tiles
+        m_Player.transform.position = m_startTile.m_PlayerSpawn.position; // must replace with spawnPoint in new tiles
     }
 
     private void TileChanger()
@@ -171,7 +167,7 @@ public class TileManager : MonoBehaviour {
                 m_prevTileCol = m_curTileCol;
                 m_prevTileDiffIndex = m_curTileDiffIndex;
                 m_prevTileIndex = m_curTileIndex;
-                Vector3 nTilePos = m_curTileCol.transform.position + new Vector3(0, 0, m_curTileCol.bounds.extents.z * 2);
+                Vector3 nTilePos = m_curTileCol.transform.position + new Vector3(0, 0, m_curTileCol.bounds.extents.z*2);
 
                 m_curTileDiffIndex = Random.Range(minDiff, maxDiff+1);
 

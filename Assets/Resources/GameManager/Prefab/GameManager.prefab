@@ -93,7 +93,7 @@ MonoBehaviour:
   hardTileStartThreshold: 2500
   easyTileEndThreshold: 1500
   normalTileEndThreshold: 4000
-  m_startTilePrefab: {fileID: 157924, guid: c8fcffa2a0e4d0848a20c55a9f1c0317, type: 2}
+  m_startTilePrefab: {fileID: 105228, guid: be223318d0a0bb24db00e16f4a20ab75, type: 2}
   m_easyTilePrefabs:
   - {fileID: 157924, guid: c8fcffa2a0e4d0848a20c55a9f1c0317, type: 2}
   - {fileID: 155470, guid: aeb9afe69f7638549a17e4cc6475ef31, type: 2}

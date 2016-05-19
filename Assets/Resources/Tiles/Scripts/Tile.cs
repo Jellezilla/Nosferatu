@@ -6,6 +6,8 @@ public class Tile : MonoBehaviour {
 
     [SerializeField]
     private bool m_IsTesting;
+    [SerializeField]
+    private bool m_HasSpawnpoint;
     private bool m_initTile;
     [SerializeField]
     private int m_HumanIndex;
@@ -15,7 +17,11 @@ public class Tile : MonoBehaviour {
     private GameObject m_HumanContainer;
     [SerializeField]
     private GameObject m_TombstonesContainer;
-
+    public Transform m_PlayerSpawn
+    {
+        private set;
+        get;
+    }
     private Transform[] m_HumanSpawnPoints;
     private HumanController[] m_Humans;
     private Transform[] m_TombSpawnPoints;
@@ -44,6 +50,13 @@ public class Tile : MonoBehaviour {
         if (!m_initTile)
         {
             m_initTile = true;
+
+
+            if (m_HasSpawnpoint)
+            {
+                m_PlayerSpawn = GameObject.FindGameObjectWithTag(Tags.spawnPoint).transform;
+            }
+
            m_Humans = new HumanController[m_HumanContainer.transform.childCount];
            m_Tombstones = new List<Tombstone>[m_TombstoneIndexs.Length];
 

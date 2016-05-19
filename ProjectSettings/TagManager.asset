@@ -9,6 +9,7 @@ TagManager:
   - UI Camera
   - GameManager
   - Lava
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
